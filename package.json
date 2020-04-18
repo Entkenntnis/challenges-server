@@ -1,0 +1,18 @@
+{
+  "name": "hack-engine",
+  "version": "0.0.1",
+  "description": "plattform inspired by hacker.org",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Entkenntnis/hack-engine.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node --use_strict index.js"
+  },
+  "author": "Entkenntnis <hack@arrrg.de>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.0"
+  }
+}
