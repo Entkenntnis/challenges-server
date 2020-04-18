@@ -1,2 +1,2 @@
 # hack-engine
-https://hack.arrrg.de
+The engine behind https://hack.arrrg.de
