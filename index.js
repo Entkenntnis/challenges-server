@@ -1,10 +1,11 @@
-const express = require('express')
+const App = {}
 
-const app = express()
+require('./server/withLogger')(App)
+require('./server/withDataDirectory')(App)
+require('./server/withConfig')(App)
+require('./server/withEntry')(App)
+require('./server/withDb')(App)
 
-app.get('/', function(req, res){
-  res.send('Hello World v2')
-})
+require('./server/dbModel')(App)
 
-app.listen(3000)
-console.log('Express started on port 3000')
+App.entry.start()
