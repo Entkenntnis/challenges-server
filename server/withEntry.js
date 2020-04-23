@@ -12,6 +12,9 @@ module.exports = function(App) {
         await fn()
       })()
     },
-    start: startApp
+    start: () => {
+      process.nextTick(startApp)
+      return App.entry.__entry
+    }
   }
 }

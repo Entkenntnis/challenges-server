@@ -14,8 +14,4 @@ module.exports = function(App) {
     await App.db.authenticate()
     App.logger.info('Database ready')
   })
-  
-  App.entry.add(async () => {
-    console.log('hello')
-  })
 }

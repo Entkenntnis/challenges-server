@@ -8,4 +8,6 @@ require('./server/withDb')(App)
 
 require('./server/dbModel')(App)
 
-App.entry.start()
+App.entry.start().then(() => {
+  console.log("Hurray!")
+})

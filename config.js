@@ -3,4 +3,7 @@ module.exports = {
     dialect: 'sqlite',
     storage: './.data/db.sqlite',
   },
+  sync: {
+    //force: true,
+  },
 }
