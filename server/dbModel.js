@@ -14,7 +14,6 @@ module.exports = function(App) {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
     score: {
       type: DataTypes.FLOAT,

@@ -1,56 +1,80 @@
+<% const i18n = config.i18n %>
+
 <!DOCTYPE html>
-<html lang="de">
+<html lang="<%= config.locale %>">
   <head>
-    <% include commenHead %>
-    <title>Hack the Web</title>
+    <%- include('commenHead') %>
+    <title><%= i18n.title %></title>
   </head>
   <body>
     <div class="container">
-      <% include header %>
-      <hr />
-      <% if (fail) { %>
-        <div class="alert alert-danger"><p>Falsche Zugangsdaten</p></div>
-      <% } %>
-      <h3>Login</h3>
-      <form action="/login" method="post" autocomplete="off">
-        <label>Name: <input type="text" name="username" value=""/></label>
-        <label>Passwort: <input type="password" name="password" value=""/></label>
-        <input type="submit" value="Los"/></form>
-      <hr />
-      <br>
+    
+      <%- include('header', {i18n}) %>
       
-      <p>Neu hier? Erstelle einen kostenlosen Account und lege los: <a href="/register">Registrierung</a>
+      <hr />
+      
+      <% if (invalidLogin) { %>
+        <div class="alert alert-danger"><p><%= i18n.login.invalid %></p></div>
+      <% } %>
+      
+      <h3><%= i18n.login.title %></h3>
+      
+      <form action="/login" method="post" autocomplete="off">
+        <label><%= i18n.login.name %> <input type="text" name="username" value=""/></label>
+        <label><%= i18n.login.password %> <input type="password" name="password" value=""/></label>
+        <input type="submit" value="<%= i18n.login.go %>"/>
+      </form>
+      
+      <hr />
+      
+      <p><%= i18n.invite %> <a href="/register"><%= i18n.register %></a>
       </p>
       
-      <br>
+      <div style="height:20px"></div>
       
-      [<a href="/highscore">Highscore</a>]
-      
-      <br>
-      
-      <br>
-      
-      <br>
-      
-      <br>
+      <p><a href="/highscore"><%= i18n.enterRoom %></a></p>
       
       <hr>
       
-      Live-Event:
-      <h3><%=ename%></h3>
+      <h3><%= i18n.hackerOfTheMonth %></h3>
       
-      <br>
-      [<a href="/highscore?session=junior">Hacking-Session Juniors</a>]
+      <div style="height:20px"></div>
       
-      <br>
-      [<a href="/highscore?session=expert">Hacking-Session Experts</a>]
+      <p>1. Master Yi</p>
       
-      <br>
-      [<a href="/highscore?session=senior">Hacking-Session Seniors</a>]
+      <p>2. Master Yi</p>
       
-      <div style="height:250px"></div>
+      <p>3. Master Yi</p>
+      
+      <p>4. Master Yi</p>
+      
+      <p>5. Master Yi</p>
+      
+      <p>6. Master Yi</p>
+      
+      <p>7. Master Yi</p>
+      
+      <p>8. Master Yi</p>
+      
+      <p>9. Master Yi</p>
+      
+      <p>10. Master Yi</p>
+      
+      <div style="height:20px"></div>
+      
+      <p>[<a href="/highscore"><%= i18n.showHighscore %></a>]</p>
+      
       <hr>
-      <p><a href="/kontakt">Kontakt</a> | <a href="/datenschutz">Datenschutzerklärung</a></p>
+      
+      <div style="height:150px"></div>
+      
+      <p><%= i18n.inviteOrga %> <a href="/highscore"><%= i18n.createRoom %></a>.</p>
+      
+      <div style="height:150px"></div>
+      
+      <hr>
+      
+      <p><a href="/kontakt"><%= i18n.contact %></a> | <a href="/datenschutz"><%= i18n.privacy %></a> | <a href="https://github.com/Entkenntnis/hack-engine" target="_blank"><%= i18n.github %></a></p>
       
     </div>
   </body>

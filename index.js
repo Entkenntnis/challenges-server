@@ -11,6 +11,7 @@ require('./server/dbModel')(App)
 
 require('./server/withExpress')(App)
 require('./server/expressSession')(App)
+require('./server/expressViews')(App)
 
 App.entry.start().then(() => {
   console.log(App.moment().format('lll'))
@@ -21,7 +22,5 @@ App.entry.start().then(() => {
 // Test code
 
 App.express.get('/', (req, res) => {
-  if (!req.session.counter)
-    req.session.counter = 1
-  res.end('Hello World! ' + req.session.counter++)
+  res.render('home', {invalidLogin: true, config: App.config})
 })
