@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <% include commenHead %>
+    <title>Hack the Web</title>
+  </head>
+  <body>
+    <div class="container">
+      <% include header %>
+      <hr />
+      <% if (fail) { %>
+        <div class="alert alert-danger"><p>Falsche Zugangsdaten</p></div>
+      <% } %>
+      <h3>Login</h3>
+      <form action="/login" method="post" autocomplete="off">
+        <label>Name: <input type="text" name="username" value=""/></label>
+        <label>Passwort: <input type="password" name="password" value=""/></label>
+        <input type="submit" value="Los"/></form>
+      <hr />
+      <br>
+      
+      <p>Neu hier? Erstelle einen kostenlosen Account und lege los: <a href="/register">Registrierung</a>
+      </p>
+      
+      <br>
+      
+      [<a href="/highscore">Highscore</a>]
+      
+      <br>
+      
+      <br>
+      
+      <br>
+      
+      <br>
+      
+      <hr>
+      
+      Live-Event:
+      <h3><%=ename%></h3>
+      
+      <br>
+      [<a href="/highscore?session=junior">Hacking-Session Juniors</a>]
+      
+      <br>
+      [<a href="/highscore?session=expert">Hacking-Session Experts</a>]
+      
+      <br>
+      [<a href="/highscore?session=senior">Hacking-Session Seniors</a>]
+      
+      <div style="height:250px"></div>
+      <hr>
+      <p><a href="/kontakt">Kontakt</a> | <a href="/datenschutz">Datenschutzerklärung</a></p>
+      
+    </div>
+  </body>
+</html>

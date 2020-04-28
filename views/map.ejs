@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <% include commenHead %>
+    <title>Hack the Web</title>
+    <script src="/svg.min.js"></script>
+    <style type="text/css">
+      .no-underline { text-decoration: none !important; }
+      body { background-image:url(/background.jpg) }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <% include status %>
+      <% include header %>
+      <hr />
+    </div>
+    <div id="drawing" style="width:1600px;height:1200px"></div>
+    <br>
+    
+    <p style="display:none" id="chals"><%-JSON.stringify(chals)%></p>
+    <p style="display:none" id="cons"><%-JSON.stringify(cons)%></p>
+    
+    <script>
+      var points = JSON.parse(document.getElementById('chals').innerHTML)
+      var connections = JSON.parse(document.getElementById('cons').innerHTML)
+      var draw = SVG('drawing')
+      
+      connections.forEach(function(c){
+        draw.line(c.start.x, c.start.y, c.end.x, c.end.y)
+          .stroke({width: 10})
+          .stroke('#464545')
+          .attr('stroke-linecap', 'round')
+      })
+      
+      points.forEach(function(p){
+        var link = draw.link("/chal/" + p.id).addClass('no-underline')
+        var rect = link.circle(18).attr({
+          fill: (p.solved ? '#666699' : '#0ce3ac'),
+          cx : p.pos.x,
+          cy : p.pos.y})
+        var text = link.text(p.title).fill('#ffffff')
+        text.center(p.pos.x, p.pos.y - 20)
+      })
+    </script>
+  </body>
+</html>

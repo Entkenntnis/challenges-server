@@ -1,0 +1,68 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+[Name: <strong><%= user.username %></strong> | 
+
+Punkte: <strong><%= Math.floor(user.points) %></strong>
+
+<% if (user.session_status == "ready") { %>
+  | Session: bereit
+<% } %>
+
+<% if (user.session_status == "running") { %>
+  <% let timediff = new Date().getTime() - user.session_startTime %>
+  <% let remaining = Math.round((1000 * 60 * 30 - timediff)/1000) %>
+  | Session: noch <span id="remaining"></span>
+  
+  
+  <script>
+    var localTime = Date.now()
+    var remaining = <%=remaining%>
+    function update(){
+      var passed = Date.now() - localTime
+      var rest = remaining - Math.round(passed/1000)
+      if (rest < 0) {
+        window.location.href = "/finish"
+      } else {
+        var restSecs = rest % 60
+        var restMins = Math.floor(rest / 60)
+        if (restSecs < 10) restSecs = "0" + restSecs.toString()
+        document.getElementById('remaining').innerHTML = restMins + ":" + restSecs
+      }
+    }
+    update()
+    setInterval(update,333)
+  </script>
+<% } %>
+
+
+]
+[
+
+<% if (user.session_status == "done" || user.session_name == "none") { %>
+<a href="/highscore">Highscore</a> | 
+<a href="/profil">Profil</a> |
+<% } %>
+
+
+<a href="/logout">abmelden</a>
+
+
+
+]
+
+<!-- <a href="/">Karte</a> | -->
+<!-- <a href="/profil">Profil</a> | -->
+
+<!--<a href="/highscore">Bestenliste</a> |-->
+<!-- Rang: <strong><%= user.rank > 0 ? user.rank : 'n.v.' %></strong> | -->

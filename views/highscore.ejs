@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include commenHead %>
+    <% if (refresh > 0) { %>
+      <meta http-equiv="refresh" content="<%=refresh%>" >
+    <% } %>
+    <title>Bestenliste</title>
+  </head>
+  <body>
+    <div class="container">
+      <% include header %>
+      <% include status %>
+      <hr />
+      <h2>Highscore<%=session?' für Hacking-Session ' + session.toUpperCase():''%></h2>
+      <p><a href="/">zurück</a></p>
+      <br>
+      
+      <% if (users.length == 0) { %>
+        <p>Aktuell sind noch keine Platzierungen vorhanden.</p>
+      <% } else { %>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Platz</th>
+              <th scope="col">Benutzername</th>
+              <th scope="col">Punkte</th>
+              <% if (!session) { %>
+                <th scope="col">Session</th>
+              <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let i = 0; i < users.length; i++) { %>
+            <% let u = users[i] %>
+              <tr <%-user&&u.username==user.username?'class="active"':''%>>
+                <td><%=u.rank%></td>
+                <td><%=u.username%></td>
+                <td><%=Math.floor(session?u.session_result:u.points)%></td>
+                <% if (!session) { %>
+                  <td><%=u.sessionInfo%></td>
+                <% } %>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+        
+      <% } %>
+      
+        
+      <br><br><br>
+      <p><%=moment().format('LLLL')%></p>
+      <% if (!refresh) { %>
+        [<a href="/highscore?session=<%=session%>&refresh=30">Auto-Refresh Version</a>]
+      <% } else { %>
+        [<a href="/highscore?session=<%=session%>">Normale Version</a>]
+      <% } %>
+    </div>
+  </bod>
+</html>

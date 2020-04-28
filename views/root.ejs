@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <% include commenHead %>
+    <title>Hack the Web</title>
+  </head>
+  <body>
+    <div class="container">
+      <% include header %>
+      <hr />
+      <% if (!session.rootLoggedIn) { %>
+        Administrator-Login:
+        <form action="/root" method="post">
+          <input type="password" name="pw" value="">
+          <input type="submit" value="Los"/>
+        </form>
+      <% } else { %>
+        <h2>Admistrator-Bereich</h2><br>
+        <a href="/rootlogout">abmelden</a><br><br>
+        [<a href="/newuser">Neuen Benutzer anlegen</a>]
+        <br><br>
+        [<a href="/root/forceend">Alle laufende Sessions abschließen</a>]
+      <% } %>
+    </div>
+  </body>
+</html>

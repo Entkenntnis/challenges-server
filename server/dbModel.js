@@ -58,11 +58,11 @@ module.exports = function(App) {
   
   const Session = App.db.define('Session', {
     sid: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(36),
       primaryKey: true,
     },
     data: {
-      type: DataTypes.STRING(4096),
+      type: DataTypes.TEXT,
     },
     expires: {
       type: DataTypes.DATE,

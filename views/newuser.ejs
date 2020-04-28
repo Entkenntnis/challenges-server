@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <% include commenHead %>
+    <title>Hack the Web</title>
+  </head>
+  <body>
+    <div class="container">
+      <% include header %>
+      <hr />
+      <h2>Neuen Benutzer anlegen</h2>
+      <% if (messages.length > 0) { %>
+        <% type = messages.indexOf("FEHLER") >= 0 ? "danger" : "success" %>
+        <div class="alert alert-<%=type%>"><p><%-messages%></p></div>
+      <% } %>
+      <br><br>
+      <form action="/newuser" method="post" autocomplete="off">
+        <label title="Name mindestens 3 Zeichen">Benutzername: <input type="text" name="uname" value=""></label><br>
+        <label title="PW mindestens 3 Zeichen">Passwort: <input type="password" name="pw1" value=""></label><br>
+        <label>Passwort wiederholen: <input type="password" name="pw2" value=""></label><br>
+        <label>Hacking-Session:
+          <select name="session" style="color:black">
+            <option value="" selected>-----</option>
+            <option value="junior">Junior-Session (bis 7. Klasse)</option>
+            <option value="expert">Expert-Session (8. bis 10. Klasse)</option>
+            <option value="senior">Senior-Session (ab 11. Klasse)</option>
+            <option value="none">Keine Teilnahme an Session</option>
+          </select>
+        </label><br>
+        <br><br>
+        <input type="submit" value="Erstellen">
+      </form>
+      
+      <br><br>
+      <a href="/root">zurück</a>
+    </div>
+  </body>
+</html>

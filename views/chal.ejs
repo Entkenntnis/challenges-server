@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include commenHead %>
+    <title><%=chal.title%></title>
+  </head>
+  <body>
+    <div class="container">
+      <% include status %>
+      <% include header %>
+      <hr />
+      <h2><%=chal.title%></h2>
+      
+      <p>
+        <% if (!correct) { %><a href="/">zurück</a> |<% } %>
+        gelöst von <%=solvedBy%> Teilnehmern</p>
+      <br>
+      
+      <% if (answer) { %>
+      <p class="text-<%=correct ? 'primary' : 'danger'%>"><strong>'<%=answer%>' ist <%=correct? 'richtig' : 'falsch'%></strong></p>
+      <% } else { %>
+        <br>
+      <% } %>
+      
+      <% if (correct) { %>
+        <br>
+        <p><a href="/">weiter</a></p>
+      <% } else { %>
+        <%-chal.html%>
+        <br>
+        <% if (!chal.nosubmit) { %>
+          <form autocomplete="off" method="post"><input id="answer" type="text" name="answer">
+            <% if (!chal.nosubmitbutton) { %>
+              <input type="submit" value="Los">
+            <% } %>
+          </form>
+        <% } %>
+      <% } %>
+      <div style="height:200px"></div>
+    </div>
+  </body>
+</html>

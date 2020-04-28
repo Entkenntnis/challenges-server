@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <% include commenHead %>
+    <title>Hack the Web - Registrierung</title>
+  </head>
+  <body>
+    <div class="container">
+      <% include header %>
+      <hr />
+      <br>
+      <h1>Registrierung</h1>
+      <br>
+      <% if (msg) { %>
+        <div class="alert alert-danger"><%-msg%></div>
+      <% } %>
+      <p>
+      <form method="post" class="form-horizontal">
+        <fieldset>
+          <div class="form-group">
+            <label for="inputName" class="col-md-2 control-label">Benutzername</label>
+            <div class="col-md-4">
+              <input class="form-control" id="inputName" type="text" name="username" value="<%=vals.username%>">
+              <small>Mind. 3 Zeichen</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPw1" class="col-md-2 control-label">Passwort</label>
+            <div class="col-md-4">
+              <input class="form-control" id="inputPw1" type="password" name="pw1" value="<%=vals.pw1%>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPw2" class="col-md-2 control-label">Passwort wiederholen</label>
+            <div class="col-md-4">
+              <input class="form-control" id="inputPw2" type="password" name="pw2" value="<%=vals.pw2%>">
+              <small>Mind. 4 Zeichen, keine Leerzeichen</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+              <p>Hinweis zum <a href="/datenschutz">Datenschutz</a></p><br>
+              <a href="/" class="btn btn-primary">Zurück</a>
+              <button type="submit" class="btn btn-success">Los</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      </p>
+    </div>
+  </body>
+</htm>

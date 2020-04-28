@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include commenHead %>
+    
+    
+      
+    <%
+    
+    function formatTime(){
+      return moment(user.lastactive).format('LLLL')
+    
+    
+      /*var last = new Date(user.lastactive)
+      var cur = new Date()
+      if (last.toDateString() == cur.toDateString()) {
+        var minutes = last.getMinutes().toString()
+        if (minutes.length == 1)
+          minutes = "0" + minutes
+        return "heute, " + last.getHours() + ":" + minutes
+      } else {
+        return new Date(user.lastactive).toLocaleString()
+      }*/
+    }
+    
+    %>
+      
+      
+    <title>Profil</title>
+  </head>
+  <body>
+    <div class="container">
+      <% include status %>
+      <% include header %>
+      <hr />
+      <h2>Profil</h2>
+      <br>
+      <p>Benutzername: <%=user.username%></p>
+      <p>Punkte: <%=user.points%></p>
+      <% if (user.session_name != "none") { %>
+      <p>Session: <%=user.session_name%></p>
+      <p>Sessionergebnis: <%=user.session_result%></p>
+      <% } %>
+      <p>Veranstaltung: <%=user.event%></p>
+      <hr />
+      <p>gelöste Aufgaben: <%=user.solvedchals.length%></p>
+      <p>Letzte Aktivität: <%=formatTime()%></p>
+      <hr />
+      <p>Die Milchstraße im Hintergrund ist ein Werk unter <a href="https://creativecommons.org/licenses/by/2.0/">Creative Commons</a> von <a href="http://www.flickr.com/photos/scotbot/9686457096">scotbot</a></p>
+      <p>Das Konzept dieser Seite ist inspiriert von <a href="http://www.hacker.org">hacker.org</a>. Go there for some real challenges.</p>
+    </div>
+  </bod>
+</html>
