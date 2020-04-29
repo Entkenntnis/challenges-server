@@ -22,7 +22,7 @@ module.exports = {
     roomRegex: /^[a-zA-Z0-9]+$/,
     minRoom: 3,
     maxRoom: 20,
-    maxRoomPerHour: 20,
+    maxRoomPerHour: 50,
   },
   i18n: {
     title: 'hack-engine',
