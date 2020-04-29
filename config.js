@@ -6,6 +6,7 @@ module.exports = {
   sync: {
     //force: true,
   },
+  logdb: false,
   port: 3000,
   sessionSecret: 'keyboard cat',
   sessionMaxAge: 1000 * 60 * 60 * 24, // 24 hours
@@ -18,7 +19,7 @@ module.exports = {
       name: 'Name:',
       password: 'Password:',
       go: 'Go',
-      invalid: 'Login invalid',
+      invalid: 'Login failed',
     },
     invite: 'New here? Create a free account and start hacking:',
     register: 'Register',

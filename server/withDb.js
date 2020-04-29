@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 module.exports = function(App) {
   try {
     App.db = new Sequelize({
-      logging: msg => console.info('[db] ' + msg),
+      logging: App.config.logdb ? msg => console.info('[db] ' + msg) : false,
       ...App.config.database
     })
   } catch(e) {
