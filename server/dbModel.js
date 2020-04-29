@@ -9,7 +9,7 @@ module.exports = function(App) {
       autoIncrement: true,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       unique: true,
     },
     password: {
@@ -24,7 +24,7 @@ module.exports = function(App) {
       allowNull: true,
     },
     session_phase: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(10),
       allowNull: true,
     },
     session_score: {
@@ -39,11 +39,8 @@ module.exports = function(App) {
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
-      type: DataTypes.STRING,
-    },
-    alias: {
-      type: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING(20),
       unique: true,
     }
   })

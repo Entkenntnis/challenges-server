@@ -13,14 +13,16 @@ require('./server/withExpress')(App)
 require('./server/expressSession')(App)
 require('./server/expressViews')(App)
 
+require('./server/withCsrf')(App)
+
+require('./server/user')(App)
+
 App.entry.start().then(() => {
-  console.log(App.moment().format('lll'))
+  App.logger.info(App.moment().toString())
 })
 
-
-
-// Test code
-
 App.express.get('/', (req, res) => {
-  res.render('home', {invalidLogin: true, config: App.config})
+  const invalidLogin = req.session.loginFail
+  req.session.loginFail = undefined
+  res.render('home', {invalidLogin, config: App.config})
 })

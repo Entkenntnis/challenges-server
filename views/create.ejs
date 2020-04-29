@@ -1,0 +1,57 @@
+<%
+const i18n = config.i18n
+const create = i18n.create
+%>
+
+<!DOCTYPE html>
+<html lang="<%= config.locale %>">
+  <head>
+    <%- include('commenHead') %>
+    <title><%= i18n.title + ' - ' + create.title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <%- include('header', {i18n}) %>
+      <hr />
+      <br>
+      <% if (rooms.length > 0) { %>
+      <h2><%=create.yourRooms%></h2>
+      <ul>
+      <% for (let room of rooms) { %>
+        <li><%=room%></li>
+      <% } %>
+      </ul>
+      <hr>
+      <div style="height:25px"></div>
+      <% } %>
+      <h2><%= create.title %></h2>
+      <br>
+      <% if (messages.length > 0) { %>
+        <div class="alert alert-danger"><%-messages.join('<br>')%></div>
+      <% } %>
+      <p><%= create.information %></p>
+      <div style="height:25px"></div>
+      <form method="post" class="form-horizontal" autocomplete="off">
+        <fieldset>
+          <div class="form-group">
+            <label for="inputName" class="col-md-2 control-label"><%= create.key %></label>
+            <div class="col-md-4">
+              <input class="form-control" id="inputName" type="text" name="room" value="<%=values.room%>">
+              <small><%=create.keyNote%></small>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+              <a href="/" class="btn btn-primary"><%= create.back %></a>
+              <button type="submit" class="btn btn-success"><%= create.go %></button>
+            </div>
+          </div>
+          <input type="hidden" name="csrf" value="<%=token%>" />
+        </fieldset>
+      </form>
+      <div style="height:250px"></div>
+    </div>
+  </body>
+</html>
+ 
+ 

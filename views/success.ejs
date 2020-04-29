@@ -1,15 +1,19 @@
+<%
+const i18n = config.i18n
+%>
+
 <!DOCTYPE html>
-<html lang="de">
+<html lang="<%= config.locale %>">
   <head>
-    <% include commenHead %>
-    <title>Hack the Web - Anmeldung erfolgreich</title>
+    <%- include('commenHead') %>
+    <title><%= i18n.title + ' - ' + i18n.success.title%></title>
   </head>
   <body>
     <div class="container">
-      <% include header %>
+      <%- include('header', {i18n}) %>
       <hr />
       <br>
-      <p>Du hast dich erfolgreich registriert. [<a href="/">zum Login</a>]</p>
+      <p><%=i18n.success.message%> [<a href="/"><%= i18n.success.login %></a>]</p>
     </div>
   </body>
 </htm>

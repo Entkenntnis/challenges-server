@@ -17,7 +17,7 @@
         <div class="alert alert-danger"><p><%= i18n.login.invalid %></p></div>
       <% } %>
       
-      <h3><%= i18n.login.title %></h3>
+      <h2><%= i18n.login.title %></h2>
       
       <form action="/login" method="post" autocomplete="off">
         <label><%= i18n.login.name %> <input type="text" name="username" value=""/></label>
@@ -27,12 +27,12 @@
       
       <hr />
       
-      <p><%= i18n.invite %> <a href="/register"><%= i18n.register %></a>
+      <p><%= i18n.invite %> <a href="/register"><%= i18n.registerLink %></a>
       </p>
       
       <div style="height:20px"></div>
       
-      <p><a href="/highscore"><%= i18n.enterRoom %></a></p>
+      <p><a href="/join"><%= i18n.joinRoom %></a></p>
       
       <hr>
       
@@ -68,7 +68,7 @@
       
       <div style="height:150px"></div>
       
-      <p><%= i18n.inviteOrga %> <a href="/highscore"><%= i18n.createRoom %></a>.</p>
+      <p><%= i18n.inviteOrga %> <a href="/create"><%= i18n.createRoom %></a>.</p>
       
       <div style="height:150px"></div>
       
