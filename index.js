@@ -10,6 +10,7 @@ require('./server/withMoment')(App)
 require('./server/dbModel')(App)
 
 require('./server/withExpress')(App)
+require('./server/expressHeaders')(App)
 require('./server/expressSession')(App)
 require('./server/expressViews')(App)
 
@@ -21,8 +22,10 @@ App.entry.start().then(() => {
   App.logger.info(App.moment().toString())
 })
 
-App.express.get('/', (req, res) => {
-  const invalidLogin = req.session.loginFail
-  req.session.loginFail = undefined
-  res.render('home', {invalidLogin, config: App.config})
+App.express.get('/contact', (req, res) => {
+  res.render('contact', {config: App.config})
+})
+
+App.express.get('/privacy', (req, res) => {
+  res.render('privacy', {config: App.config})
 })

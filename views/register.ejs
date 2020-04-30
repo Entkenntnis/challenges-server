@@ -43,8 +43,7 @@ const register = i18n.register
           </div>
           <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-              <p><%= register.noteOn %> <a href="/datenschutz"><%= register.dataProtection %></a></p><br>
-              <a href="/" class="btn btn-primary"><%= register.back %></a>
+              <p><%= register.noteOn %> <a href="/privacy"><%= register.dataProtection %></a></p><br>
               <button type="submit" class="btn btn-success"><%= register.go %></button>
             </div>
           </div>
@@ -52,6 +51,12 @@ const register = i18n.register
           <input type="hidden" name="room" value="<%=room%>" />
         </fieldset>
       </form>
+      
+      <div style="height:40px"></div>
+      
+      <p><a href="/" class="btn btn-primary"><%= i18n.back %></a></p>
+      
+      <div style="height:40px"></div>
     </div>
   </body>
 </html>

@@ -1,23 +1,22 @@
 <%
   const i18n = config.i18n
-  const highscore = i18n.highscore
 %>
 
 <!DOCTYPE html>
 <html lang="<%=config.locale%>">
   <head>
     <%- include('commenHead') %>
-    <title><%= i18n.title + ' - ' + highscore.title %></title>
+    <title><%= i18n.title + ' - ' + i18n.privacy.title%></title>
   </head>
   <body>
     <div class="container">
       <%- include('header', {i18n}) %>
       <hr />
-      <h2><%= highscore.title %></h2>
+      <h2><%= i18n.privacy.title %></h2>
+         
+      <div style="height:40px"></div>
       
-      <div style=height:25px></div>
-      
-      <%- include('highscoreTable', {users, highscore}) %>
+      <%- i18n.privacy.HTML %>
       
       <div style="height:40px"></div>
       

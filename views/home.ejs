@@ -36,45 +36,31 @@
       
       <hr>
       
+      <div style="height:30px"></div>
+      
       <h3><%= i18n.hackerOfTheMonth %></h3>
       
       <div style="height:20px"></div>
       
-      <p>1. Master Yi</p>
+      <%- include('highscoreTable', {users, highscore: i18n.highscore}) %>
       
-      <p>2. Master Yi</p>
-      
-      <p>3. Master Yi</p>
-      
-      <p>4. Master Yi</p>
-      
-      <p>5. Master Yi</p>
-      
-      <p>6. Master Yi</p>
-      
-      <p>7. Master Yi</p>
-      
-      <p>8. Master Yi</p>
-      
-      <p>9. Master Yi</p>
-      
-      <p>10. Master Yi</p>
-      
-      <div style="height:20px"></div>
+      <div style="height:50px"></div>
       
       <p>[<a href="/highscore"><%= i18n.showHighscore %></a>]</p>
       
+      <div style="height:30px"></div>
+      
       <hr>
       
-      <div style="height:150px"></div>
+      <div style="height:250px"></div>
       
       <p><%= i18n.inviteOrga %> <a href="/create"><%= i18n.createRoom %></a>.</p>
       
-      <div style="height:150px"></div>
+      <div style="height:50px"></div>
       
       <hr>
       
-      <p><a href="/kontakt"><%= i18n.contact %></a> | <a href="/datenschutz"><%= i18n.privacy %></a> | <a href="https://github.com/Entkenntnis/hack-engine" target="_blank"><%= i18n.github %></a></p>
+      <p><a href="/contact"><%= i18n.contactLink %></a> | <a href="/privacy"><%= i18n.privacyLink %></a> | <a href="https://github.com/Entkenntnis/hack-engine" target="_blank"><%= i18n.github %></a></p>
       
     </div>
   </body>

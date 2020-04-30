@@ -23,6 +23,8 @@ module.exports = {
     minRoom: 3,
     maxRoom: 20,
     maxRoomPerHour: 50,
+    highscoreLimit: 2000,
+    topHackersLimit: 10,
   },
   i18n: {
     title: 'hack-engine',
@@ -38,12 +40,13 @@ module.exports = {
     registerLink: 'Register',
     joinRoom: 'Join room',
     hackerOfTheMonth: 'Top Hackers of the Month',
-    showHighscore: 'Highscore',
+    showHighscore: 'Complete Highscore',
     inviteOrga: 'Are you hosting an event? Here you can ',
     createRoom: 'create a custom room',
-    contact: 'Contact',
-    privacy: 'Privacy Policy',
+    contactLink: 'Contact',
+    privacyLink: 'Privacy Policy',
     github: 'GitHub',
+    back: 'Back',
     register: {
       title: 'Register',
       username: 'Username',
@@ -93,6 +96,22 @@ module.exports = {
       title: 'Registration successful',
       message: 'Your registration was successful.',
       login: 'Login',
-    }
+    },
+    highscore: {
+      title: 'Highscore',
+      empty: 'There are no hackers in the highscore yet. Become the first!',
+      rank: 'Rank',
+      name: 'Username',
+      score: 'Score',
+      lastActive: 'last active',
+    },
+    contact: {
+      title: 'Contact',
+      HTML: '<p>Please provide contact information according to the legislation of your country.</p>',
+    },
+    privacy: {
+      title: 'Privacy Policy',
+      HTML: '<p>Please provide legal information according to the legislation of your country.</p>',
+    },
   }
 }

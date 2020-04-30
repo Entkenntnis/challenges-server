@@ -190,4 +190,50 @@ module.exports = function(App) {
     req.session.loginFail = true
     res.redirect('/')
   })
+  
+  App.express.get('/highscore', async (req, res) => {
+    const dbUsers = await App.db.models.User.findAll({
+      attributes: ['name', 'score', 'updatedAt'],
+      where: {score: {[Op.gt]:0}},
+      order: [['score', 'DESC']],
+      limit: App.config.highscoreLimit,
+    })
+    users = processHighscore(dbUsers)
+    res.render('highscore', {
+      config: App.config,
+      users
+    })
+  })
+  
+  
+  App.express.get('/', async (req, res) => {
+    const invalidLogin = req.session.loginFail
+    req.session.loginFail = undefined
+    const dbUsers = await App.db.models.User.findAll({
+      attributes: ['name', 'score', 'updatedAt'],
+      where: {score: {[Op.gt]:0}, updatedAt: {[Op.gte]:App.moment().subtract(1, 'months').toDate()}},
+      order: [['score', 'DESC']],
+      limit: App.config.topHackersLimit,
+    })
+    const users = processHighscore(dbUsers)
+    res.render('home', {invalidLogin, config: App.config, users})
+  })
+  
+  function processHighscore(dbUsers) {
+    const users = dbUsers.map((user,i) => {
+      return {
+        name: user.name,
+        score: Math.floor(user.score),
+        lastActive: App.moment(user.updatedAt).fromNow(),
+      }
+    })
+    users.forEach((user,i) => {
+      if (i > 0 && users[i-1].score == user.score) {
+        user.rank = users[i-1].rank
+      } else {
+        user.rank = i+1
+      }
+    })
+    return users
+  }
 }
