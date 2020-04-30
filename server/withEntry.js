@@ -1,11 +1,11 @@
-module.exports = function(App) {
+module.exports = function (App) {
   let startApp
-  
+
   App.entry = {
-    __entry: new Promise(res => {
+    __entry: new Promise((res) => {
       startApp = res
     }),
-    add: fn => {
+    add: (fn) => {
       const prevEntry = App.entry.__entry
       App.entry.__entry = (async () => {
         await prevEntry
@@ -15,6 +15,6 @@ module.exports = function(App) {
     start: () => {
       process.nextTick(startApp)
       return App.entry.__entry
-    }
+    },
   }
 }

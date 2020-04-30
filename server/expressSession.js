@@ -1,48 +1,47 @@
 const session = require('express-session')
 const Op = require('sequelize').Op
 
-module.exports = function(App) {
-  
+module.exports = function (App) {
   class SessionStore extends session.Store {
     constructor() {
       super()
     }
-    
+
     get(sid, cb) {
       ;(async () => {
         const session = await App.db.models.Session.findOne({
-          where: {sid}
+          where: { sid },
         })
         return session ? JSON.parse(session.data) : null
-      })().then(session => cb(null, session))
+      })().then((session) => cb(null, session))
     }
-    
+
     set(sid, session, cb) {
       ;(async () => {
         const data = JSON.stringify(session)
         const expires = session.cookie.expires
         const [sess] = await App.db.models.Session.findCreateFind({
-          where: {sid},
-          defaults: { data, expires }
+          where: { sid },
+          defaults: { data, expires },
         })
         sess.data = data
         sess.expires = expires
         await sess.save()
       })().then(() => cb(null))
     }
-    
+
     destroy(sid, cb) {
       ;(async () => {
         await App.db.models.Session.destroy({
-          where: {sid}
+          where: { sid },
         })
       })().then(() => cb(null))
     }
-    
+
     touch(sid, session, cb) {
       ;(async () => {
         const sess = await App.db.models.Session.findOne({
-          where: {sid}
+          where: { sid },
         })
         // PERF only touch session if expires is more off than 10 minutes
         if (sess) {
@@ -57,30 +56,33 @@ module.exports = function(App) {
       })().then(() => cb(null))
     }
   }
-  
+
   // clean up every 5 minutes
-  App.periodic.add(5, async => {
-    App.db.models.Session.destroy({ where: { expires: { [Op.lt]: new Date() } } })
+  App.periodic.add(5, async () => {
+    await App.db.models.Session.destroy({
+      where: { expires: { [Op.lt]: new Date() } },
+    })
   })
-  
-  App.express.use(session({
-    resave: false,
-    saveUninitialized: false,
-    secret: App.config.sessionSecret,
-    cookie : { maxAge : App.config.sessionMaxAge },
-    store: new SessionStore()
-  }))
-  
+
+  App.express.use(
+    session({
+      resave: false,
+      saveUninitialized: false,
+      secret: App.config.sessionSecret,
+      cookie: { maxAge: App.config.sessionMaxAge },
+      store: new SessionStore(),
+    })
+  )
+
   // COMPAT: session is not automatically saved on redirect, doing it here manually
-  App.express.use(function(req, res, next) {
+  App.express.use(function (req, res, next) {
     const redirect = res.redirect
-    res.redirect = function(){
+    res.redirect = function () {
       if (req.session.save) {
         req.session.save(() => {
           redirect.apply(this, arguments)
         })
-      } else
-        redirect.apply(this, arguments)
+      } else redirect.apply(this, arguments)
     }
     next()
   })

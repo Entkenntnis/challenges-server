@@ -1,18 +1,18 @@
-const prefix = "[hack-engine] "
+const prefix = '[hack-engine] '
 
-module.exports = function(App) {
+module.exports = function (App) {
   App.logger = {
-    info: msg => {
+    info: (msg) => {
       console.info(prefix + msg)
     },
-    fatal: msg => {
+    fatal: (msg) => {
       console.error(prefix + msg)
       console.trace()
       process.exit(1)
-    }
+    },
   }
 
-  process.on('unhandledRejection', reason => {
+  process.on('unhandledRejection', (reason) => {
     App.logger.fatal('Error: ' + reason)
   })
 }

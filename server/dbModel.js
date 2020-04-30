@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize')
 
-module.exports = function(App) {
-  
+module.exports = function (App) {
   const User = App.db.define('User', {
     id: {
       type: DataTypes.INTEGER,
@@ -32,7 +31,7 @@ module.exports = function(App) {
       allowNull: true,
     },
   })
-  
+
   const Room = App.db.define('Room', {
     id: {
       type: DataTypes.INTEGER,
@@ -42,17 +41,17 @@ module.exports = function(App) {
     name: {
       type: DataTypes.STRING(20),
       unique: true,
-    }
+    },
   })
-  
+
   const Solution = App.db.define('Solution', {
     cid: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-    }
+    },
   })
-  
-  const Session = App.db.define('Session', {
+
+  App.db.define('Session', {
     sid: {
       type: DataTypes.STRING(36),
       primaryKey: true,
@@ -64,18 +63,17 @@ module.exports = function(App) {
       type: DataTypes.DATE,
     },
   })
-  
+
   Room.hasMany(User)
   User.belongsTo(Room)
-  
+
   User.hasMany(Solution, {
     foreignKey: {
-      primaryKey: true
-    }
+      primaryKey: true,
+    },
   })
   Solution.belongsTo(User)
-  
-  
+
   App.entry.add(async () => {
     await App.db.sync(App.config.sync)
     App.logger.info('Database synchronized')

@@ -63,11 +63,12 @@ module.exports = {
       nameInvalidChars: 'Username contains invalid characters.',
       pwTooShort: 'Password too short.',
       pwTooLong: 'Long passwords are good. But this??',
-      pwMismatch: 'Passwords don\'t match.',
+      pwMismatch: "Passwords don't match.",
       invalidToken: 'Form invalid. Please try again.',
       failure: 'Creating user failed. Please try again.',
       nameExists: 'Username already exists.',
-      serverCrowded: 'There are too many registrations at the moment. Please try again in 15 minutes.'
+      serverCrowded:
+        'There are too many registrations at the moment. Please try again in 15 minutes.',
     },
     join: {
       title: 'Join Room',
@@ -82,14 +83,16 @@ module.exports = {
       key: 'New room key:',
       back: 'Back',
       go: 'Create',
-      information: 'You can use a room to create a local highscore for your event and use the session system. A hacking session lasts 30 minutes, in this time user can solve challenges and gain points. After 30 minutes, the score is submitted to the local highscore. After the session, users can continue to work on the challenges as regular users.',
+      information:
+        'You can use a room to create a local highscore for your event and use the session system. A hacking session lasts 30 minutes, in this time user can solve challenges and gain points. After 30 minutes, the score is submitted to the local highscore. After the session, users can continue to work on the challenges as regular users.',
       keyInvalid: 'Only alphanumeric characters allowed in room key.',
       keyTooShort: 'Room key to short.',
       keyTooLong: 'Room key to long.',
       keyExists: 'Room key already exists.',
       failure: 'Creating room failed. Please try again.',
       keyNote: '3 - 20 characters, alpha-numeric',
-      serverCrowded: 'There are too many room creations at the moment. Please try again in 15 minutes.',
+      serverCrowded:
+        'There are too many room creations at the moment. Please try again in 15 minutes.',
       invalidToken: 'Form invalid. Please try again.',
     },
     success: {
@@ -107,11 +110,13 @@ module.exports = {
     },
     contact: {
       title: 'Contact',
-      HTML: '<p>Please provide contact information according to the legislation of your country.</p>',
+      HTML:
+        '<p>Please provide contact information according to the legislation of your country.</p>',
     },
     privacy: {
       title: 'Privacy Policy',
-      HTML: '<p>Please provide legal information according to the legislation of your country.</p>',
+      HTML:
+        '<p>Please provide legal information according to the legislation of your country.</p>',
     },
-  }
+  },
 }

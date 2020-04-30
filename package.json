@@ -8,7 +8,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node --use_strict index.js ./demo_data/"
+    "start": "node --use_strict index.js ./demo_data/",
+    "prettify": "prettier --write index.js config.js ./server/**/*.js",
+    "lint": "eslint index.js config.js ./server/**/*.js"
   },
   "author": "Entkenntnis <hack@arrrg.de>",
   "license": "MIT",
@@ -24,5 +26,9 @@
     "moment": "^2.24.0",
     "sequelize": "^5.21.0",
     "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "prettier": "^2.0.5"
   }
 }

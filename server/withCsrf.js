@@ -1,10 +1,10 @@
 const Tokens = require('csrf')
 
-module.exports = function(App) {
+module.exports = function (App) {
   const instance = new Tokens()
-  
+
   App.csrf = {
-    create: req => {
+    create: (req) => {
       if (!req.session.csrfSecret) {
         req.session.csrfSecret = instance.secretSync()
       }
@@ -12,6 +12,6 @@ module.exports = function(App) {
     },
     verify: (req, token) => {
       return instance.verify(req.session.csrfSecret, token)
-    }
+    },
   }
 }
