@@ -4,6 +4,10 @@ const bcrypt = require('bcryptjs')
 module.exports = function(App) {
   
   App.express.get('/register', (req, res) => {
+    if (req.session.userId) {
+      res.redirect('/map')
+      return
+    }
     const room = req.session.joinRoom
     req.session.joinRoom = undefined
     const values = req.session.registerValues || {}
@@ -91,6 +95,10 @@ module.exports = function(App) {
 
 
   App.express.get('/join', (req, res) => {
+    if (req.session.userId) {
+      res.redirect('/map')
+      return
+    }
     const values = req.session.joinValues || {}
     req.session.joinValues = undefined
     res.render('join', {
@@ -183,7 +191,8 @@ module.exports = function(App) {
     if (user) {
       const success = bcrypt.compare(password, user.password)
       if (success) {
-        res.end('ok')
+        req.session.userId = user.id
+        res.redirect('/map')
         return
       }
     }
@@ -207,6 +216,10 @@ module.exports = function(App) {
   
   
   App.express.get('/', async (req, res) => {
+    if (req.session.userId) {
+      res.redirect('/map')
+      return
+    }
     const invalidLogin = req.session.loginFail
     req.session.loginFail = undefined
     const dbUsers = await App.db.models.User.findAll({
@@ -217,6 +230,11 @@ module.exports = function(App) {
     })
     const users = processHighscore(dbUsers)
     res.render('home', {invalidLogin, config: App.config, users})
+  })
+  
+  App.express.get('/logout', (req, res) => {
+    req.session.userId = undefined
+    res.redirect('/')
   })
   
   function processHighscore(dbUsers) {

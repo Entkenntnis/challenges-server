@@ -6,6 +6,7 @@ require('./server/withConfig')(App)
 require('./server/withEntry')(App)
 require('./server/withDb')(App)
 require('./server/withMoment')(App)
+require('./server/withPeriodic')(App)
 
 require('./server/dbModel')(App)
 
@@ -28,4 +29,11 @@ App.express.get('/contact', (req, res) => {
 
 App.express.get('/privacy', (req, res) => {
   res.render('privacy', {config: App.config})
+})
+
+
+// TEMP
+
+App.express.get('/map', (req, res) => {
+  res.end('ok ' + req.session.userId)
 })

@@ -1,4 +1,5 @@
 const session = require('express-session')
+const Op = require('sequelize').Op
 
 module.exports = function(App) {
   
@@ -56,6 +57,11 @@ module.exports = function(App) {
       })().then(() => cb(null))
     }
   }
+  
+  // clean up every 5 minutes
+  App.periodic.add(5, async => {
+    App.db.models.Session.destroy({ where: { expires: { [Op.lt]: new Date() } } })
+  })
   
   App.express.use(session({
     resave: false,
