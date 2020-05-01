@@ -1,4 +1,5 @@
 const express = require('express')
+const Op = require('sequelize').Op
 
 module.exports = function (App) {
   const router = express.Router()
@@ -17,6 +18,64 @@ module.exports = function (App) {
     }
     req.session.userId = undefined
     res.redirect('/')
+  })
+
+  router.get('/finish', (req, res) => {
+    if (req.user.session_phase === 'OUTRO') {
+      res.render('finish', { config: App.config })
+    } else {
+      res.redirect('/map')
+    }
+  })
+
+  router.get('/sessiondone', async (req, res) => {
+    if (req.user.session_phase === 'OUTRO') {
+      req.user.session_phase = 'DONE'
+      await req.user.save()
+    }
+    res.redirect('/map')
+  })
+
+  router.get('/endsession', async (req, res) => {
+    if (req.user.session_phase === 'ACTIVE') {
+      req.user.session_score = req.user.score
+      req.user.session_phase = 'OUTRO'
+      await req.user.save()
+      res.redirect('/finish')
+      return
+    }
+    res.redirect('/map')
+  })
+
+  App.periodic.add(5, async () => {
+    const expiredUsers = await App.db.models.User.findAll({
+      where: {
+        session_phase: 'ACTIVE',
+        session_startTime: { [Op.lte]: App.moment().subtract(30, 'minutes') },
+      },
+    })
+    for (const user of expiredUsers) {
+      user.session_phase = 'OUTRO'
+      user.session_score = user.score
+      await user.save()
+    }
+  })
+
+  router.use(async (req, res, next) => {
+    if (req.user.session_phase === 'ACTIVE') {
+      const expired = App.moment(req.user.session_startTime)
+        .add(30, 'minutes')
+        .isBefore(App.moment())
+      if (expired) {
+        res.redirect('/endsession')
+        return
+      }
+    }
+    if (req.user.session_phase === 'OUTRO') {
+      res.redirect('/finish')
+      return
+    }
+    next()
   })
 
   router.get('/map', async (req, res) => {
@@ -79,15 +138,19 @@ module.exports = function (App) {
     res.render('map', { user: req.user, config: App.config, map: canvas.svg() })
   })
 
-  const rates = {}
-
   router.use('/challenge/:id', (req, res, next) => {
     // rate limit
     const id = parseInt(req.params.id)
 
-    if (id && req.user.id && req.body.answer) {
+    if (
+      id &&
+      req.user.id &&
+      req.body.answer &&
+      challenges.some((c) => c.id === id)
+    ) {
       const key = req.user.id + '-' + id
-      const rate = rates[key]
+      req.session.rates = req.session.rates || {}
+      const rate = req.session.rates[key]
       if (rate) {
         if (rate.lockedUntil > 0) {
           if (Date.now() < rate.lockedUntil) {
@@ -108,7 +171,7 @@ module.exports = function (App) {
           }
         }
       } else {
-        rates[key] = { count: 1, lockedUntil: -1 }
+        req.session.rates[key] = { count: 1, lockedUntil: -1 }
       }
     }
     next()
@@ -133,7 +196,8 @@ module.exports = function (App) {
         const answer = raw.toLowerCase()
         return {
           answer,
-          correct: challenge.solution && answer === challenge.solution.toLowerCase(),
+          correct:
+            challenge.solution && answer === challenge.solution.toLowerCase(),
         }
       }
 
@@ -145,8 +209,7 @@ module.exports = function (App) {
           where: { cid: id, UserId: req.user.id },
         })
         if (created) {
-          req.user.score += 10
-          if (req.user.score !== 0) {
+          if (req.user.score > 0) {
             // add a small bonus for fast solving
             const pausetime =
               (new Date().getTime() - req.user.updatedAt.getTime()) /
@@ -155,8 +218,12 @@ module.exports = function (App) {
             req.user.score += Math.pow(0.5, tinterval) * 2
           } else {
             req.user.score += 2
-            // TODO start session
+            if (req.user.session_phase === 'READY') {
+              req.user.session_phase = 'ACTIVE'
+              req.user.session_startTime = new Date()
+            }
           }
+          req.user.score += 10
           await req.user.save()
         }
       } catch (e) {

@@ -124,7 +124,7 @@ module.exports = {
     status: {
       name: 'Name:',
       score: 'Score:',
-      sessionReady: 'session: ready',
+      sessionReady: 'Session: ready',
       highscore: 'Highscore',
       profile: 'Profile',
       logout: 'Logout',
@@ -142,6 +142,10 @@ module.exports = {
       correct: 'is correct',
       wrong: 'is wrong',
       locked: 'After 20 tries, you must pause for 30 seconds. Please wait',
+    },
+    finish: {
+      html: '<h2>Session Finished</h2>',
+      ok: 'OK',
     },
   },
 }

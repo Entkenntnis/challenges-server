@@ -1,0 +1,29 @@
+<%
+  const i18n = config.i18n
+  const highscore = i18n.highscore
+%>
+
+<!DOCTYPE html>
+<html lang="<%=config.locale%>">
+  <head>
+    <%- include('commenHead') %>
+    <title><%= i18n.title + ' - ' + highscore.title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <%- include('header', {i18n}) %>
+      <hr />
+      <h2><%= highscore.title %></h2>
+      
+      <div style=height:25px></div>
+      
+      <%- include('highscoreTable', {users, highscore}) %>
+      
+      <div style="height:40px"></div>
+      
+      <p><a href="/" class="btn btn-primary"><%= i18n.back %></a></p>
+      
+      <div style="height:40px"></div>
+    </div>
+  </body>
+</html>

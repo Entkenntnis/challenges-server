@@ -1,23 +1,21 @@
+<%
+  const i18n = config.i18n
+%>
+
 <!DOCTYPE html>
-<html lang="de">
+<html lang="<%= config.locale %>">
   <head>
-    <% include commenHead %>
-    <title>Hack the Web</title>
+    <%- include('commenHead') %>
+    <title><%=i18n.title %></title>
   </head>
   <body>
     <div class="container">
-      <% include header %>
+      <%- include('header', {i18n}) %>
       <hr />
       
-      <h2>Herzlichen Glückwunsch!</h2>
+      <%- i18n.finish.html %>
       
-      <p>Du hast die Session erfolgreich absolviert. Deine 30 Minuten sind nun abgelaufen.</p>
-      
-      <p>Klicke auf OK, um dein Ergebnis in der Highscore zu speichern. Danach wird dein Account in den freien Modus geschaltet. Du kannst an den Aufgaben weiterarbeiten - ganz ohne Zeitdruck</p>
-      
-      <p>Vielen Dank für die Teilnahme. Wir wünschen dir alles Gute für deine Zukunft als Hacker!</p>
-      
-      [<a href="/endsession">OK</a>]
+      [<a href="/sessiondone"><%= i18n.finish.ok %></a>]
       
     </div>
   </body>

@@ -17,7 +17,7 @@
 <% if (user.session_phase == "ACTIVE") { %>
   <% let timediff = new Date().getTime() - user.session_startTime %>
   <% let remaining = Math.round((1000 * 60 * 30 - timediff)/1000) %>
-  | Session: noch <span id="remaining"></span>
+  | Session: <span id="remaining"></span>
   
   
   <script>

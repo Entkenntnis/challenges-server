@@ -79,6 +79,7 @@ module.exports = function (App) {
           name: username,
           password,
           RoomId: roomId,
+          session_phase: roomId && 'READY',
         })
         res.redirect('/success')
         return
