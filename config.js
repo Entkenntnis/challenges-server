@@ -43,7 +43,7 @@ module.exports = {
     registerLink: 'Register',
     joinRoom: 'Join room',
     hackerOfTheMonth: 'Top Hackers of the Month',
-    showHighscore: 'Complete Highscore',
+    showHighscore: 'Show All',
     inviteOrga: 'Are you hosting an event? Here you can ',
     createRoom: 'create a custom room',
     contactLink: 'Contact',
@@ -109,7 +109,10 @@ module.exports = {
       rank: 'Rank',
       name: 'Username',
       score: 'Score',
+      sessionScore: 'Session Score',
       lastActive: 'last active',
+      showRoomScore: 'Show Room Highscore',
+      showGlobalScore: 'Show All',
     },
     contact: {
       title: 'Contact',
@@ -146,6 +149,9 @@ module.exports = {
     finish: {
       html: '<h2>Session Finished</h2>',
       ok: 'OK',
+    },
+    profile: {
+      title: 'Profile',
     },
   },
 }

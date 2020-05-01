@@ -210,10 +210,17 @@ module.exports = function (App) {
       order: [['score', 'DESC']],
       limit: App.config.highscoreLimit,
     })
+    let user = undefined
+    if (req.session.userId) {
+      user = await App.db.models.User.findOne({
+        where: { id: req.session.userId },
+      })
+    }
     const users = processHighscore(dbUsers)
     res.render('highscore', {
       config: App.config,
       users,
+      user,
     })
   })
 

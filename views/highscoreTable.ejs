@@ -11,12 +11,12 @@
       </tr>
     </thead>
     <tbody>
-      <% for (const user of users) { %>
-        <tr <false?'class="active"':''%>>
-          <td><%=user.rank%></td>
-          <td><%=user.name%></td>
-          <td><%=user.score%></td>
-          <td><%=user.lastActive%></td>
+      <% for (const u of users) { %>
+        <tr <%-user &&u.name === user.name?'class="active"':''%>>
+          <td><%=u.rank%></td>
+          <td><%=u.name%></td>
+          <td><%=u.score%></td>
+          <td><%=u.lastActive%></td>
         </tr>
       <% } %>
     </tbody>

@@ -12,16 +12,50 @@
   <body>
     <div class="container">
       <%- include('header', {i18n}) %>
+      <% if (user) { %>
+        <%- include('status', {i18n,user}) %>
+      <% } %>
       <hr />
-      <h2><%= highscore.title %></h2>
+      <h2><%= highscore.title %> for room <%= room %></h2>
       
       <div style=height:25px></div>
       
-      <%- include('highscoreTable', {users, highscore}) %>
+      <p>[<a href="/highscore"><%=highscore.showGlobalScore%></a>]</p>
+      
+      <div style=height:25px></div>
+      
+      <% if (users.length == 0) { %>
+        <p><%= highscore.empty%></p>
+      <% } else { %>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col"><%= highscore.rank %></th>
+              <th scope="col"><%= highscore.name %></th>
+              <th scope="col"><%= highscore.sessionScore %></th>
+              <th scope="col">(<%= highscore.score %>)</th>
+              <th scope="col"><%= highscore.lastActive %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (const u of users) { %>
+              <tr <%-user &&u.name === user.name?'class="active"':''%>>
+                <td><%=u.rank%></td>
+                <td><%=u.name%></td>
+                <td><%=u.sessionScore%></td>
+                <td>(<%=u.score%>)</td>
+                <td><%=u.lastActive%></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+        
+      <% } %> 
+
       
       <div style="height:40px"></div>
       
-      <p><a href="/" class="btn btn-primary"><%= i18n.back %></a></p>
+      <p><a href="/<%= user ? 'map' : ''%>" class="btn btn-primary"><%= i18n.back %></a></p>
       
       <div style="height:40px"></div>
     </div>

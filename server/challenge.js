@@ -242,11 +242,41 @@ module.exports = function (App) {
   })
 
   router.get('/profile', async (req, res) => {
-    res.end('profile')
+    res.render('profile', { user: req.user, config: App.config, room: '123' })
   })
 
+  App.express.get('/highscore', async (req, res) => {})
+
   router.get('/roomscore', async (req, res) => {
-    res.end('roomscore')
+    const room = await App.db.models.Room.findOne({where: {id:req.user.RoomId}})
+    if (req.user.RoomId && room) {
+      const dbUsers = await App.db.models.User.findAll({
+        attributes: ['name', 'score', 'session_score', 'updatedAt'],
+        where: {
+          roomId:req.user.RoomId
+        },
+        order: [['session_score', 'DESC']],
+        limit: App.config.highscoreLimit,
+      })
+      const users = dbUsers.map(user => {
+        return {
+          name: user.name,
+          score: Math.floor(user.score),
+          sessionScore: user.session_score ? Math.floor(user.session_score) : '...',
+          lastActive: App.moment(user.updatedAt).fromNow(),
+        }
+      })
+      users.forEach((user, i) => {
+        if (i > 0 && users[i - 1].score == user.score) {
+          user.rank = users[i - 1].rank
+        } else {
+          user.rank = i + 1
+        }
+      })
+      res.render('roomscore', {config: App.config, user:req.user, room:room.name, users})
+      return
+    }
+    res.redirect('/map')
   })
 
   App.express.use(router)
