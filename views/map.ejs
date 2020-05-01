@@ -1,9 +1,12 @@
+<%
+  const i18n = config.i18n
+%>
+
 <!DOCTYPE html>
-<html lang="de">
+<html lang="<%=config.locale%>">
   <head>
-    <% include commenHead %>
-    <title>Hack the Web</title>
-    <script src="/svg.min.js"></script>
+    <%- include('commenHead') %>
+    <title><%= i18n.title %></title>
     <style type="text/css">
       .no-underline { text-decoration: none !important; }
       body { background-image:url(/background.jpg) }
@@ -11,37 +14,18 @@
   </head>
   <body>
     <div class="container">
-      <% include status %>
-      <% include header %>
+      <%- include('status', {i18n, user}) %>
+      <%- include('header', {i18n}) %>
       <hr />
     </div>
-    <div id="drawing" style="width:1600px;height:1200px"></div>
-    <br>
+    <div id="drawing" style="width:1600px;height:1200px;position:relative;">
+      <%-map%>
+      <span style="position:absolute;right:10px;bottom:10px;">
+        <%= i18n.map.background %>
+        <a href="http://www.flickr.com/photos/scotbot/9686457096">scotbot</a>
+        (<a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>)
+      </span>
+    </div>
     
-    <p style="display:none" id="chals"><%-JSON.stringify(chals)%></p>
-    <p style="display:none" id="cons"><%-JSON.stringify(cons)%></p>
-    
-    <script>
-      var points = JSON.parse(document.getElementById('chals').innerHTML)
-      var connections = JSON.parse(document.getElementById('cons').innerHTML)
-      var draw = SVG('drawing')
-      
-      connections.forEach(function(c){
-        draw.line(c.start.x, c.start.y, c.end.x, c.end.y)
-          .stroke({width: 10})
-          .stroke('#464545')
-          .attr('stroke-linecap', 'round')
-      })
-      
-      points.forEach(function(p){
-        var link = draw.link("/chal/" + p.id).addClass('no-underline')
-        var rect = link.circle(18).attr({
-          fill: (p.solved ? '#666699' : '#0ce3ac'),
-          cx : p.pos.x,
-          cy : p.pos.y})
-        var text = link.text(p.title).fill('#ffffff')
-        text.center(p.pos.x, p.pos.y - 20)
-      })
-    </script>
   </body>
 </html>

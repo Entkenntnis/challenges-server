@@ -1,0 +1,45 @@
+<%
+  const i18n = config.i18n
+%>
+
+<!DOCTYPE html>
+<html lang="<%=config.locale%>">
+  <head>
+    <%- include('commenHead') %>
+    <title><%=challenge.title%></title>
+  </head>
+  <body>
+    <div class="container">
+      <%- include('status', {user, i18n}) %>
+      <%- include('header', {i18n}) %>
+      <hr />
+      <h2><%=challenge.title%></h2>
+      
+      <p>
+        <% if (!correct) { %><a href="/map"><%=i18n.challenge.back%></a> |<% } %>
+        <%=i18n.challenge.solvedBy%> <%=solvedBy%> <%=solvedBy === 1 ? i18n.challenge.user : i18n.challenge.users%>
+      </p>
+      
+      <div style="height:16px"></div>
+      
+      <% if (answer) { %>
+      <p class="text-<%=correct ? 'primary' : 'danger'%>"><strong>'<%=answer%>' <%=correct? i18n.challenge.correct : i18n.challenge.wrong%></strong></p>
+      <% } %>
+      
+      <div style="height:16px"></div>
+      
+      <% if (correct) { %>
+        <p><a href="/map"><%= i18n.challenge.continue %></a></p>
+      <% } else { %>
+        <%-challenge.html%>
+        <div style="height:16px"></div>
+        <% if (!challenge.hidesubmit) { %>
+          <form autocomplete="off" method="post"><input id="answer" type="text" name="answer">
+            <input type="submit" value="<%=i18n.challenge.go%>">
+          </form>
+        <% } %>
+      <% } %>
+      <div style="height:200px"></div>
+    </div>
+  </body>
+</html>

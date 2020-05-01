@@ -12,6 +12,7 @@ module.exports = {
   sessionSecret: 'keyboard cat',
   sessionMaxAge: 1000 * 60 * 60 * 24, // 24 hours
   locale: 'en',
+  reloadChallenges: true,
   accounts: {
     minUsername: 3,
     maxUsername: 40,
@@ -25,6 +26,8 @@ module.exports = {
     maxRoomPerHour: 50,
     highscoreLimit: 2000,
     topHackersLimit: 10,
+    solveRateLimit: 20,
+    solveRateTimeout: 30,
   },
   i18n: {
     title: 'hack-engine',
@@ -117,6 +120,28 @@ module.exports = {
       title: 'Privacy Policy',
       HTML:
         '<p>Please provide legal information according to the legislation of your country.</p>',
+    },
+    status: {
+      name: 'Name:',
+      score: 'Score:',
+      sessionReady: 'session: ready',
+      highscore: 'Highscore',
+      profile: 'Profile',
+      logout: 'Logout',
+    },
+    map: {
+      background: 'Background:',
+    },
+    challenge: {
+      back: 'back',
+      go: 'Go',
+      solvedBy: 'solved by',
+      users: 'people',
+      user: 'person',
+      continue: 'continue',
+      correct: 'is correct',
+      wrong: 'is wrong',
+      locked: 'After 20 tries, you must pause for 30 seconds. Please wait',
     },
   },
 }
