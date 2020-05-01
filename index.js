@@ -15,24 +15,11 @@ require('./server/expressHeaders')(App)
 require('./server/expressSession')(App)
 require('./server/expressViews')(App)
 
+require('./server/staticPages')(App)
 require('./server/withCsrf')(App)
-
 require('./server/user')(App)
 require('./server/challenge')(App)
 
 App.entry.start().then(() => {
   App.logger.info(App.moment().toString())
-})
-
-App.express.get('/contact', (req, res) => {
-  res.render('contact', { config: App.config })
-})
-
-App.express.get('/privacy', (req, res) => {
-  res.render('privacy', { config: App.config })
-})
-
-App.express.get('/ramble', (req, res) => {
-  req.session.userId = 3243234
-  res.end('ramble')
 })

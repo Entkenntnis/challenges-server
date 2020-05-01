@@ -1,0 +1,16 @@
+
+<%- include('../statusBar', {t:App.config.i18n.statusBar, user}) %>
+
+<style type="text/css">
+  .no-underline { text-decoration: none !important; }
+  body { background-image:url(/background.jpg) }
+</style>
+
+<div id="drawing" style="width:1600px;height:1200px;position:relative;">
+  <%- props.map %>
+  <span style="position:absolute;right:10px;bottom:10px;">
+    <%= t.background %>
+    <a href="http://www.flickr.com/photos/scotbot/9686457096">scotbot</a>
+    (<a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>)
+  </span>
+</div>

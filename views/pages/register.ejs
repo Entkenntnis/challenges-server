@@ -1,0 +1,41 @@
+
+<h2><%= props.room ? App.config.i18n.join.title + ' \'' + props.room + '\'' : t.title %></h2>
+
+<% if (props.messages.length > 0) { %>
+  <div class="alert alert-danger"><%-props.messages.join('<br>')%></div>
+<% } %>
+
+<form method="post" class="form-horizontal" autocomplete="off">
+  <fieldset>
+    <div class="form-group">
+      <label for="inputName" class="col-md-2 control-label"><%= t.username %></label>
+      <div class="col-md-4">
+        <input class="form-control" id="inputName" type="text" name="username" value="<%=props.values.username%>">
+        <small><%= t.usernameNote %></small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPw1" class="col-md-2 control-label"><%= t.password %></label>
+      <div class="col-md-4">
+        <input class="form-control" id="inputPw1" type="password" name="pw1" value="<%=props.values.pw1%>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPw2" class="col-md-2 control-label"><%= t.repeatPassword %></label>
+      <div class="col-md-4">
+        <input class="form-control" id="inputPw2" type="password" name="pw2" value="<%=props.values.pw2%>">
+        <small><%= t.passwordNote %></small>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <p style="margin-top:8px;margin-bottom:16px;"><%= t.noteOn %> <a href="/privacy"><%= t.dataProtection %></a></p>
+        <button type="submit" class="btn btn-success"><%= t.go %></button>
+      </div>
+    </div>
+    <input type="hidden" name="csrf" value="<%=props.token%>"/>
+    <input type="hidden" name="room" value="<%=props.room%>" />
+  </fieldset>
+  
+  <%- include('../backButton', {t}) %>
+</form>

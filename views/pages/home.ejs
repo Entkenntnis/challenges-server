@@ -1,0 +1,47 @@
+
+
+
+<% if (props.invalidLogin) { %>
+  <div class="alert alert-danger"><p><%= t.invalid %></p></div>
+<% } %>
+
+<h2><%= t.loginHeading %></h2>
+
+<form action="/login" method="post" autocomplete="off">
+  <label><%= t.name %> <input type="text" name="username" value=""/></label>
+  <span style="display:inline-block;width:10px;"></span>
+  <label><%= t.password %> <input type="password" name="password" value=""/></label>
+  <input type="submit" value="<%= t.go %>"/>
+</form>
+
+<p style="margin-bottom:20px;margin-top:20px;"><%= t.invite %> <a href="/register"><%= t.registerLink %></a></p>
+
+<p>[<a href="/join"><%= t.joinRoom %></a>]</p>
+
+<hr />
+
+<h2><%= t.hackerOfTheMonth %></h2>
+
+<%- include('../highscoreTable', {users:props.users, t: App.config.i18n.highscore, user}) %>
+
+<p>[<a href="/highscore"><%= t.showHighscore %></a>]</p>
+
+<hr />
+
+<h2><%= t.rooms %></h2>
+
+<p><%= t.inviteOrga %> <a href="/create"><%= t.createRoom %></a>.</p>
+
+<hr />
+
+<div style="height:350px"></div>
+
+<hr style="margin-bottom:8px"/>
+
+<p>
+  <a href="/contact"><%= t.contactLink %></a> |
+  <a href="/privacy"><%= t.privacyLink %></a> | 
+  <a href="https://github.com/Entkenntnis/hack-engine" target="_blank"><%= t.github %></a> | 
+  <%= t.version %>
+</p>
+      

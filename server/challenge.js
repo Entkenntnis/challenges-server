@@ -135,7 +135,13 @@ module.exports = function (App) {
     })
     points.map(drawPoint)
 
-    res.render('map', { user: req.user, config: App.config, map: canvas.svg() })
+    res.renderPage({
+      page: 'map',
+      props: {
+        map: canvas.svg()
+      },
+      outsideOfContainer: true
+    })
   })
 
   router.use('/challenge/:id', (req, res, next) => {
@@ -230,14 +236,15 @@ module.exports = function (App) {
         console.log(e)
       }
     }
-
-    res.render('challenge', {
-      config: App.config,
-      challenge,
-      correct,
-      answer,
-      user: req.user,
-      solvedBy,
+    
+    res.renderPage({
+      page: 'challenge',
+      props: {
+        challenge,
+        correct,
+        answer,
+        solvedBy,
+      }
     })
   })
 
@@ -245,24 +252,26 @@ module.exports = function (App) {
     res.render('profile', { user: req.user, config: App.config, room: '123' })
   })
 
-  App.express.get('/highscore', async (req, res) => {})
-
   router.get('/roomscore', async (req, res) => {
-    const room = await App.db.models.Room.findOne({where: {id:req.user.RoomId}})
+    const room = await App.db.models.Room.findOne({
+      where: { id: req.user.RoomId },
+    })
     if (req.user.RoomId && room) {
       const dbUsers = await App.db.models.User.findAll({
         attributes: ['name', 'score', 'session_score', 'updatedAt'],
         where: {
-          roomId:req.user.RoomId
+          roomId: req.user.RoomId,
         },
         order: [['session_score', 'DESC']],
         limit: App.config.highscoreLimit,
       })
-      const users = dbUsers.map(user => {
+      const users = dbUsers.map((user) => {
         return {
           name: user.name,
           score: Math.floor(user.score),
-          sessionScore: user.session_score ? Math.floor(user.session_score) : '...',
+          sessionScore: user.session_score
+            ? Math.floor(user.session_score)
+            : '...',
           lastActive: App.moment(user.updatedAt).fromNow(),
         }
       })
@@ -273,7 +282,12 @@ module.exports = function (App) {
           user.rank = i + 1
         }
       })
-      res.render('roomscore', {config: App.config, user:req.user, room:room.name, users})
+      res.render('roomscore', {
+        config: App.config,
+        user: req.user,
+        room: room.name,
+        users,
+      })
       return
     }
     res.redirect('/map')

@@ -1,25 +1,20 @@
 
 
-<%
-  const status = i18n.status
-%>
-
 <p class="status">
 
-[<%= status.name %> <strong><%= user.name %></strong> | 
+[<%= t.name %> <strong><%= user.name %></strong> | 
 
-<%= status.score %> <strong><%= Math.floor(user.score) %></strong>
+<%= t.score %> <strong><%= Math.floor(user.score) %></strong>
 
 <% if (user.session_phase === "READY") { %>
-  | <%= status.sessionReady %>
+  | <%= t.sessionReady %>
 <% } %>
 
 <% if (user.session_phase == "ACTIVE") { %>
   <% let timediff = new Date().getTime() - user.session_startTime %>
   <% let remaining = Math.round((1000 * 60 * 30 - timediff)/1000) %>
-  | Session: <span id="remaining"></span>
-  
-  
+  | <%= t.session %> <span id="remaining"></span>
+
   <script>
     var localTime = Date.now()
     var remaining = <%=remaining%>
@@ -45,12 +40,12 @@
 [
 
 <% if (!user.session_phase || user.session_phase == "DONE") { %>
-  <a href="/highscore"><%= status.highscore %></a> | 
+  <a href="/highscore"><%= t.highscore %></a> | 
 <% } %>
 
-<a href="/profile"><%= status.profile%></a> |
+<a href="/profile"><%= t.profile%></a> |
 
-<a href="/logout"><%= status.logout %></a>
+<a href="/logout"><%= t.logout %></a>
 
 ]
 
@@ -68,5 +63,8 @@
     .status {
       margin-top: 20px;
     }
+  }
+  .status {
+    z-index:10;
   }
 </style>

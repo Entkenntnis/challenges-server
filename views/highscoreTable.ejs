@@ -1,25 +1,24 @@
 <% if (users.length == 0) { %>
-  <p><%= highscore.empty%></p>
+  <p><%= t.empty%></p>
 <% } else { %>
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col"><%= highscore.rank %></th>
-        <th scope="col"><%= highscore.name %></th>
-        <th scope="col"><%= highscore.score %></th>
-        <th scope="col"><%= highscore.lastActive %></th>
+        <th scope="col"><%= t.rank %></th>
+        <th scope="col"><%= t.name %></th>
+        <th scope="col"><%= t.score %></th>
+        <th scope="col"><%= t.lastActive %></th>
       </tr>
     </thead>
     <tbody>
-      <% for (const u of users) { %>
-        <tr <%-user &&u.name === user.name?'class="active"':''%>>
-          <td><%=u.rank%></td>
-          <td><%=u.name%></td>
-          <td><%=u.score%></td>
-          <td><%=u.lastActive%></td>
+      <% for (const row of users) { %>
+        <tr <%- (user && row.name === user.name) ? 'class="active"' : '' %>>
+          <td><%=row.rank%></td>
+          <td><%=row.name%></td>
+          <td><%=row.score%></td>
+          <td><%=row.lastActive%></td>
         </tr>
       <% } %>
     </tbody>
   </table>
-  
 <% } %> 

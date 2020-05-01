@@ -1,0 +1,34 @@
+
+<%- include('../statusBar', {user, t:App.config.i18n.statusBar}) %>
+
+<h2><%= props.challenge.title %></h2>
+
+<p>
+  <% if (!props.correct) { %>
+    <a href="/map"><%= t.back %></a> |
+  <% } %>
+  <%= t.solvedBy %> <%= props.solvedBy %> <%= props.solvedBy === 1 ? t.user : t.users %>
+</p>
+
+<div style="height:16px"></div>
+
+<% if (props.answer) { %>
+  <p class="text-<%= props.correct ? 'primary' : 'danger' %>">
+    <strong>'<%= props.answer %>' <%= props.correct ? t.correct : t.wrong %></strong>
+  </p>
+<% } %>
+
+<div style="height:16px"></div>
+
+<% if (props.correct) { %>
+  <p><a href="/map"><%= t.continue %></a></p>
+<% } else { %>
+  <%- props.challenge.html %>
+  <% if (!props.challenge.hidesubmit) { %>
+    <form autocomplete="off" method="post"><input id="answer" type="text" name="answer">
+      <input type="submit" value="<%= t.go %>">
+    </form>
+  <% } %>
+<% } %>
+
+<div style="height:200px"></div>

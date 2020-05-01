@@ -12,12 +12,14 @@ module.exports = function (App) {
     const values = req.session.registerValues || {}
     req.session.registerValues = undefined
     const token = App.csrf.create(req)
-    res.render('register', {
-      messages: req.flash('register'),
-      values,
-      token,
-      room,
-      config: App.config,
+    res.renderPage({
+      page: 'register',
+      props: {
+        messages: req.flash('register'),
+        values,
+        token,
+        room
+      }
     })
   })
 
@@ -105,10 +107,12 @@ module.exports = function (App) {
     }
     const values = req.session.joinValues || {}
     req.session.joinValues = undefined
-    res.render('join', {
-      messages: req.flash('join'),
-      values,
-      config: App.config,
+    res.renderPage({
+      page: 'join',
+      props: {
+        messages: req.flash('join'),
+        values,
+      }
     })
   })
 
@@ -129,12 +133,16 @@ module.exports = function (App) {
   App.express.get('/create', (req, res) => {
     const values = req.session.roomValues || {}
     req.session.roomValues = undefined
+    res.renderPage({
+      page: 'create',
+      props: {
+        messages: req.flash('create'),
+        values,
+        token: App.csrf.create(req),
+        rooms: req.session.rooms || [],
+      }
+    })
     res.render('create', {
-      messages: req.flash('create'),
-      values,
-      token: App.csrf.create(req),
-      config: App.config,
-      rooms: req.session.rooms || [],
     })
   })
 
@@ -184,7 +192,7 @@ module.exports = function (App) {
   })
 
   App.express.get('/success', (req, res) => {
-    res.render('success', { config: App.config })
+    res.renderPage('success')
   })
 
   App.express.post('/login', async (req, res) => {
@@ -217,10 +225,12 @@ module.exports = function (App) {
       })
     }
     const users = processHighscore(dbUsers)
-    res.render('highscore', {
-      config: App.config,
-      users,
-      user,
+    res.renderPage({
+      page: 'highscore',
+      props: {
+        users
+      },
+      user
     })
   })
 
@@ -241,7 +251,13 @@ module.exports = function (App) {
       limit: App.config.topHackersLimit,
     })
     const users = processHighscore(dbUsers)
-    res.render('home', { invalidLogin, config: App.config, users })
+    res.renderPage({
+      page: 'home',
+      props: {
+        invalidLogin,
+        users
+      },
+    })
   })
 
   App.express.get('/logout', (req, res) => {
