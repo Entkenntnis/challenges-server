@@ -22,7 +22,7 @@ module.exports = function (App) {
 
   router.get('/finish', (req, res) => {
     if (req.user.session_phase === 'OUTRO') {
-      res.render('finish', { config: App.config })
+      res.renderPage('finish')
     } else {
       res.redirect('/map')
     }
@@ -43,6 +43,15 @@ module.exports = function (App) {
       await req.user.save()
       res.redirect('/finish')
       return
+    }
+    res.redirect('/map')
+  })
+
+  router.get('/startsession', async (req, res) => {
+    if (req.user.session_phase === 'READY') {
+      req.user.session_phase = 'ACTIVE'
+      req.user.session_startTime = new Date()
+      await req.user.save()
     }
     res.redirect('/map')
   })
@@ -93,25 +102,6 @@ module.exports = function (App) {
 
     const points = []
 
-    function drawPoint(p) {
-      const link = canvas.link('/challenge/' + p.id).addClass('no-underline')
-      link.circle(18).attr({
-        fill: p.isSolved ? '#666699' : '#0ce3ac',
-        cx: p.pos.x,
-        cy: p.pos.y,
-      })
-      const text = link.text(p.title).fill('#ffffff')
-      text.center(p.pos.x, p.pos.y - 20)
-    }
-
-    function drawConnection(c) {
-      canvas
-        .line(c.start.x, c.start.y, c.end.x, c.end.y)
-        .stroke({ width: 10 })
-        .stroke('#464545')
-        .attr('stroke-linecap', 'round')
-    }
-
     challenges.map((challenge) => {
       const isSolved = solved.includes(challenge.id)
       const point = {
@@ -129,18 +119,30 @@ module.exports = function (App) {
         challenge.deps.forEach((dep) => {
           const previous = challenges.filter((c) => c.id === dep)[0]
           if (solved.includes(previous.id))
-            drawConnection({ start: challenge.pos, end: previous.pos })
+            App.config.map.drawConnection(canvas, {
+              start: challenge.pos,
+              end: previous.pos,
+            })
         })
       }
     })
+
+    function drawPoint(p) {
+      App.config.map.drawPoint(
+        canvas.link('/challenge/' + p.id).addClass('no-underline'),
+        p,
+        App.config.map.textColor
+      )
+    }
+
     points.map(drawPoint)
 
     res.renderPage({
       page: 'map',
       props: {
-        map: canvas.svg()
+        map: canvas.svg(),
       },
-      outsideOfContainer: true
+      outsideOfContainer: true,
     })
   })
 
@@ -236,7 +238,7 @@ module.exports = function (App) {
         console.log(e)
       }
     }
-    
+
     res.renderPage({
       page: 'challenge',
       props: {
@@ -244,12 +246,30 @@ module.exports = function (App) {
         correct,
         answer,
         solvedBy,
-      }
+      },
     })
   })
 
   router.get('/profile', async (req, res) => {
-    res.render('profile', { user: req.user, config: App.config, room: '123' })
+    let room
+    if (req.user.RoomId) {
+      const roomRow = await App.db.models.Room.findOne({
+        where: { id: req.user.RoomId },
+      })
+      if (roomRow) {
+        room = roomRow.name
+      }
+    }
+    const solved = await App.db.models.Solution.count({
+      where: { UserId: req.user.id },
+    })
+    res.renderPage({
+      page: 'profile',
+      props: {
+        room,
+        solved,
+      },
+    })
   })
 
   router.get('/roomscore', async (req, res) => {
@@ -262,16 +282,20 @@ module.exports = function (App) {
         where: {
           roomId: req.user.RoomId,
         },
-        order: [['session_score', 'DESC']],
+        order: [
+          ['session_score', 'DESC'],
+          ['updatedAt', 'DESC'],
+        ],
         limit: App.config.highscoreLimit,
       })
       const users = dbUsers.map((user) => {
         return {
           name: user.name,
           score: Math.floor(user.score),
-          sessionScore: user.session_score
-            ? Math.floor(user.session_score)
-            : '...',
+          sessionScore:
+            user.session_score || user.session_score === 0
+              ? Math.floor(user.session_score)
+              : '...',
           lastActive: App.moment(user.updatedAt).fromNow(),
         }
       })
@@ -282,11 +306,12 @@ module.exports = function (App) {
           user.rank = i + 1
         }
       })
-      res.render('roomscore', {
-        config: App.config,
-        user: req.user,
-        room: room.name,
-        users,
+      res.renderPage({
+        page: 'roomscore',
+        props: {
+          room: room.name,
+          users,
+        },
       })
       return
     }

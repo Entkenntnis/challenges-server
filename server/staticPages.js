@@ -1,4 +1,4 @@
-module.exports = function(App) {
+module.exports = function (App) {
   App.express.get('/contact', (req, res) => {
     res.renderPage('contact')
   })

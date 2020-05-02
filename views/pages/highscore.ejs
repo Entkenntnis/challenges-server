@@ -1,8 +1,14 @@
 
+<% if (user) { %>
+
+<%- include('../statusBar', {user, t:App.config.i18n.statusBar}) %>
+
+<% } %>
+
 <h2><%= t.title %></h2>
 
 <% if (user && user.RoomId) { %>
-  <p>[<a href="/roomscore"><%=highscore.showRoomScore%></a>]</p>
+  <p class="my-4">[<a href="/roomscore"><%=t.showRoomScore%></a>]</p>
 <% } %>
 
 <%- include('../highscoreTable', {users:props.users, t, user}) %>

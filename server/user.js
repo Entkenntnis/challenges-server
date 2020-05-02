@@ -18,8 +18,8 @@ module.exports = function (App) {
         messages: req.flash('register'),
         values,
         token,
-        room
-      }
+        room,
+      },
     })
   })
 
@@ -112,7 +112,7 @@ module.exports = function (App) {
       props: {
         messages: req.flash('join'),
         values,
-      }
+      },
     })
   })
 
@@ -140,10 +140,9 @@ module.exports = function (App) {
         values,
         token: App.csrf.create(req),
         rooms: req.session.rooms || [],
-      }
+      },
     })
-    res.render('create', {
-    })
+    res.render('create', {})
   })
 
   App.express.post('/create', async (req, res) => {
@@ -215,7 +214,10 @@ module.exports = function (App) {
     const dbUsers = await App.db.models.User.findAll({
       attributes: ['name', 'score', 'updatedAt'],
       where: { score: { [Op.gt]: 0 } },
-      order: [['score', 'DESC']],
+      order: [
+        ['score', 'DESC'],
+        ['updatedAt', 'DESC'],
+      ],
       limit: App.config.highscoreLimit,
     })
     let user = undefined
@@ -228,9 +230,9 @@ module.exports = function (App) {
     res.renderPage({
       page: 'highscore',
       props: {
-        users
+        users,
       },
-      user
+      user,
     })
   })
 
@@ -255,7 +257,7 @@ module.exports = function (App) {
       page: 'home',
       props: {
         invalidLogin,
-        users
+        users,
       },
     })
   })

@@ -30,6 +30,28 @@ const config = {
     solveRateLimit: 20,
     solveRateTimeout: 30,
   },
+  map: {
+    background: '/background.jpg',
+    backgroundLicenseHtml:
+      '<a href="https://paintingvalley.com/sketch-paper-texture#sketch-paper-texture-37.jpg">paintingvalley.com</a> (<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">CC BY-NC 4.0</a>)',
+    textColor: 'black',
+    drawPoint: (link, p, textColor) => {
+      link.circle(18).attr({
+        fill: p.isSolved ? 'var(--gray-dark)' : 'var(--success)',
+        cx: p.pos.x,
+        cy: p.pos.y,
+      })
+      const text = link.plain(p.title).fill(textColor).font('family', 'inherit')
+      text.center(p.pos.x, p.pos.y - 20)
+    },
+    drawConnection: (canvas, c) => {
+      canvas
+        .line(c.start.x, c.start.y, c.end.x, c.end.y)
+        .stroke({ width: 10 })
+        .stroke('var(--gray)')
+        .attr('stroke-linecap', 'round')
+    },
+  },
 }
 
 config.i18n = {
@@ -90,9 +112,9 @@ config.i18n = {
     name: 'Username',
     score: 'Score',
     sessionScore: 'Session Score',
-    lastActive: 'last active',
-    showRoomScore: 'Show Room Highscore',
-    showGlobalScore: 'Show All',
+    lastActive: 'Last Active',
+    showRoomScore: 'room only',
+    showGlobalScore: 'show all',
   },
   create: {
     title: 'Create Room',
@@ -138,25 +160,22 @@ config.i18n = {
     profile: 'Profile',
     logout: 'Logout',
   },
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  title: 'hack-engine',
-  
-  status: {
+  profile: {
+    title: 'Profile',
+    username: 'Username:',
+    score: 'Score:',
+    solved: 'Challenges solved:',
+    lastActive: 'Last active:',
+    room: 'Room:',
+    sessionReady: 'Session is ready. Solve a challenge to start it.',
+    startSession: 'Start session now!',
+    sessionActive: 'Session is running...',
+    endSession: 'End session now!',
+    sessionDone: 'Session done.',
+    sessionScore: 'Session score:',
   },
   challenge: {
     back: 'back',
-    go: 'Go',
     solvedBy: 'solved by',
     users: 'people',
     user: 'person',
@@ -165,12 +184,14 @@ config.i18n = {
     wrong: 'is wrong',
     locked: 'After 20 tries, you must pause for 30 seconds. Please wait',
   },
-  finish: {
-    html: '<h2>Session Finished</h2>',
-    ok: 'OK',
+  roomscore: {
+    title: 'Highscore',
+    heading: 'Highscore: ',
   },
-  profile: {
-    title: 'Profile',
+  finish: {
+    title: 'Session finished',
+    html: '<p>Well done!</p>',
+    ok: 'OK',
   },
 }
 

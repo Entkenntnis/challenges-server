@@ -6,17 +6,17 @@ module.exports = function (App) {
       const page = opts.page || opts
       const props = opts.props || {}
       const outsideOfContainer = opts.outsideOfContainer
-      
-      const t = {...App.config.i18n.share, ...App.config.i18n[page]}
-      
-      const title = App.config.i18n.title + (t.title? ' - ' + t.title : '')
-      
+
+      const t = { ...App.config.i18n.share, ...App.config.i18n[page] }
+
+      const title = App.config.i18n.brand + (t.title ? ' - ' + t.title : '')
+
       const locale = App.config.locale
       const brand = App.config.i18n.brand
       const slogan = App.config.i18n.slogan
-      
+
       const user = opts.user || req.user
-      
+
       res.render('main', {
         locale,
         brand,
@@ -27,7 +27,7 @@ module.exports = function (App) {
         user,
         t,
         outsideOfContainer,
-        App
+        App,
       })
     }
     next()
