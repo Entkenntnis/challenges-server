@@ -1,3 +1,5 @@
+const baseInterval = 10000
+
 module.exports = function (App) {
   const tasks = []
 
@@ -11,9 +13,10 @@ module.exports = function (App) {
         task.lastRun = Date.now()
       }
     }
-    setTimeout(check, 10000)
+    setTimeout(check, baseInterval)
   }
 
+  // REMARK: Give server same time to start
   setTimeout(check, 2000)
 
   App.periodic = {

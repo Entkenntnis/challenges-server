@@ -37,6 +37,10 @@
   <body>
     <div class="container">
     
+      <% if (user) { %>
+        <%- include('./statusBar', {user, t:App.config.i18n.statusBar}) %>
+      <% } %>
+      
       <div class="page-header">
         <h1><a href="/"><%= brand %></a></h1>
         <p class="lead"><%= slogan %></p>
@@ -44,7 +48,7 @@
       
       <hr class="my-4"/>
     
-    <% const content = include('./pages/' + page, {props, t, user, App}) %>
+      <% const content = include('./pages/' + page, {props, t, user, App}) %>
     
     <% if (!outsideOfContainer) { %>
       <%- content %>

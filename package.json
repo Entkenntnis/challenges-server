@@ -1,6 +1,6 @@
 {
   "name": "hack-engine",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "plattform inspired by hacker.org",
   "repository": {
     "type": "git",
@@ -15,10 +15,10 @@
   "author": "Entkenntnis <hack@arrrg.de>",
   "license": "MIT",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "bcryptjs": "^2.4.0",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.0",
-    "connect-gzip-static": "^2.1.1",
+    "connect-gzip-static": "^2.1.0",
     "csrf": "^3.1.0",
     "ejs": "^3.1.0",
     "express": "^4.17.0",
@@ -26,11 +26,11 @@
     "moment": "^2.25.0",
     "sequelize": "^5.21.0",
     "sqlite3": "^4.2.0",
-    "svg.js": "^2.7.1",
+    "svg.js": "^2.7.0",
     "svgdom": "0.0.21"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "prettier": "^2.0.5"
+    "prettier": "2.0.5"
   }
 }

@@ -8,9 +8,9 @@ module.exports = function (App) {
       return
     }
     const room = req.session.joinRoom
-    req.session.joinRoom = undefined
+    delete req.session.joinRoom
     const values = req.session.registerValues || {}
-    req.session.registerValues = undefined
+    delete req.session.registerValues
     const token = App.csrf.create(req)
     res.renderPage({
       page: 'register',
@@ -241,7 +241,7 @@ module.exports = function (App) {
       return
     }
     const invalidLogin = req.session.loginFail
-    req.session.loginFail = undefined
+    delete req.session.loginFail
     const dbUsers = await App.db.models.User.findAll({
       attributes: ['name', 'score', 'updatedAt'],
       where: {
@@ -262,7 +262,7 @@ module.exports = function (App) {
   })
 
   App.express.get('/logout', (req, res) => {
-    req.session.userId = undefined
+    delete req.session.userId
     res.redirect('/')
   })
 

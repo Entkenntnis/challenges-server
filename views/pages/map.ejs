@@ -1,14 +1,26 @@
 
-<%- include('../statusBar', {t:App.config.i18n.statusBar, user}) %>
-
 <style type="text/css">
-  .no-underline { text-decoration: none !important; }
-  body { background-image:url(<%- App.config.map.background %>) }
+  .no-underline {
+    text-decoration: none !important;
+  }
+  body {
+    background-image:url(<%- App.config.map.background %>);
+  }
+  .drawing {
+    width: 1600px;
+    heigh: 1200px;
+    position: relative;
+  }
+  .license {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
 </style>
 
-<div id="drawing" style="width:1600px;height:1200px;position:relative;">
+<div class="drawing">
   <%- props.map %>
-  <span style="position:absolute;right:10px;bottom:10px;">
+  <span class="license">
     <%= t.background %>
     <%- App.config.map.backgroundLicenseHtml %>
   </span>

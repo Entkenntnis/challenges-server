@@ -1,3 +1,4 @@
+// REMARK: can't move to config because it's not available yet
 const prefix = '[hack-engine] '
 
 module.exports = function (App) {
@@ -7,7 +8,6 @@ module.exports = function (App) {
     },
     fatal: (msg) => {
       console.error(prefix + msg)
-      console.trace()
       process.exit(1)
     },
   }

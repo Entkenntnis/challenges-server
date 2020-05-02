@@ -20,6 +20,7 @@ module.exports = function (App) {
       ;(async () => {
         const data = JSON.stringify(session)
         const expires = session.cookie.expires
+        // REMARK: findCreateFind is assumed to be a little bit more robust
         const [sess] = await App.db.models.Session.findCreateFind({
           where: { sid },
           defaults: { data, expires },
@@ -43,7 +44,7 @@ module.exports = function (App) {
         const sess = await App.db.models.Session.findOne({
           where: { sid },
         })
-        // PERF only touch session if expires is more off than 10 minutes
+        // PERF: only touch session if expires is off by more than 10 minutes
         if (sess) {
           const sessionExpire = App.moment(sess.expires)
           const newExpire = App.moment(session.cookie.expires)

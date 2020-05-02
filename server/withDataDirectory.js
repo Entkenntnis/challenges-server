@@ -1,5 +1,3 @@
-// Read directory from command line and set it to App.dataDir
-
 const fs = require('fs')
 const path = require('path')
 

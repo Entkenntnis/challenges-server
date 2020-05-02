@@ -1,8 +1,7 @@
 const Tokens = require('csrf')
+const instance = new Tokens()
 
 module.exports = function (App) {
-  const instance = new Tokens()
-
   App.csrf = {
     create: (req) => {
       if (!req.session.csrfSecret) {

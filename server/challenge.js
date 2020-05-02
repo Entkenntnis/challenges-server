@@ -2,7 +2,10 @@ const express = require('express')
 const Op = require('sequelize').Op
 
 module.exports = function (App) {
+  // REMARK: the encapsulation with router is not working too great, so may be removed
   const router = express.Router()
+
+  // REMARK: allow hot reloading
   let challenges = require(App.dataDirectory + '/challenges')
 
   router.use(async (req, res, next) => {
@@ -16,7 +19,7 @@ module.exports = function (App) {
         return
       }
     }
-    req.session.userId = undefined
+    delete req.session.userId
     res.redirect('/')
   })
 
@@ -135,6 +138,7 @@ module.exports = function (App) {
       )
     }
 
+    // COMPAT: draw points after connections to show the above
     points.map(drawPoint)
 
     res.renderPage({
@@ -146,8 +150,8 @@ module.exports = function (App) {
     })
   })
 
+  // rate limit challenge routes
   router.use('/challenge/:id', (req, res, next) => {
-    // rate limit
     const id = parseInt(req.params.id)
 
     if (
@@ -174,6 +178,7 @@ module.exports = function (App) {
         } else {
           rate.count++
           if (rate.count > App.config.accounts.solveRateLimit) {
+            // REMARK: should move to moment one day
             rate.lockedUntil =
               Date.now() + 1000 * App.config.accounts.solveRateTimeout
           }
@@ -218,7 +223,7 @@ module.exports = function (App) {
         })
         if (created) {
           if (req.user.score > 0) {
-            // add a small bonus for fast solving
+            // REMARK: add a small bonus for fast solving
             const pausetime =
               (new Date().getTime() - req.user.updatedAt.getTime()) /
               (60 * 1000)
@@ -226,6 +231,7 @@ module.exports = function (App) {
             req.user.score += Math.pow(0.5, tinterval) * 2
           } else {
             req.user.score += 2
+            // REMARK: start session on first solved challenge
             if (req.user.session_phase === 'READY') {
               req.user.session_phase = 'ACTIVE'
               req.user.session_startTime = new Date()

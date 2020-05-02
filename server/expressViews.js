@@ -16,7 +16,6 @@ module.exports = function (App) {
   App.express.set('views', 'views')
   App.express.set('view engine', 'ejs')
 
-  // use translation overrides
   const translation = App.config.translations[App.config.locale]
   if (translation) {
     override(App.config.i18n, translation)
