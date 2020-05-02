@@ -1,3 +1,5 @@
+// REFACTOR: move i18n to its own module
+
 function override(original, over) {
   for (const key of Object.keys(original)) {
     if (typeof original[key] === 'string') {
@@ -13,7 +15,7 @@ function override(original, over) {
 }
 
 module.exports = function (App) {
-  App.express.set('views', 'views')
+  App.express.set('views', require('path').join(__dirname, '../views'))
   App.express.set('view engine', 'ejs')
 
   const origi18n = JSON.stringify(App.config.i18n)

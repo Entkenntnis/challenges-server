@@ -49,7 +49,7 @@ module.exports = function (App) {
           const sessionExpire = App.moment(sess.expires)
           const newExpire = App.moment(session.cookie.expires)
           const staleMinutes = newExpire.diff(sessionExpire, 'minutes')
-          if (staleMinutes >= 10) {
+          if (staleMinutes >= App.config.session.allowUnderexpire) {
             sess.expires = session.cookie.expires
             await sess.save()
           }
@@ -58,8 +58,7 @@ module.exports = function (App) {
     }
   }
 
-  // clean up every 5 minutes
-  App.periodic.add(5, async () => {
+  App.periodic.add(App.config.session.cleanupInterval, async () => {
     await App.db.models.Session.destroy({
       where: { expires: { [Op.lt]: new Date() } },
     })
@@ -70,7 +69,7 @@ module.exports = function (App) {
       resave: false,
       saveUninitialized: false,
       secret: App.config.sessionSecret,
-      cookie: { maxAge: App.config.sessionMaxAge },
+      cookie: { maxAge: App.config.session.maxAge },
       store: new SessionStore(),
     })
   )

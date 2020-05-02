@@ -248,7 +248,10 @@ module.exports = function (App) {
         score: { [Op.gt]: 0 },
         updatedAt: { [Op.gte]: App.moment().subtract(1, 'months').toDate() },
       },
-      order: [['score', 'DESC']],
+      order: [
+        ['score', 'DESC'],
+        ['updatedAt', 'DESC'],
+      ],
       limit: App.config.topHackersLimit,
     })
     const users = processHighscore(dbUsers)

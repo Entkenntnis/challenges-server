@@ -1,18 +1,12 @@
-// REMARK: can't move to config because it's not available yet
-const prefix = '[hack-engine] '
-
 module.exports = function (App) {
   App.logger = {
     info: (msg) => {
-      console.info(prefix + msg)
-    },
-    fatal: (msg) => {
-      console.error(prefix + msg)
-      process.exit(1)
+      console.info(App.config.logprefix + msg)
     },
   }
 
-  process.on('unhandledRejection', (reason) => {
-    App.logger.fatal('Error: ' + reason)
+  // REMARK: terminate process on unhandled rejection
+  process.on('unhandledRejection', (up) => {
+    throw up
   })
 }

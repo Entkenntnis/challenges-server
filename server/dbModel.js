@@ -74,9 +74,4 @@ module.exports = function (App) {
     onDelete: 'cascade',
   })
   Solution.belongsTo(User)
-
-  App.entry.add(async () => {
-    await App.db.sync(App.config.sync)
-    App.logger.info('Database synchronized')
-  })
 }

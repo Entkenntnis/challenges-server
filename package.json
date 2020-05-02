@@ -8,9 +8,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node --use_strict index.js ./demo_data/",
-    "prettify": "prettier --write index.js config.js ./server/**/*.js",
-    "lint": "eslint index.js config.js ./server/**/*.js"
+    "prettify": "prettier --write index.js config.js ./{server,routes}/**/*.js",
+    "lint": "eslint index.js config.js ./{server,routes}/**/*.js"
   },
   "author": "Entkenntnis <hack@arrrg.de>",
   "license": "MIT",

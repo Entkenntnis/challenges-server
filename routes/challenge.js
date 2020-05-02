@@ -6,7 +6,7 @@ module.exports = function (App) {
   const router = express.Router()
 
   // REMARK: allow hot reloading
-  let challenges = require(App.dataDirectory + '/challenges')
+  let challenges = require(App.config.challengesDir + '/challenges')
 
   router.use(async (req, res, next) => {
     if (req.session.userId) {
@@ -92,7 +92,7 @@ module.exports = function (App) {
 
   router.get('/map', async (req, res) => {
     reloadChallenges()
-    
+
     const solvedDb = await App.db.models.Solution.findAll({
       where: { UserId: req.user.id },
     })
@@ -214,12 +214,12 @@ module.exports = function (App) {
             challenge.solution && answer === challenge.solution.toLowerCase(),
         }
       }
-      
-    let answer = ""
+
+    let answer = ''
     let correct = false
-    
+
     try {
-      if (req.body.answer) {   
+      if (req.body.answer) {
         const result = check(req.body.answer || '', { req, App })
         if (result.answer) {
           answer = result.answer
@@ -349,9 +349,9 @@ module.exports = function (App) {
   function reloadChallenges() {
     if (App.config.reloadChallenges) {
       delete require.cache[
-        require.resolve(App.dataDirectory + '/challenges.js')
+        require.resolve(App.config.challengesDir + '/challenges.js')
       ]
-      challenges = require(App.dataDirectory + '/challenges')
+      challenges = require(App.config.challengesDir + '/challenges')
     }
   }
 }
