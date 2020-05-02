@@ -201,7 +201,6 @@ module.exports = function (App) {
     }
 
     const challenge = challenges.filter((c) => c.id === id)[0]
-    const solvedBy = await App.db.models.Solution.count({ where: { cid: id } })
 
     const check =
       challenge.check ||
@@ -244,6 +243,8 @@ module.exports = function (App) {
         console.log(e)
       }
     }
+
+    const solvedBy = await App.db.models.Solution.count({ where: { cid: id } })
 
     res.renderPage({
       page: 'challenge',

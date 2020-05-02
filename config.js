@@ -11,9 +11,10 @@ const config = {
   port: 3000,
   sessionSecret: 'keyboard cat',
   sessionMaxAge: 1000 * 60 * 60 * 24, // 24 hours
-  locale: 'fr',
+  locale: 'en',
   theme: 'sketchy',
   reloadChallenges: true,
+  configRoutes: true,
   accounts: {
     minUsername: 3,
     maxUsername: 40,

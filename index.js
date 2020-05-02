@@ -15,6 +15,19 @@ require('./server/expressHeaders')(App)
 require('./server/expressSession')(App)
 require('./server/expressViews')(App)
 
+if (App.config.configRoutes) {
+  App.express.get('/setlocale/:locale', (req, res) => {
+    App.config.locale = req.params.locale
+    App.moment.locale(req.params.locale)
+    res.redirect('/')
+  })
+
+  App.express.get('/settheme/:theme', (req, res) => {
+    App.config.theme = req.params.theme
+    res.redirect('/')
+  })
+}
+
 require('./server/staticPages')(App)
 require('./server/withCsrf')(App)
 require('./server/user')(App)

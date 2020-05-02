@@ -16,6 +16,8 @@ module.exports = function (App) {
   App.express.set('views', 'views')
   App.express.set('view engine', 'ejs')
 
+  const origi18n = JSON.stringify(App.config.i18n)
+
   const translation = App.config.translations[App.config.locale]
   if (translation) {
     override(App.config.i18n, translation)
@@ -23,6 +25,15 @@ module.exports = function (App) {
 
   App.express.use((req, res, next) => {
     res.renderPage = (opts) => {
+      // REMARK: allow hot reloading locale
+      if (App.config.configRoutes) {
+        App.config.i18n = JSON.parse(origi18n)
+        const translation = App.config.translations[App.config.locale]
+        if (translation) {
+          override(App.config.i18n, translation)
+        }
+      }
+
       const page = opts.page || opts
       const props = opts.props || {}
       const outsideOfContainer = opts.outsideOfContainer
