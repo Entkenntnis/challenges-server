@@ -1,6 +1,6 @@
 {
-  "name": "hack-engine",
-  "version": "1.0.0",
+  "name": "@entkenntnis/hack-engine",
+  "version": "0.1.0",
   "description": "plattform inspired by hacker.org",
   "repository": {
     "type": "git",
@@ -31,5 +31,8 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "prettier": "2.0.5"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
