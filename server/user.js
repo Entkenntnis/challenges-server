@@ -142,7 +142,6 @@ module.exports = function (App) {
         rooms: req.session.rooms || [],
       },
     })
-    res.render('create', {})
   })
 
   App.express.post('/create', async (req, res) => {

@@ -11,7 +11,7 @@ const config = {
   port: 3000,
   sessionSecret: 'keyboard cat',
   sessionMaxAge: 1000 * 60 * 60 * 24, // 24 hours
-  locale: 'en',
+  locale: 'fr',
   theme: 'sketchy',
   reloadChallenges: true,
   accounts: {
@@ -52,11 +52,11 @@ const config = {
         .attr('stroke-linecap', 'round')
     },
   },
+  brand: 'hack-engine',
+  slogan: 'An homage to hacker.org',
 }
 
 config.i18n = {
-  brand: 'hack-engine',
-  slogan: 'An homage to hacker.org',
   share: {
     back: 'Back',
     go: 'Go',
@@ -192,6 +192,295 @@ config.i18n = {
     title: 'Session finished',
     html: '<p>Well done!</p>',
     ok: 'OK',
+  },
+}
+
+config.translations = {
+  de: {
+    share: {
+      go: 'Los',
+      back: 'Zurück',
+    },
+    home: {
+      loginHeading: 'Login',
+      invalid: 'Falsche Zugangsdaten',
+      name: 'Name:',
+      password: 'Passwort:',
+      invite: 'Neu hier? Erstelle einen kostenlosen Account und lege los:',
+      registerLink: 'Registrierung',
+      joinRoom: 'Raum beitreten',
+      hackerOfTheMonth: 'Hacker des Monats',
+      showHighscore: 'alle anzeigen',
+      rooms: 'Räume',
+      inviteOrga: 'Leitest du eine Veranstaltung? Hier kannst du',
+      createRoom: 'einen eigenen Raum anlegen',
+      contactLink: 'Kontakt',
+      privacyLink: 'Datenschutzerklärung',
+      github: 'GitHub',
+      version: 'Version: Mai 2020',
+    },
+    register: {
+      title: 'Registrierung',
+      username: 'Benutzername',
+      password: 'Passwort',
+      repeatPassword: 'Passwort wiederholen',
+      usernameNote: `Min. ${config.accounts.minUsername} Zeichen`,
+      passwordNote: `Min. ${config.accounts.minPw} Zeichen`,
+      noteOn: 'Hinweis zum',
+      dataProtection: 'Datenschutz',
+      nameTooShort: 'Benutzername zu kurz.',
+      nameTooLong: `Benutzername zu lang, max. ${config.accounts.maxUsername} Zeichen.`,
+      nameInvalidChars: 'Benutzername enthält ungültige Zeichen.',
+      pwTooShort: 'Passwort zu kurz.',
+      pwTooLong: 'Passwort zu lang.',
+      pwMismatch: 'Passwörter stimmen nicht überein.',
+      invalidToken:
+        'Übermittelte Daten gehört nicht zu dieser Sitzung. Bitte erneut versuchen.',
+      failure: 'Registrierung fehlgeschlagen. Bitte erneut versuchen.',
+      nameExists: 'Benutzername existiert bereits.',
+      serverCrowded:
+        'Es gibt im Moment ein hohes Aufkommen an Registrierungen, versuche es in 15 Minuten erneut.',
+    },
+    join: {
+      title: 'Beitreten',
+      key: 'Raumschlüssel:',
+      roomNotFound: 'Raum nicht gefunden!',
+    },
+    highscore: {
+      title: 'Highscore',
+      empty: 'Die Highscore enthält noch keine Einträge. Werde der Erste!',
+      rank: 'Platz',
+      name: 'Benutzername',
+      score: 'Punktzahl',
+      sessionScore: 'Session-Punktzahl',
+      lastActive: 'zuletzt aktiv',
+      showRoomScore: 'nur Raum',
+      showGlobalScore: 'alle anzeigen',
+    },
+    create: {
+      title: 'Raum erstellen',
+      yourRooms: 'Meine Räume',
+      key: 'Neuer Raumschlüssel:',
+      go: 'Erstellen',
+      information:
+        'Über einen Raum kannst gemeinsam mit einer Gruppe teilnehmen und das Session-System nutzen. Eine Session dauert 30 Minuten. In dieser Zeit könen Aufgaben bearbeitet und Punkte gesammelt werden. Nach Ablauf der 30 Minuten wird die Punktzahl in einer lokalen Highscore gespeichert. Nach der Session können die Teilnehmer als normale Benutzer weiter an den Aufgaben arbeiten.',
+      keyInvalid: 'Raumschlüssel darf nur Buchstaben und Ziffern enthalten.',
+      keyTooShort: 'Raumschlüssel zu kurz.',
+      keyTooLong: 'Raumschlüssel zu lang.',
+      keyExists: 'Raumschlüssel existiert bereits.',
+      failure: 'Raumerstellung fehlgeschlagen. Bitte erneut versuchen.',
+      keyNote: `${config.accounts.minRoom} - ${config.accounts.minRoom} Zeichen, alpha-numerisch`,
+      serverCrowded:
+        'Es gibt im Moment ein hohes Aufkommen an Raumerstellungen, versuche es in 15 Minuten erneut.',
+      invalidToken:
+        'Übermittelte Daten gehört nicht zu dieser Sitzung. Bitte erneut versuchen.',
+    },
+    contact: {
+      title: 'Kontakt',
+      HTML:
+        '<p>Bitte stelle Kontaktinformation passend zur Gesetzgebung deines Landes zur Verfügung.</p>',
+    },
+    privacy: {
+      title: 'Datenschutzerklärung',
+      HTML:
+        '<p>Bitte stelle eine Datenschutzerklärung passend zur Gesetzgebung deines Landes zur Verfügung.</p>',
+    },
+    success: {
+      title: 'Registrierung erfolgreich',
+      message: 'Deine Registrierung war erfolgreich.',
+      login: 'zum Login',
+    },
+    map: {
+      background: 'Hintergrundbild:',
+    },
+    statusBar: {
+      name: 'Name:',
+      score: 'Punkte:',
+      sessionReady: 'Session: bereit',
+      session: 'Session:',
+      highscore: 'Highscore',
+      profile: 'Profil',
+      logout: 'abmelden',
+    },
+    profile: {
+      title: 'Profil',
+      username: 'Benutzername:',
+      score: 'Punktzahl:',
+      solved: 'Gelöste Aufgaben:',
+      lastActive: 'Zuletzt aktiv:',
+      room: 'Raum:',
+      sessionReady: 'Session ist bereit. Löse eine Aufgabe, um sie zu starten.',
+      startSession: 'Session jetzt starten!',
+      sessionActive: 'Session läuft...',
+      endSession: 'Session jetzt beenden!',
+      sessionDone: 'Session fertig.',
+      sessionScore: 'Session-Punktzahl:',
+    },
+    challenge: {
+      back: 'zurück',
+      solvedBy: 'gelöst von',
+      users: 'Personen',
+      user: 'Person',
+      continue: 'weiter',
+      correct: 'ist richtig',
+      wrong: 'ist falsch',
+      locked:
+        'Du musst nach 20 Versuchen jeweils eine Pause von 30 Sekunden einlegen. Bitte warte noch',
+    },
+    roomscore: {
+      title: 'Highscore',
+      heading: 'Highscore: ',
+    },
+    finish: {
+      title: 'Session beendet',
+      html: '<p>Gut gemacht!</p>',
+      ok: 'OK',
+    },
+  },
+  fr: {
+    share: {
+      go: 'Allez',
+      back: 'Retour',
+    },
+    home: {
+      loginHeading: 'Login',
+      invalid: "Données d'accès erronées.",
+      name: 'Nom:',
+      password: 'Mot de passe:',
+      invite: 'Vous êtes nouveau ici? Créez un compte gratuit et commencez:',
+      registerLink: 'Inscription',
+      joinRoom: 'Rejoindre une salle',
+      hackerOfTheMonth: 'Hacker du Mois',
+      showHighscore: 'tout afficher',
+      rooms: 'Salles',
+      inviteOrga: 'Vous organisez un événement? Ici, vous pouvez',
+      createRoom: 'créer votre propre chambre',
+      contactLink: 'Contact',
+      privacyLink: 'Politique de confidentialité',
+      github: 'GitHub',
+      version: 'version: mai 2020',
+    },
+    register: {
+      title: 'Inscription',
+      username: 'Nom',
+      password: 'Mot de passe',
+      repeatPassword: 'Répéter le mot de passe',
+      usernameNote: `Min. ${config.accounts.minUsername} lettres`,
+      passwordNote: `Min. ${config.accounts.minPw} lettres`,
+      noteOn: 'Note sur la',
+      dataProtection: 'protection des données',
+      nameTooShort: "Nom d'utilisateur trop court.",
+      nameTooLong: `Nom d'utilisateur trop long, max. ${config.accounts.maxUsername} lettres.`,
+      nameInvalidChars:
+        "Le nom d'utilisateur contient des caractères non valides.",
+      pwTooShort: 'Mot de passe trop court.',
+      pwTooLong: 'Mot de passe trop long.',
+      pwMismatch: 'Les mots de passe ne correspondent pas.',
+      invalidToken:
+        "Les données transmises n'appartiennent pas à cette session. Veuillez réessayer.",
+      failure: "L'enregistrement a échoué. Veuillez réessayer.",
+      nameExists: "Le nom d'utilisateur existe déjà.",
+      serverCrowded:
+        "Il y a un grand nombre d'inscriptions en ce moment, essayez à nouveau dans 15 minutes.",
+    },
+    join: {
+      title: 'Rejoignez',
+      key: 'Clé de la chambre:',
+      roomNotFound: 'Chambre non trouvée!',
+    },
+    highscore: {
+      title: 'Highscore',
+      empty:
+        'Le highscore ne contient encore aucune entrée. Soyez les premiers!',
+      rank: 'Position',
+      name: 'Nom',
+      score: 'Score',
+      sessionScore: 'Session Score',
+      lastActive: 'dernier actif',
+      showRoomScore: 'seulement la chambre',
+      showGlobalScore: 'tout afficher',
+    },
+    create: {
+      title: 'Créer une chambre',
+      yourRooms: 'Mes chambres',
+      key: 'Nouvelle clé de chambre:',
+      go: 'Créer',
+      information:
+        "Via une salle, vous pouvez participer avec un groupe et utiliser le système de session. Une séance dure 30 minutes. Pendant ce temps, vous pouvez travailler sur des tâches et collecter des points. Une fois les 30 minutes écoulées, le score est enregistré dans un classement local. Après la session, les participants peuvent continuer à travailler sur les tâches en tant qu'utilisateurs normaux.",
+      keyInvalid:
+        'La clé de la chambre ne peut contenir que des lettres et des chiffres.',
+      keyTooShort: 'Clé de chambre trop court.',
+      keyTooLong: 'Clé de chambre trop long.',
+      keyExists: 'Clé de chambre existe déjà.',
+      failure: 'La création de salles a échoué. Veuillez réessayer.',
+      keyNote: `${config.accounts.minRoom} - ${config.accounts.minRoom} lettres, alpha-numérique`,
+      serverCrowded:
+        'Il y a un grand volume de créations de salles en ce moment, essayez de nouveau dans 15 minutes.',
+      invalidToken:
+        "Les données transmises n'appartiennent pas à cette session. Veuillez réessayer.",
+    },
+    contact: {
+      title: 'Contact',
+      HTML:
+        '<p>Veuillez fournir les coordonnées appropriées à la législation de votre pays.</p>',
+    },
+    privacy: {
+      title: 'Politique de confidentialité',
+      HTML:
+        '<p>Veuillez fournir une politique de confidentialité adaptée à la législation de votre pays.</p>',
+    },
+    success: {
+      title: 'Inscription réussie',
+      message: 'Votre inscription a été réussie.',
+      login: 'login',
+    },
+    map: {
+      background: "Fond d'écran:",
+    },
+    statusBar: {
+      name: 'Nom:',
+      score: 'Score:',
+      sessionReady: 'Session: prêt',
+      session: 'Session:',
+      highscore: 'Highscore',
+      profile: 'Profil',
+      logout: 'Déconnexion',
+    },
+    profile: {
+      title: 'Profil',
+      username: 'Nom:',
+      score: 'Score:',
+      solved: 'Tâches résolues:',
+      lastActive: 'dernier actif:',
+      room: 'Chambre:',
+      sessionReady:
+        'La session est prête. Résolvez une tâche pour la démarrer.',
+      startSession: 'Démarrer la session maintenant!',
+      sessionActive: 'Déroulement de la session...',
+      endSession: 'Fin de la session!',
+      sessionDone: 'La session est terminée.',
+      sessionScore: 'Session score:',
+    },
+    challenge: {
+      back: 'retour',
+      solvedBy: 'touchés par',
+      users: 'personnes',
+      user: 'personne',
+      continue: 'en savoir plus',
+      correct: 'est correcte',
+      wrong: 'est erronée',
+      locked:
+        'Vous devez faire une pause de 30 secondes après 20 tentatives. Veuillez patienter',
+    },
+    roomscore: {
+      title: 'Highscore',
+      heading: 'Highscore: ',
+    },
+    finish: {
+      title: 'Fin de la session',
+      html: '<p>Bien joué!</p>',
+      ok: 'OK',
+    },
   },
 }
 

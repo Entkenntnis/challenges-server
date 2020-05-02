@@ -21,5 +21,5 @@ require('./server/user')(App)
 require('./server/challenge')(App)
 
 App.entry.start().then(() => {
-  App.logger.info(App.moment().toString())
+  App.logger.info(App.moment().format('LLLL'))
 })

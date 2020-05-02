@@ -71,6 +71,7 @@ module.exports = function (App) {
     foreignKey: {
       primaryKey: true,
     },
+    onDelete: 'cascade',
   })
   Solution.belongsTo(User)
 
