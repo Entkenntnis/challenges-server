@@ -43,7 +43,7 @@ const config = {
         cy: p.pos.y,
       })
       const text = link.plain(p.title).fill(textColor).font('family', 'inherit')
-      text.center(p.pos.x, p.pos.y - 20)
+      text.center(p.pos.x + p.title.length, p.pos.y - 23)
     },
     drawConnection: (canvas, c) => {
       canvas

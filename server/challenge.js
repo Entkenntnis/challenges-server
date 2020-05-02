@@ -91,6 +91,8 @@ module.exports = function (App) {
   })
 
   router.get('/map', async (req, res) => {
+    reloadChallenges()
+    
     const solvedDb = await App.db.models.Solution.findAll({
       where: { UserId: req.user.id },
     })
@@ -212,8 +214,25 @@ module.exports = function (App) {
             challenge.solution && answer === challenge.solution.toLowerCase(),
         }
       }
-
-    const { answer, correct } = check(req.body.answer || '', { req, App })
+      
+    let answer = ""
+    let correct = false
+    
+    try {
+      if (req.body.answer) {   
+        const result = check(req.body.answer || '', { req, App })
+        if (result.answer) {
+          answer = result.answer
+          correct = result.correct
+        } else {
+          answer = req.body.answer
+          correct = result
+        }
+      }
+    } catch (e) {
+      console.log(e)
+      // something didn't work out, avoid server crashing
+    }
 
     if (correct) {
       try {
