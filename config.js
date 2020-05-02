@@ -12,6 +12,7 @@ const config = {
   sessionSecret: 'keyboard cat',
   sessionMaxAge: 1000 * 60 * 60 * 24, // 24 hours
   locale: 'en',
+  theme: 'sketchy',
   reloadChallenges: true,
   accounts: {
     minUsername: 3,

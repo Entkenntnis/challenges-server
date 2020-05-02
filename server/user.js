@@ -153,12 +153,12 @@ module.exports = function (App) {
     async function check() {
       if (!App.csrf.verify(req, req.body.csrf))
         return App.config.i18n.create.invalidToken
-      if (!App.config.accounts.roomRegex.test(room))
-        return App.config.i18n.create.keyInvalid
       if (room.length < App.config.accounts.minRoom)
         return App.config.i18n.create.keyTooShort
       if (room.length > App.config.accounts.maxRoom)
         return App.config.i18n.create.keyTooLong
+      if (!App.config.accounts.roomRegex.test(room))
+        return App.config.i18n.create.keyInvalid
       if (roomId) return App.config.i18n.create.keyExists
 
       const creationRate = await App.db.models.Room.count({

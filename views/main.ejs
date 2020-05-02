@@ -8,13 +8,23 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
 
     <!-- Bootstrap -->
-    <link href="/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/<%= App.config.theme %>.min.css" rel="stylesheet">
 
     <title><%= title %></title>
     
     <style>
       h1 {
         font-size: 3em;
+        margin: 40px 0 20px 0;
+      }
+      .page-header {
+        margin-bottom: 30px;
+      }
+      .lead {
+        font-size: 1.5em;
+      }
+      .table th {
+        border-top: none;
       }
       h2 {
         margin-bottom: 16px;
@@ -32,7 +42,7 @@
         <p class="lead"><%= slogan %></p>
       </div>
       
-      <hr />
+      <hr class="my-4"/>
     
     <% const content = include('./pages/' + page, {props, t, user, App}) %>
     
