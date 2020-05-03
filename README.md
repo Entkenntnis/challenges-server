@@ -10,7 +10,7 @@ A great way to learn and master a skill is to solve challenges. This package aim
 Install the `@entkenntnis/challenges-server` package from npm and write this
 
 ```js
-require('challenges-server')()
+require('@entkenntnis/challenges-server')()
 ```
 
 to start the server.
@@ -24,7 +24,7 @@ Look at the create-challenges-server repo for an extended introduction into crea
 The server exposes a lot of config options, which you can all override and customize:
 
 ```js
-require('challenges-server')(config => {
+require('@entkenntnis/challenges-server')(config => {
   // config.port = 8080
   return config
 })
