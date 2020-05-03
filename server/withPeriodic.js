@@ -7,7 +7,10 @@ module.exports = function (App) {
     },
   }
 
-  setTimeout(check, App.config.periodic.startupDelay)
+  // REMARK: start tasks only after db and express are ready
+  App.entry.add(async () => {
+    setTimeout(check, App.config.periodic.startupDelay)
+  })
 
   function check() {
     for (const task of tasks) {

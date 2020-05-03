@@ -70,6 +70,7 @@ module.exports = function () {
       allowUnderexpire: 10, // minutes
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
     },
+    urlPrefix: 'http://localhost:3000',
   }
 
   config.i18n = {

@@ -5,7 +5,7 @@
   <div class="alert alert-danger"><%= t.invalid %></div>
 <% } %>
 
-<form action="/login" method="post" autocomplete="off">
+<form action="<%=prefix%>/login" method="post" autocomplete="off">
 
   <div class="form-group">
     <label><%= t.name %> <input class="form-control" type="text" name="username" value=""/></label>
@@ -16,9 +16,9 @@
   </div>
 </form>
 
-<p style="margin-bottom:20px;margin-top:20px;"><%= t.invite %> <a href="/register"><%= t.registerLink %></a></p>
+<p style="margin-bottom:20px;margin-top:20px;"><%= t.invite %> <a href="<%=prefix%>/register"><%= t.registerLink %></a></p>
 
-<p>[<a href="/join"><%= t.joinRoom %></a>]</p>
+<p>[<a href="<%=prefix%>/join"><%= t.joinRoom %></a>]</p>
 
 <hr class="my-5"/>
 
@@ -26,19 +26,19 @@
 
 <%- include('../highscoreTable', {users:props.users, t: App.config.i18n.highscore, user}) %>
 
-<p>[<a href="/highscore"><%= t.showHighscore %></a>]</p>
+<p>[<a href="<%=prefix%>/highscore"><%= t.showHighscore %></a>]</p>
 
 <hr class="my-5"/>
 
 <h2><%= t.rooms %></h2>
 
-<p><%= t.inviteOrga %> <a href="/create"><%= t.createRoom %></a>.</p>
+<p><%= t.inviteOrga %> <a href="<%=prefix%>/create"><%= t.createRoom %></a>.</p>
 
 <hr class="my-5"/>
 
 <p>
-  <a href="/contact"><%= t.contactLink %></a> |
-  <a href="/privacy"><%= t.privacyLink %></a> | 
+  <a href="<%=prefix%>/contact"><%= t.contactLink %></a> |
+  <a href="<%=prefix%>/privacy"><%= t.privacyLink %></a> | 
   <a href="https://github.com/Entkenntnis/hack-engine" target="_blank"><%= t.github %></a> | 
   <%= t.version %>
 </p>

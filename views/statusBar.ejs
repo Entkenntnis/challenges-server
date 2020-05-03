@@ -23,7 +23,7 @@
         var passed = Date.now() - localTime
         var rest = remaining - Math.round(passed/1000)
         if (rest < 0) {
-          window.location.href = "/finish"
+          window.location.href = "<%=prefix%>/finish"
         } else {
           var restSecs = rest % 60
           var restMins = Math.floor(rest / 60)
@@ -42,12 +42,12 @@
 [
 
 <% if (!user.session_phase || user.session_phase == "DONE") { %>
-  <a href="/highscore"><%= t.highscore %></a> | 
+  <a href="<%=prefix%>/highscore"><%= t.highscore %></a> | 
 <% } %>
 
-<a href="/profile"><%= t.profile%></a> |
+<a href="<%=prefix%>/profile"><%= t.profile%></a> |
 
-<a href="/logout"><%= t.logout %></a>
+<a href="<%=prefix%>/logout"><%= t.logout %></a>
 
 ]
 

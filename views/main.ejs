@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="<%=App.config.urlPrefix%>/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="<%=App.config.urlPrefix%>/favicon.ico" type="image/x-icon"/>
 
     <!-- Bootstrap -->
-    <link href="/theme/<%= App.config.theme %>.min.css" rel="stylesheet">
+    <link href="<%=App.config.urlPrefix%>/theme/<%= App.config.theme %>.min.css" rel="stylesheet">
 
     <title><%= title %></title>
     
@@ -38,20 +38,26 @@
     <div class="container">
     
       <% if (user) { %>
-        <%- include('./statusBar', {user, t:App.config.i18n.statusBar}) %>
+        <%- include('./statusBar', {user, t:App.config.i18n.statusBar, prefix: App.config.urlPrefix}) %>
       <% } %>
       
       <div class="page-header">
-        <h1><a href="/"><%= brand %></a></h1>
+        <h1><a href="<%=App.config.urlPrefix%>/"><%= brand %></a></h1>
         <p class="lead"><%= slogan %></p>
       </div>
       
       <hr class="my-4"/>
     
-      <% const content = include('./pages/' + page, {props, t, user, App}) %>
+      <% const content = include('./pages/' + page, {props, t, user, App, prefix: App.config.urlPrefix}) %>
     
     <% if (!outsideOfContainer) { %>
       <%- content %>
+      
+      <% if (backButton) { %>
+        <p style="margin-top:40px;margin-bottom:40px;">
+          <a href="<%=App.config.prefix%>/" class="btn btn-primary btn-sm"><%= t.back %></a>
+        </p>
+      <% } %>
     </div>
     <% } else { %>
     </div>

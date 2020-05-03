@@ -25,7 +25,7 @@ module.exports = function (App) {
 
   router.get('/finish', (req, res) => {
     if (req.user.session_phase === 'OUTRO') {
-      res.renderPage('finish')
+      res.renderPage({page:'finish', backButton: false})
     } else {
       res.redirect('/map')
     }
@@ -149,6 +149,7 @@ module.exports = function (App) {
         map: canvas.svg(),
       },
       outsideOfContainer: true,
+      backButton: false,
     })
   })
 
@@ -273,6 +274,7 @@ module.exports = function (App) {
         answer,
         solvedBy,
       },
+      backButton: false,
     })
   })
 

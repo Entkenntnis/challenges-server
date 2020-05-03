@@ -29,13 +29,11 @@
     </div>
     <div class="form-group row">
       <div class="col-md-5 offset-md-2">
-        <p style="margin-top:8px;margin-bottom:16px;"><%= t.noteOn %> <a href="/privacy"><%= t.dataProtection %></a></p>
+        <p style="margin-top:8px;margin-bottom:16px;"><%= t.noteOn %> <a href="<%=prefix%>/privacy"><%= t.dataProtection %></a></p>
         <button type="submit" class="btn btn-success"><%= t.go %></button>
       </div>
     </div>
     <input type="hidden" name="csrf" value="<%=props.token%>"/>
     <input type="hidden" name="room" value="<%=props.room%>" />
   </fieldset>
-  
-  <%- include('../backButton', {t}) %>
 </form>

@@ -49,6 +49,7 @@ module.exports = function (App) {
       const slogan = App.config.slogan
 
       const user = opts.user || req.user
+      const backButton = opts.backButton !== false
 
       res.render('main', {
         locale,
@@ -61,6 +62,7 @@ module.exports = function (App) {
         t,
         outsideOfContainer,
         App,
+        backButton
       })
     }
     next()

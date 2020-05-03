@@ -2,11 +2,9 @@
   const highscore = App.config.i18n.highscore
 %>
 
-<%- include('../statusBar', {user, t:App.config.i18n.statusBar}) %>
-
 <h2><%= t.heading %> <%= props.room %></h2>
 
-<p class="my-4">[<a href="/highscore"><%=highscore.showGlobalScore%></a>]</p>
+<p class="my-4">[<a href="<%=prefix%>/highscore"><%=highscore.showGlobalScore%></a>]</p>
 
 <% if (props.users.length == 0) { %>
   <p><%= highscore.empty%></p>
@@ -34,6 +32,4 @@
     </tbody>
   </table>
   
-<% } %> 
-
-<%- include('../backButton', {t}) %>
+<% } %>

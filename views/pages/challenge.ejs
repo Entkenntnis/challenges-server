@@ -3,7 +3,7 @@
 
 <p>
   <% if (!props.correct) { %>
-    <a href="/map"><%= t.back %></a> |
+    <a href="<%=prefix%>/map"><%= t.back %></a> |
   <% } %>
   <%= t.solvedBy %> <%= props.solvedBy %> <%= props.solvedBy === 1 ? t.user : t.users %>
 </p>
@@ -19,7 +19,7 @@
 <div style="height:16px"></div>
 
 <% if (props.correct) { %>
-  <p><a href="/map"><%= t.continue %></a></p>
+  <p><a href="<%=prefix%>/map"><%= t.continue %></a></p>
 <% } else { %>
   <%- props.challenge.html %>
   <% if (!props.challenge.hidesubmit) { %>

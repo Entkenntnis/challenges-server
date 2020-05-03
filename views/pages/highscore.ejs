@@ -2,9 +2,7 @@
 <h2><%= t.title %></h2>
 
 <% if (user && user.RoomId) { %>
-  <p class="my-4">[<a href="/roomscore"><%=t.showRoomScore%></a>]</p>
+  <p class="my-4">[<a href="<%=prefix%>/roomscore"><%=t.showRoomScore%></a>]</p>
 <% } %>
 
 <%- include('../highscoreTable', {users:props.users, t, user}) %>
-
-<%- include('../backButton', {t}) %>

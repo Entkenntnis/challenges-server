@@ -190,7 +190,7 @@ module.exports = function (App) {
   })
 
   App.express.get('/success', (req, res) => {
-    res.renderPage('success')
+    res.renderPage({page:'success', backButton: false})
   })
 
   App.express.post('/login', async (req, res) => {
@@ -231,7 +231,7 @@ module.exports = function (App) {
       props: {
         users,
       },
-      user,
+      user, // REMARK provide our own user because it's not provided by middleware
     })
   })
 
@@ -261,6 +261,7 @@ module.exports = function (App) {
         invalidLogin,
         users,
       },
+      backButton: false,
     })
   })
 
