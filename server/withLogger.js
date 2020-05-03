@@ -6,7 +6,7 @@ module.exports = function (App) {
   }
 }
 
-  // REMARK: terminate process on unhandled rejection
+// REMARK: terminate process on unhandled rejection
 process.on('unhandledRejection', (up) => {
   throw up
 })

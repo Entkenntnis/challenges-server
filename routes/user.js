@@ -190,7 +190,7 @@ module.exports = function (App) {
   })
 
   App.express.get('/success', (req, res) => {
-    res.renderPage({page:'success', backButton: false})
+    res.renderPage({ page: 'success', backButton: false })
   })
 
   App.express.post('/login', async (req, res) => {

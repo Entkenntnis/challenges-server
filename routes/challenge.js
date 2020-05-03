@@ -25,7 +25,7 @@ module.exports = function (App) {
 
   router.get('/finish', (req, res) => {
     if (req.user.session_phase === 'OUTRO') {
-      res.renderPage({page:'finish', backButton: false})
+      res.renderPage({ page: 'finish', backButton: false })
     } else {
       res.redirect('/map')
     }

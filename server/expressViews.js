@@ -62,7 +62,7 @@ module.exports = function (App) {
         t,
         outsideOfContainer,
         App,
-        backButton
+        backButton,
       })
     }
     next()
