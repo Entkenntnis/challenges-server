@@ -134,7 +134,7 @@ module.exports = function (App) {
 
     function drawPoint(p) {
       App.config.map.drawPoint(
-        canvas.link('/challenge/' + p.id).addClass('no-underline'),
+        canvas.link(App.config.urlPrefix + '/challenge/' + p.id).addClass('no-underline'),
         p,
         App.config.map.textColor
       )
