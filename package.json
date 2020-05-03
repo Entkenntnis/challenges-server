@@ -1,10 +1,10 @@
 {
-  "name": "@entkenntnis/hack-engine",
+  "name": "@entkenntnis/challenges-server",
   "version": "0.1.0",
   "description": "plattform inspired by hacker.org",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Entkenntnis/hack-engine.git"
+    "url": "git://github.com/Entkenntnis/challenges-server.git"
   },
   "main": "index.js",
   "scripts": {

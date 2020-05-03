@@ -4,9 +4,9 @@ module.exports = function (App) {
       console.info(App.config.logprefix + msg)
     },
   }
+}
 
   // REMARK: terminate process on unhandled rejection
-  process.on('unhandledRejection', (up) => {
-    throw up
-  })
-}
+process.on('unhandledRejection', (up) => {
+  throw up
+})
