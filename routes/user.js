@@ -198,7 +198,7 @@ module.exports = function (App) {
     const password = req.body.password || ''
     const user = await App.db.models.User.findOne({ where: { name: username } })
     if (user) {
-      const success = bcrypt.compare(password, user.password)
+      const success = await bcrypt.compare(password, user.password)
       if (success) {
         req.session.userId = user.id
         res.redirect('/map')
