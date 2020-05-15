@@ -75,7 +75,10 @@ module.exports = function () {
       solutionClass_correct: 'success',
       solutionClass_wrong: 'danger',
       tableHighlightClass: 'primary',
+      fontSize: undefined,
     },
+    editors: [],
+    customCSS: '',
   }
 
   return config

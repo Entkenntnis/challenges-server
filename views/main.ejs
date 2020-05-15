@@ -13,6 +13,11 @@
     <title><%= title %></title>
     
     <style>
+      <% if (App.config.styles.fontSize) { %>
+      body {
+        font-size: <%-App.config.styles.fontSize%>;
+      }
+      <% } %>
       h1 {
         font-size: 3em;
         margin: 40px 0 20px 0;
@@ -37,6 +42,8 @@
         border-color: <%-App.config.styles.hrColor%>;
       }
       <% } %>
+      
+      <%- App.config.customCSS %>
       
     </style>
   </head>

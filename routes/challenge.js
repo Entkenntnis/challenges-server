@@ -99,6 +99,10 @@ module.exports = function (App) {
 
     const solved = solvedDb.map((s) => s.cid)
 
+    if (App.config.editors.includes(req.user.name)) {
+      challenges.map((c) => solved.push(c.id))
+    }
+
     const window = require('svgdom')
     const SVG = require('svg.js')(window)
     const document = window.document
@@ -251,7 +255,7 @@ module.exports = function (App) {
       // something didn't work out, avoid server crashing
     }
 
-    if (correct) {
+    if (correct && !App.config.editors.includes(req.user.name)) {
       try {
         const [, created] = await App.db.models.Solution.findOrCreate({
           where: { cid: id, UserId: req.user.id },

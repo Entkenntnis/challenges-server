@@ -23,8 +23,8 @@
 <% } else { %>
   <%- props.challenge.html %>
   <% if (!props.challenge.hidesubmit) { %>
-    <form autocomplete="off" method="post"><input id="answer" type="text" name="answer">
-      <input type="submit" value="<%= t('go') %>">
+    <form autocomplete="off" method="post"><input id="challenge_answer" type="text" name="answer">
+      <input type="submit" id="challenge_submit" value="<%= t('go') %>">
     </form>
   <% } %>
 <% } %>
