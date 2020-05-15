@@ -32,6 +32,12 @@
       form {
         margin-top: 30px;
       }
+      <% if (App.config.styles.hrColor) { %>
+      hr {
+        border-color: <%-App.config.styles.hrColor%>;
+      }
+      <% } %>
+      
     </style>
   </head>
   <body>

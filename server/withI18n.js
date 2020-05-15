@@ -7,6 +7,9 @@ module.exports = function (App) {
 
   App.entry.add(async () => {
     await App.i18n.init({ ...App.config.i18nConfig, lng: App.config.locale })
+    for (const extend of App.config.i18nExtend) {
+      App.i18n.addResource(extend.lng, 'translation', extend.key, extend.value)
+    }
     App.logger.info('Translations ready')
   })
 }

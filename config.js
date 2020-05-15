@@ -38,26 +38,7 @@ module.exports = function () {
       background: '/background.jpg',
       backgroundLicenseHtml:
         '<a href="https://paintingvalley.com/sketch-paper-texture#sketch-paper-texture-37.jpg">paintingvalley.com</a> (<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">CC BY-NC 4.0</a>)',
-      textColor: 'black',
-      drawPoint: (link, p, textColor) => {
-        link.circle(18).attr({
-          fill: p.isSolved ? 'var(--gray-dark)' : 'var(--success)',
-          cx: p.pos.x,
-          cy: p.pos.y,
-        })
-        const text = link
-          .plain(p.title)
-          .fill(textColor)
-          .font('family', 'inherit')
-        text.center(p.pos.x + p.title.length, p.pos.y - 23)
-      },
-      drawConnection: (canvas, c) => {
-        canvas
-          .line(c.start.x, c.start.y, c.end.x, c.end.y)
-          .stroke({ width: 10 })
-          .stroke('var(--gray)')
-          .attr('stroke-linecap', 'round')
-      },
+      centeringOffset: 1,
     },
     brand: 'challenges-server',
     slogan: 'An homage to hacker.org',
@@ -72,11 +53,28 @@ module.exports = function () {
     },
     urlPrefix: '',
     i18nConfig: {
-      debug: true,
+      debug: false,
       fallbackLng: 'en',
       backend: {
         loadPath: __dirname + '/lang/{{lng}}.json',
       },
+    },
+    i18nExtend: [
+      /*{
+        lng: 'de',
+        key: 'home.version',
+        value: 'Version: Juni 2020'
+      },*/
+    ],
+    styles: {
+      mapTextColor: 'black',
+      connectionColor: 'var(--gray)',
+      pointColor: 'var(--success)',
+      pointColor_solved: 'var(--gray-dark)',
+      hrColor: undefined,
+      solutionClass_correct: 'success',
+      solutionClass_wrong: 'danger',
+      tableHighlightClass: 'primary',
     },
   }
 

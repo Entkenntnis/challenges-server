@@ -123,7 +123,7 @@
   },
   "roomscore": {
     "title": "Highscore",
-    "heading": "Highscore: "
+    "heading": "Highscore for room \"{{room}}\""
   },
   "finish": {
     "title": "Session finished",

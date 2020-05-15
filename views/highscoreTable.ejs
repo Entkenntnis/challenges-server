@@ -12,7 +12,7 @@
     </thead>
     <tbody>
       <% for (const row of users) { %>
-        <tr <%- (user && row.name === user.name) ? 'class="table-primary"' : '' %>>
+        <tr <%- (user && row.name === user.name) ? `class="table-${App.config.styles.tableHighlightClass}"` : '' %>>
           <td><%=row.rank%></td>
           <td><%=row.name%></td>
           <td><%=row.score%></td>

@@ -123,27 +123,43 @@ module.exports = function (App) {
         points.push(point)
         challenge.deps.forEach((dep) => {
           const previous = challenges.filter((c) => c.id === dep)[0]
-          if (solved.includes(previous.id))
-            App.config.map.drawConnection(canvas, {
-              start: challenge.pos,
-              end: previous.pos,
-            })
+          if (solved.includes(previous.id)) {
+            canvas
+              .line(
+                previous.pos.x,
+                previous.pos.y,
+                challenge.pos.x,
+                challenge.pos.y
+              )
+              .stroke({ width: 10 })
+              .stroke(App.config.styles.connectionColor)
+              .attr('stroke-linecap', 'round')
+          }
         })
       }
     })
 
-    function drawPoint(p) {
-      App.config.map.drawPoint(
-        canvas
-          .link(App.config.urlPrefix + '/challenge/' + p.id)
-          .addClass('no-underline'),
-        p,
-        App.config.map.textColor
+    // COMPAT: draw points after connections to show the above
+    for (const point of points) {
+      const link = canvas
+        .link(App.config.urlPrefix + '/challenge/' + point.id)
+        .addClass('no-underline')
+      link.circle(18).attr({
+        fill: point.isSolved
+          ? App.config.styles.pointColor_solved
+          : App.config.styles.pointColor,
+        cx: point.pos.x,
+        cy: point.pos.y,
+      })
+      const text = link
+        .plain(point.title)
+        .fill(App.config.styles.textColor)
+        .font('family', 'inherit')
+      text.center(
+        point.pos.x + App.config.map.centeringOffset * point.title.length,
+        point.pos.y - 23
       )
     }
-
-    // COMPAT: draw points after connections to show the above
-    points.map(drawPoint)
 
     res.renderPage({
       page: 'map',
