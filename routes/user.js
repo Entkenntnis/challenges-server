@@ -27,15 +27,14 @@ module.exports = function (App) {
     const username = (req.body.username || '').trim()
     const pw1 = req.body.pw1 || ''
     const pw2 = req.body.pw2 || ''
-    const register = App.config.i18n.register
     const room = req.body.room
     let roomId
 
     if (room) {
       const dbRoom = await App.db.models.Room.findOne({ where: { name: room } })
       if (!dbRoom) {
-        req.flash('join', App.config.i18n.join.roomNotFound)
-        req.session.joinValues = { room }
+        // REMARK: this is not expected to happen
+        req.flash('join', App.i18n.t('join.roomNotFound'))
         res.redirect('/join')
         return
       }
@@ -43,22 +42,27 @@ module.exports = function (App) {
     }
 
     async function check() {
-      if (!App.csrf.verify(req, req.body.csrf)) return register.invalidToken
+      if (!App.csrf.verify(req, req.body.csrf))
+        return App.i18n.t('register.invalidToken')
       if (username.length < App.config.accounts.minUsername)
-        return register.nameTooShort
+        return App.i18n.t('register.nameTooShort')
       if (username.length > App.config.accounts.maxUsername)
-        return register.nameTooLong
+        return App.i18n.t('register.nameTooLong', {
+          max: App.config.accounts.maxUsername,
+        })
       if (!App.config.accounts.regex.test(username))
-        return register.nameInvalidChars
+        return App.i18n.t('register.nameInvalidChars')
 
       const user = await App.db.models.User.findOne({
         where: { name: username },
       })
-      if (user) return register.nameExists
+      if (user) return App.i18n.t('register.nameExists')
 
-      if (pw1 != pw2) return register.pwMismatch
-      if (pw1.length < App.config.accounts.minPw) return register.pwTooShort
-      if (pw1.length > App.config.accounts.maxPw) return register.pwTooLong
+      if (pw1 != pw2) return App.i18n.t('register.pwMismatch')
+      if (pw1.length < App.config.accounts.minPw)
+        return App.i18n.t('register.pwTooShort')
+      if (pw1.length > App.config.accounts.maxPw)
+        return App.i18n.t('register.pwTooLong')
 
       const creationRate = await App.db.models.User.count({
         where: {
@@ -67,7 +71,7 @@ module.exports = function (App) {
       })
 
       if (creationRate > App.config.accounts.maxRatePerHour)
-        return register.serverCrowded
+        return App.i18n.t('register.serverCrowded')
     }
 
     const err = await check()
@@ -87,7 +91,7 @@ module.exports = function (App) {
         return
       } catch (e) {
         console.warn(e)
-        req.flash('register', register.failure)
+        req.flash('register', App.i18n.t('register.failure'))
       }
     }
     req.session.registerValues = {
@@ -120,7 +124,7 @@ module.exports = function (App) {
     const room = req.body.room
     const roomId = await App.db.models.Room.findOne({ where: { name: room } })
     if (!roomId) {
-      req.flash('join', App.config.i18n.join.roomNotFound)
+      req.flash('join', App.i18n.t('join.roomNotFound'))
       req.session.joinValues = { room }
       res.redirect('/join')
       return
@@ -150,14 +154,14 @@ module.exports = function (App) {
 
     async function check() {
       if (!App.csrf.verify(req, req.body.csrf))
-        return App.config.i18n.create.invalidToken
+        return App.i18n.t('create.invalidToken')
       if (room.length < App.config.accounts.minRoom)
-        return App.config.i18n.create.keyTooShort
+        return App.i18n.t('create.keyTooShort')
       if (room.length > App.config.accounts.maxRoom)
-        return App.config.i18n.create.keyTooLong
+        return App.i18n.t('create.keyTooLong')
       if (!App.config.accounts.roomRegex.test(room))
-        return App.config.i18n.create.keyInvalid
-      if (roomId) return App.config.i18n.create.keyExists
+        return App.i18n.t('create.keyInvalid')
+      if (roomId) return App.i18n.t('create.keyExists')
 
       const creationRate = await App.db.models.Room.count({
         where: {
@@ -166,7 +170,7 @@ module.exports = function (App) {
       })
 
       if (creationRate > App.config.accounts.maxRoomPerHour)
-        return App.config.i18n.create.serverCrowded
+        return App.i18n.t('create.serverCrowded')
     }
 
     const err = await check()
@@ -181,7 +185,7 @@ module.exports = function (App) {
         return
       } catch (e) {
         console.warn(e)
-        req.flash('create', App.config.i18n.create.failure)
+        req.flash('create', App.i18n.t('create.failure'))
       }
     }
 

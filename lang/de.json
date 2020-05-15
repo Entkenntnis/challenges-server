@@ -1,0 +1,133 @@
+{
+  "share": {
+    "go": "Los",
+    "back": "Zurück"
+  },
+  "home": {
+    "loginHeading": "Login",
+    "invalid": "Falsche Zugangsdaten",
+    "name": "Name:",
+    "password": "Passwort:",
+    "invite": "Neu hier? Erstelle einen kostenlosen Account und lege los: {{-link}}",
+    "registerLink": "Registrierung",
+    "joinRoom": "Raum beitreten",
+    "hackerOfTheMonth": "Top 10 des Monats",
+    "showHighscore": "alle anzeigen",
+    "rooms": "Räume",
+    "inviteOrga": "Leitest du eine Veranstaltung? Hier kannst du {{-link}}.",
+    "createRoom": "einen eigenen Raum anlegen",
+    "contactLink": "Kontakt",
+    "privacyLink": "Datenschutzerklärung",
+    "github": "GitHub",
+    "version": "Version: Mai 2020"
+  },
+  "register": {
+    "title": "Registrierung",
+    "joinRoomTitle": "Trete Raum \"{{room}}\" bei",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "repeatPassword": "Passwort wiederholen",
+    "usernameNote": "Min. {{minUsername}} Zeichen",
+    "passwordNote": "Min. {{minPassword}} Zeichen",
+    "noteOn": "Hinweis zum {{-link}}",
+    "dataProtection": "Datenschutz",
+    "nameTooShort": "Benutzername zu kurz.",
+    "nameTooLong": "Benutzername zu lang, max. {{max}} Zeichen.",
+    "nameInvalidChars": "Benutzername enthält ungültige Zeichen.",
+    "pwTooShort": "Passwort zu kurz.",
+    "pwTooLong": "Passwort zu lang.",
+    "pwMismatch": "Passwörter stimmen nicht überein.",
+    "invalidToken": "Übermittelte Daten gehört nicht zu dieser Sitzung. Bitte erneut versuchen.",
+    "failure": "Registrierung fehlgeschlagen. Bitte erneut versuchen.",
+    "nameExists": "Benutzername existiert bereits.",
+    "serverCrowded": "Es gibt im Moment ein hohes Aufkommen an Registrierungen, versuche es in 15 Minuten erneut."
+  },
+  "join": {
+    "title": "Beitreten",
+    "key": "Raumschlüssel:",
+    "roomNotFound": "Raum nicht gefunden!"
+  },
+  "highscore": {
+    "title": "Highscore",
+    "empty": "Die Highscore enthält noch keine Einträge. Werde der Erste!",
+    "rank": "Platz",
+    "name": "Benutzername",
+    "score": "Punktzahl",
+    "sessionScore": "Session-Punktzahl",
+    "lastActive": "zuletzt aktiv",
+    "showRoomScore": "nur Raum",
+    "showGlobalScore": "alle anzeigen"
+  },
+  "create": {
+    "title": "Raum erstellen",
+    "yourRooms": "Meine Räume",
+    "key": "Neuer Raumschlüssel:",
+    "go": "Erstellen",
+    "information": "Über einen Raum kannst gemeinsam mit einer Gruppe teilnehmen und das Session-System nutzen. Eine Session dauert 30 Minuten. In dieser Zeit könen Aufgaben bearbeitet und Punkte gesammelt werden. Nach Ablauf der 30 Minuten wird die Punktzahl in einer lokalen Highscore gespeichert. Nach der Session können die Teilnehmer als normale Benutzer weiter an den Aufgaben arbeiten.",
+    "keyInvalid": "Raumschlüssel darf nur Buchstaben und Ziffern enthalten.",
+    "keyTooShort": "Raumschlüssel zu kurz.",
+    "keyTooLong": "Raumschlüssel zu lang.",
+    "keyExists": "Raumschlüssel existiert bereits.",
+    "failure": "Raumerstellung fehlgeschlagen. Bitte erneut versuchen.",
+    "keyNote": "{{minRoom}} - {{maxRoom}} Zeichen, alpha-numerisch",
+    "serverCrowded": "Es gibt im Moment ein hohes Aufkommen an Raumerstellungen, versuche es in 15 Minuten erneut.",
+    "invalidToken": "Übermittelte Daten gehört nicht zu dieser Sitzung. Bitte erneut versuchen."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "HTML": "<p>Bitte stelle Kontaktinformation passend zur Gesetzgebung deines Landes zur Verfügung.</p>"
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "HTML": "<p>Bitte stelle eine Datenschutzerklärung passend zur Gesetzgebung deines Landes zur Verfügung.</p>"
+  },
+  "success": {
+    "title": "Registrierung erfolgreich",
+    "message": "Deine Registrierung war erfolgreich.",
+    "login": "zum Login"
+  },
+  "map": {
+    "background": "Hintergrundbild:"
+  },
+  "statusBar": {
+    "name": "Name:",
+    "score": "Punkte:",
+    "sessionReady": "Session: bereit",
+    "session": "Session:",
+    "highscore": "Highscore",
+    "profile": "Profil",
+    "logout": "abmelden"
+  },
+  "profile": {
+    "title": "Profil",
+    "username": "Benutzername:",
+    "score": "Punktzahl:",
+    "solved": "Gelöste Aufgaben:",
+    "lastActive": "Zuletzt aktiv:",
+    "room": "Raum:",
+    "sessionReady": "Session ist bereit. Löse eine Aufgabe, um sie zu starten.",
+    "startSession": "Session jetzt starten!",
+    "sessionActive": "Session läuft...",
+    "endSession": "Session jetzt beenden!",
+    "sessionDone": "Session fertig.",
+    "sessionScore": "Session-Punktzahl:"
+  },
+  "challenge": {
+    "back": "zurück",
+    "solvedBy": "gelöst von {{count}} Person",
+    "solvedBy_plural": "gelöst von {{count}} Personen",
+    "continue": "weiter",
+    "correct": "ist richtig",
+    "wrong": "ist falsch",
+    "locked": "Du musst nach 20 Versuchen jeweils eine Pause von 30 Sekunden einlegen. Bitte warte noch {{sec}}s."
+  },
+  "roomscore": {
+    "title": "Highscore",
+    "heading": "Highscore: "
+  },
+  "finish": {
+    "title": "Session beendet",
+    "html": "<p>Gut gemacht!</p>",
+    "ok": "OK"
+  }
+}

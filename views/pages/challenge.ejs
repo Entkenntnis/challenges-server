@@ -3,28 +3,28 @@
 
 <p>
   <% if (!props.correct) { %>
-    <a href="<%=prefix%>/map"><%= t.back %></a> |
+    <a href="<%=prefix%>/map"><%= t('back') %></a> |
   <% } %>
-  <%= t.solvedBy %> <%= props.solvedBy %> <%= props.solvedBy === 1 ? t.user : t.users %>
+  <%= t('solvedBy', {count: props.solvedBy}) %> %>
 </p>
 
 <div style="height:16px"></div>
 
 <% if (props.answer) { %>
   <p class="text-<%= props.correct ? 'success' : 'danger' %>">
-    <strong>'<%= props.answer %>' <%= props.correct ? t.correct : t.wrong %></strong>
+    <strong>'<%= props.answer %>' <%= props.correct ? t('correct') : t('wrong') %></strong>
   </p>
 <% } %>
 
 <div style="height:16px"></div>
 
 <% if (props.correct) { %>
-  <p><a href="<%=prefix%>/map"><%= t.continue %></a></p>
+  <p><a href="<%=prefix%>/map"><%= t('continue') %></a></p>
 <% } else { %>
   <%- props.challenge.html %>
   <% if (!props.challenge.hidesubmit) { %>
     <form autocomplete="off" method="post"><input id="answer" type="text" name="answer">
-      <input type="submit" value="<%= t.go %>">
+      <input type="submit" value="<%= t('go') %>">
     </form>
   <% } %>
 <% } %>

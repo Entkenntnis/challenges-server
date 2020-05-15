@@ -2,18 +2,18 @@
 
 <p class="status">
 
-[<%= t.name %> <strong><%= user.name %></strong> | 
+[<%= t('statusBar.name') %> <strong><%= user.name %></strong> | 
 
-<%= t.score %> <strong><%= Math.floor(user.score) %></strong>
+<%= t('statusBar.score') %> <strong><%= Math.floor(user.score) %></strong>
 
 <% if (user.session_phase === "READY") { %>
-  | <%= t.sessionReady %>
+  | <%= t('statusBar.sessionReady') %>
 <% } %>
 
 <% if (user.session_phase == "ACTIVE") { %>
   <% let timediff = new Date().getTime() - user.session_startTime %>
   <% let remaining = Math.round((1000 * 60 * 30 - timediff)/1000) %>
-  | <%= t.session %> <span id="remaining"></span>
+  | <%= t('statusBar.session') %> <span id="remaining"></span>
 
   <% if (user.session_startTime) { %>
     <script>
@@ -42,12 +42,12 @@
 [
 
 <% if (!user.session_phase || user.session_phase == "DONE") { %>
-  <a href="<%=prefix%>/highscore"><%= t.highscore %></a> | 
+  <a href="<%=prefix%>/highscore"><%= t('statusBar.highscore') %></a> | 
 <% } %>
 
-<a href="<%=prefix%>/profile"><%= t.profile%></a> |
+<a href="<%=prefix%>/profile"><%= t('statusBar.profile') %></a> |
 
-<a href="<%=prefix%>/logout"><%= t.logout %></a>
+<a href="<%=prefix%>/logout"><%= t('statusBar.logout') %></a>
 
 ]
 

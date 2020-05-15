@@ -134,7 +134,9 @@ module.exports = function (App) {
 
     function drawPoint(p) {
       App.config.map.drawPoint(
-        canvas.link(App.config.urlPrefix + '/challenge/' + p.id).addClass('no-underline'),
+        canvas
+          .link(App.config.urlPrefix + '/challenge/' + p.id)
+          .addClass('no-underline'),
         p,
         App.config.map.textColor
       )
@@ -169,10 +171,8 @@ module.exports = function (App) {
       if (rate) {
         if (rate.lockedUntil > 0) {
           if (Date.now() < rate.lockedUntil) {
-            var secs = Math.round((rate.lockedUntil - Date.now()) / 1000)
-            res.send(
-              App.config.i18n.challenge.locked + ' ' + secs.toString() + 's.'
-            )
+            var sec = Math.round((rate.lockedUntil - Date.now()) / 1000)
+            res.send(App.i18n.t('challenge.locked', { sec }))
             return
           } else {
             rate.lockedUntil = -1

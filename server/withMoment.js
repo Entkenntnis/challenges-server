@@ -1,4 +1,7 @@
 module.exports = function (App) {
   App.moment = require('moment')
-  App.moment.locale(App.config.locale)
+
+  App.i18n.on('languageChanged', (lng) => {
+    App.moment.locale(lng)
+  })
 }

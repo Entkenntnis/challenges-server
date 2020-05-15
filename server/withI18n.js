@@ -1,0 +1,12 @@
+var i18next = require('i18next')
+var Backend = require('i18next-node-fs-backend')
+
+module.exports = function (App) {
+  App.i18n = i18next.createInstance()
+  App.i18n.use(Backend)
+
+  App.entry.add(async () => {
+    await App.i18n.init({ ...App.config.i18nConfig, lng: App.config.locale })
+    App.logger.info('Translations ready')
+  })
+}

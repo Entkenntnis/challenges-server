@@ -1,13 +1,13 @@
 <% if (users.length == 0) { %>
-  <p><%= t.empty%></p>
+  <p><%= t('highscore.empty') %></p>
 <% } else { %>
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col"><%= t.rank %></th>
-        <th scope="col"><%= t.name %></th>
-        <th scope="col"><%= t.score %></th>
-        <th scope="col"><%= t.lastActive %></th>
+        <th scope="col"><%= t('highscore.rank') %></th>
+        <th scope="col"><%= t('highscore.name') %></th>
+        <th scope="col"><%= t('highscore.score') %></th>
+        <th scope="col"><%= t('highscore.lastActive') %></th>
       </tr>
     </thead>
     <tbody>

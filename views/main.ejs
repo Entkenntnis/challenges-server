@@ -38,7 +38,7 @@
     <div class="container">
     
       <% if (user) { %>
-        <%- include('./statusBar', {user, t:App.config.i18n.statusBar, prefix: App.config.urlPrefix}) %>
+        <%- include('./statusBar', {user, t, prefix: App.config.urlPrefix}) %>
       <% } %>
       
       <div class="page-header">
@@ -55,7 +55,7 @@
       
       <% if (backButton) { %>
         <p style="margin-top:40px;margin-bottom:40px;">
-          <a href="<%=App.config.urlPrefix%>/" class="btn btn-primary btn-sm"><%= t.back %></a>
+          <a href="<%=App.config.urlPrefix%>/" class="btn btn-primary btn-sm"><%= t('back') %></a>
         </p>
       <% } %>
     </div>

@@ -6,6 +6,7 @@ module.exports = function (extend = (config) => config) {
   require('./server/withEntry')(App)
   require('./server/withLogger')(App)
   require('./server/withDb')(App)
+  require('./server/withI18n')(App)
   require('./server/withExpress')(App)
   require('./server/withCsrf')(App)
   require('./server/withMoment')(App)
@@ -22,6 +23,6 @@ module.exports = function (extend = (config) => config) {
   require('./routes/challenge')(App)
 
   App.entry.start().then(() => {
-    App.logger.info(App.moment().format('LLLL'))
+    App.logger.info(App.moment().locale('en').format('LLLL'))
   })
 }
