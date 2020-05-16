@@ -8,21 +8,21 @@
 <p><%= t('lastActive') %> <%= App.moment(user.updatedAt).fromNow() %> (<%= App.moment(user.updatedAt).format("LLLL") %>)</p>
 
 <% if (props.room) { %>
-<hr />
+  <hr />
 
-<p><%= t('room') %> <%= props.room%></p>
-<% if (user.session_phase === 'READY') { %>
-  <p><%= t('sessionReady') %></p>
-  <p><a href="<%=prefix%>/startsession"><%= t('startSession') %></a></p>
-<% } %>
-<% if (user.session_phase === 'ACTIVE') { %>
-  <p><%= t('sessionActive') %></p>
-  <p><a href="<%=prefix%>/endsession"><%= t('endSession') %></a></p>
-<% } %>
-<% if (user.session_phase === 'DONE') { %>
-  <p><%= t('sessionDone') %></p>
-  <p><%= t('sessionScore') %> <%= user.session_score %></p>
+  <p><%= t('room') %> <%= props.room%></p>
+  <% if (user.session_phase === 'READY') { %>
+    <p><%= t('sessionReady') %></p>
+    <p><a href="<%=prefix%>/startsession"><%= t('startSession') %></a></p>
+  <% } %>
+  <% if (user.session_phase === 'ACTIVE') { %>
+    <p><%= t('sessionActive') %></p>
+    <p><a href="<%=prefix%>/endsession"><%= t('endSession') %></a></p>
+  <% } %>
+  <% if (user.session_phase === 'DONE') { %>
+    <p><%= t('sessionDone') %></p>
+    <p><%= t('sessionScore') %> <%= user.session_score %></p>
+  <% } %>
 <% } %>
 
-
-<% } %>
+<p style="text-align:right"><a href="<%=prefix%>/delete"><%= t('delete') %></a></p>

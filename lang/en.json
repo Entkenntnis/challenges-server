@@ -110,7 +110,8 @@
     "sessionActive": "Session is running...",
     "endSession": "End session now!",
     "sessionDone": "Session done.",
-    "sessionScore": "Session score:"
+    "sessionScore": "Session score:",
+    "delete": "Delete Account ..."
   },
   "challenge": {
     "back": "back",
@@ -129,5 +130,9 @@
     "title": "Session finished",
     "html": "<p>Well done!</p>",
     "ok": "OK"
+  },
+  "delete": {
+    "title": "Delete Account",
+    "confirm": "Here you can <strong>permanently</strong> delete your account and your progress. This action can not be undone. Confirm it with your username:"
   }
 }

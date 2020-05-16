@@ -367,6 +367,21 @@ module.exports = function (App) {
     res.redirect('/map')
   })
 
+  router.get('/delete', (req, res) => {
+    res.renderPage('delete')
+  })
+
+  router.post('/delete', async (req, res) => {
+    const username = req.body.username || ''
+    if (username === req.user.name) {
+      await App.db.models.User.destroy({ where: { id: req.user.id } })
+      delete req.session.userId
+      res.send('Account erfolgreich gelöscht. <a href="/">zurück</a>')
+    } else {
+      res.redirect('/delete')
+    }
+  })
+
   App.express.use(router)
 
   function reloadChallenges() {

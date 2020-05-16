@@ -110,7 +110,8 @@
     "sessionActive": "Déroulement de la session...",
     "endSession": "Fin de la session!",
     "sessionDone": "La session est terminée.",
-    "sessionScore": "Session score:"
+    "sessionScore": "Session score:",
+    "delete": "Supprimer le compte ..."
   },
   "challenge": {
     "back": "retour",
@@ -129,5 +130,11 @@
     "title": "Fin de la session",
     "html": "<p>Bien joué!</p>",
     "ok": "OK"
+  },
+  "delete": {
+    "title": "Supprimer le compte",
+    "confirm": "Vous pouvez ici supprimer <strong>irrévocablement</strong> votre compte et votre progression. Ce processus ne peut être défait. Veuillez le confirmer en entrant votre nom d'utilisateur:"
   }
 } 
+
+

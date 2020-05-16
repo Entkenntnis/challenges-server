@@ -20,7 +20,7 @@ module.exports = function (App) {
         if (App.i18n.exists(key)) {
           return App.i18n.t(key, opts)
         }
-        return ''
+        return key
       }
 
       const title = opts.setTitle

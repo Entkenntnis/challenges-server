@@ -80,6 +80,7 @@ module.exports = function () {
     editors: [],
     customCSS: '',
     callback: undefined,
+    masterPassword: undefined,
   }
 
   return config

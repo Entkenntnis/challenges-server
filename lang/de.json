@@ -110,7 +110,8 @@
     "sessionActive": "Session läuft...",
     "endSession": "Session jetzt beenden!",
     "sessionDone": "Session fertig.",
-    "sessionScore": "Session-Punktzahl:"
+    "sessionScore": "Session-Punktzahl:",
+    "delete": "Account löschen ..."
   },
   "challenge": {
     "back": "zurück",
@@ -129,5 +130,9 @@
     "title": "Session beendet",
     "html": "<p>Gut gemacht!</p>",
     "ok": "OK"
+  },
+  "delete": {
+    "title": "Account löschen",
+    "confirm": "Hier kannst du deinen Account und deinen Fortschritt <strong>unwiderruflich</strong> löschen. Dieser Vorgang kann nicht rückgängig gemacht werden. Bitte bestätige das mit der Eingabe deines Benutzernamens:"
   }
 }
