@@ -24,5 +24,6 @@ module.exports = function (extend = (config) => config) {
 
   App.entry.start().then(() => {
     App.logger.info(App.moment().locale('en').format('LLLL'))
+    if (App.config.callback) App.config.callback(App)
   })
 }

@@ -295,6 +295,7 @@ module.exports = function (App) {
         solvedBy,
       },
       backButton: false,
+      setTitle: challenge.title,
     })
   })
 

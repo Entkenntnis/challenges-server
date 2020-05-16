@@ -23,9 +23,10 @@ module.exports = function (App) {
         return ''
       }
 
-      const title =
-        App.config.brand +
-        (App.i18n.exists(page + '.title') ? ' - ' + t('title') : '')
+      const title = opts.setTitle
+        ? opts.setTitle
+        : App.config.brand +
+          (App.i18n.exists(page + '.title') ? ' - ' + t('title') : '')
 
       const locale = App.config.locale
       const brand = App.config.brand
