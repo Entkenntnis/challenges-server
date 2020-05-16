@@ -79,7 +79,7 @@ module.exports = function () {
     },
     editors: [],
     customCSS: '',
-    callback: undefined
+    callback: undefined,
   }
 
   return config
