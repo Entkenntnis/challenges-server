@@ -111,7 +111,8 @@
     "endSession": "End session now!",
     "sessionDone": "Session done.",
     "sessionScore": "Session score:",
-    "delete": "Delete Account ..."
+    "delete": "Delete Account ...",
+    "changepw": "Change password ..."
   },
   "challenge": {
     "back": "back",
@@ -133,6 +134,14 @@
   },
   "delete": {
     "title": "Delete Account",
-    "confirm": "Here you can <strong>permanently</strong> delete your account and your progress. This action can not be undone. Confirm it with your username:"
+    "confirm": "Here you can <strong>permanently</strong> delete your account and your progress. This action can not be undone. Confirm it with your username:",
+    "success": "Account successfully deleted. {{-link}}"
+  },
+  "changepw": {
+    "title": "Change password",
+    "wrongpw": "Wrong password",
+    "existingPassword": "Current password",
+    "newPassword": "New password",
+    "success": "New password successfully set. {{-link}}"
   }
 }

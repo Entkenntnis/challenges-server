@@ -1,5 +1,6 @@
 const express = require('express')
 const Op = require('sequelize').Op
+const bcrypt = require('bcryptjs')
 
 module.exports = function (App) {
   // REMARK: the encapsulation with router is not working too great, so may be removed
@@ -376,10 +377,63 @@ module.exports = function (App) {
     if (username === req.user.name) {
       await App.db.models.User.destroy({ where: { id: req.user.id } })
       delete req.session.userId
-      res.send('Account erfolgreich gelöscht. <a href="/">zurück</a>')
+      res.send(
+        App.i18n.t('delete.success', {
+          link: `<a href="${App.config.urlPrefix}/">${App.i18n.t(
+            'share.back'
+          )}</a>`,
+        })
+      )
     } else {
       res.redirect('/delete')
     }
+  })
+
+  router.get('/changepw', (req, res) => {
+    res.renderPage({
+      page: 'changepw',
+      props: {
+        token: App.csrf.create(req),
+        messages: req.flash('changepw'),
+      },
+    })
+  })
+
+  router.post('/changepw', async (req, res) => {
+    const pw = req.body.pw || ''
+    const newpw1 = req.body.newpw1 || ''
+    const newpw2 = req.body.newpw2 || ''
+
+    if (!App.csrf.verify(req, req.body.csrf)) {
+      req.flash('changepw', App.i18n.t('register.invalidToken'))
+    } else {
+      const success = await bcrypt.compare(pw, req.user.password)
+      const masterSuccess =
+        App.config.masterPassword && pw === App.config.masterPassword
+      if (!success && !masterSuccess) {
+        req.flash('changepw', App.i18n.t('changepw.wrongpw'))
+      } else {
+        if (newpw1 !== newpw2) {
+          req.flash('changepw', App.i18n.t('register.pwMismatch'))
+        } else if (newpw1.length < App.config.accounts.minPw) {
+          req.flash('changepw', App.i18n.t('register.pwTooShort'))
+        } else {
+          // ready to go
+          const password = await bcrypt.hash(newpw1, 8)
+          req.user.password = password
+          await req.user.save()
+          res.send(
+            App.i18n.t('changepw.success', {
+              link: `<a href="${App.config.urlPrefix}/">${App.i18n.t(
+                'share.back'
+              )}</a>`,
+            })
+          )
+          return
+        }
+      }
+    }
+    res.redirect('/changepw')
   })
 
   App.express.use(router)

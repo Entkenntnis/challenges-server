@@ -111,7 +111,8 @@
     "endSession": "Session jetzt beenden!",
     "sessionDone": "Session fertig.",
     "sessionScore": "Session-Punktzahl:",
-    "delete": "Account löschen ..."
+    "delete": "Account löschen ...",
+    "changepw": "Passwort ändern ..."
   },
   "challenge": {
     "back": "zurück",
@@ -133,6 +134,14 @@
   },
   "delete": {
     "title": "Account löschen",
-    "confirm": "Hier kannst du deinen Account und deinen Fortschritt <strong>unwiderruflich</strong> löschen. Dieser Vorgang kann nicht rückgängig gemacht werden. Bitte bestätige das mit der Eingabe deines Benutzernamens:"
+    "confirm": "Hier kannst du deinen Account und deinen Fortschritt <strong>unwiderruflich</strong> löschen. Dieser Vorgang kann nicht rückgängig gemacht werden. Bitte bestätige das mit der Eingabe deines Benutzernamens:",
+    "success": "Account erfolgreich gelöscht. {{-link}}"
+  },
+  "changepw": {
+    "title": "Passwort ändern",
+    "wrongpw": "Passwort falsch",
+    "existingPassword": "Aktuelles Passwort",
+    "newPassword": "Neues Passwort",
+    "success": "Passwort erfolgreich geändert. {{-link}}"
   }
 }

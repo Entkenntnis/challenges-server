@@ -111,7 +111,8 @@
     "endSession": "Fin de la session!",
     "sessionDone": "La session est terminée.",
     "sessionScore": "Session score:",
-    "delete": "Supprimer le compte ..."
+    "delete": "Supprimer le compte ...",
+    "changepw": "Changer de mot de passe ..."
   },
   "challenge": {
     "back": "retour",
@@ -133,7 +134,15 @@
   },
   "delete": {
     "title": "Supprimer le compte",
-    "confirm": "Vous pouvez ici supprimer <strong>irrévocablement</strong> votre compte et votre progression. Ce processus ne peut être défait. Veuillez le confirmer en entrant votre nom d'utilisateur:"
+    "confirm": "Vous pouvez ici supprimer <strong>irrévocablement</strong> votre compte et votre progression. Ce processus ne peut être défait. Veuillez le confirmer en entrant votre nom d'utilisateur:",
+    "success": "Compte supprimé avec succès. {{-link}}"
+  },
+  "changepw": {
+    "title": "Changer de mot de passe",
+    "wrongpw": "Mot de passe erroné",
+    "existingPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "success": "Changement de mot de passe réussi. {{-link}}"
   }
 } 
 

@@ -1,0 +1,60 @@
+<h2><%= t('title') %></h2>
+
+<% if (props.messages.length > 0) { %>
+  <div class="alert alert-danger"><%-props.messages.join('<br>')%></div>
+<% } %>
+
+<form method="post" autocomplete="off">
+  <fieldset>
+    <div class="form-group row">
+      <label for="pw" class="col-md-2 col-form-label"><%= t('existingPassword') %></label>
+      <div class="col-md-5">
+        <input
+          class="form-control"
+          id="pw"
+          type="password"
+          name="pw"
+          value=""
+          required
+          maxlength="<%=App.config.accounts.maxPw%>"
+        >
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <label for="newp1" class="col-md-2 col-form-label"><%= t('newPassword') %></label>
+      <div class="col-md-5">
+        <input
+          class="form-control"
+          id="newp1"
+          type="password"
+          name="newpw1"
+          value=""
+          required
+          maxlength="<%=App.config.accounts.maxPw%>"
+        >
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="newpw2" class="col-md-2 col-form-label"><%= t('register.repeatPassword') %></label>
+      <div class="col-md-5">
+        <input
+          class="form-control"
+          id="newpw2"
+          type="password"
+          name="newpw2"
+          value=""
+          required
+          maxlength="<%=App.config.accounts.maxPw%>"
+        >
+        <small><%= t('register.passwordNote', {minPassword: App.config.accounts.minPw}) %></small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-5 offset-md-2">
+        <button type="submit" class="btn btn-success"><%= t('go') %></button>
+      </div>
+    </div>
+    <input type="hidden" name="csrf" value="<%=props.token%>"/>
+  </fieldset>
+</form>
