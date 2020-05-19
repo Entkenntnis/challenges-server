@@ -8,13 +8,13 @@
     "invalid": "Falsche Zugangsdaten",
     "name": "Name:",
     "password": "Passwort:",
-    "invite": "Neu hier? Erstelle einen kostenlosen Account und lege los: {{-link}}",
+    "invite_": "Neu hier? Erstelle einen kostenlosen Account und lege los: {{-link}}",
     "registerLink": "Registrierung",
     "joinRoom": "Raum beitreten",
     "hackerOfTheMonth": "Top 10 des Monats",
     "showHighscore": "alle anzeigen",
     "rooms": "Räume",
-    "inviteOrga": "Leitest du eine Veranstaltung? Hier kannst du {{-link}}.",
+    "inviteOrga_": "Leitest du eine Veranstaltung? Hier kannst du {{-link}}.",
     "createRoom": "einen eigenen Raum anlegen",
     "contactLink": "Kontakt",
     "privacyLink": "Datenschutzerklärung",
@@ -22,8 +22,8 @@
     "version": "Version: Mai 2020"
   },
   "register": {
-    "title": "Registrierung",
-    "joinRoomTitle": "Trete Raum \"{{room}}\" bei",
+    "normalHeading": "Registrierung",
+    "joinRoomHeading": "Trete Raum \"{{room}}\" bei",
     "username": "Benutzername",
     "password": "Passwort",
     "repeatPassword": "Passwort wiederholen",
@@ -43,12 +43,12 @@
     "serverCrowded": "Es gibt im Moment ein hohes Aufkommen an Registrierungen, versuche es in 15 Minuten erneut."
   },
   "join": {
-    "title": "Beitreten",
+    "heading": "Beitreten",
     "key": "Raumschlüssel:",
     "roomNotFound": "Raum nicht gefunden!"
   },
   "highscore": {
-    "title": "Highscore",
+    "heading": "Highscore",
     "empty": "Die Highscore enthält noch keine Einträge. Werde der Erste!",
     "rank": "Platz",
     "name": "Benutzername",
@@ -74,17 +74,17 @@
     "invalidToken": "Übermittelte Daten gehört nicht zu dieser Sitzung. Bitte erneut versuchen."
   },
   "contact": {
-    "title": "Kontakt",
-    "HTML": "<p>Bitte stelle Kontaktinformation passend zur Gesetzgebung deines Landes zur Verfügung.</p>"
+    "heading": "Kontakt",
+    "content_": "<p>Bitte stelle Kontaktinformation passend zur Gesetzgebung deines Landes zur Verfügung.</p>"
   },
   "privacy": {
-    "title": "Datenschutzerklärung",
-    "HTML": "<p>Bitte stelle eine Datenschutzerklärung passend zur Gesetzgebung deines Landes zur Verfügung.</p>"
+    "heading": "Datenschutzerklärung",
+    "content_": "<p>Bitte stelle eine Datenschutzerklärung passend zur Gesetzgebung deines Landes zur Verfügung.</p>"
   },
   "success": {
     "title": "Registrierung erfolgreich",
-    "message": "Deine Registrierung war erfolgreich.",
-    "login": "zum Login"
+    "content_": "Deine Registrierung war erfolgreich.",
+    "back": "Zum Login"
   },
   "map": {
     "background": "Hintergrundbild:"

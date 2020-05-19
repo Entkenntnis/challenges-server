@@ -1,6 +1,4 @@
 
-<h2><%= props.room ? t('joinRoomTitle', {room: props.room}) : t('title') %></h2>
-
 <% if (props.messages.length > 0) { %>
   <div class="alert alert-danger"><%-props.messages.join('<br>')%></div>
 <% } %>

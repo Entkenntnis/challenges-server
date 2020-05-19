@@ -8,13 +8,13 @@
     "invalid": "Login failed!",
     "name": "Name:",
     "password": "Password:",
-    "invite": "New here? Create a free account and get started: {{-link}}",
+    "invite_": "New here? Create a free account and get started: {{-link}}",
     "registerLink": "Register",
     "joinRoom": "Join room",
     "hackerOfTheMonth": "Top 10 of the Month",
     "showHighscore": "Show all",
     "rooms": "Rooms",
-    "inviteOrga": "Are you hosting an event? Here you can {{-link}}.",
+    "inviteOrga_": "Are you hosting an event? Here you can {{-link}}.",
     "createRoom": "create a custom room",
     "contactLink": "Contact",
     "privacyLink": "Privacy Policy",
@@ -22,8 +22,8 @@
     "version": "Version: May 2020"
   },
   "register": {
-    "title": "Register",
-    "joinRoomTitle": "Join room \"{{room}}\"",
+    "normalHeading": "Register",
+    "joinRoomHeading": "Join room \"{{room}}\"",
     "username": "Username",
     "password": "Password",
     "repeatPassword": "Repeat password",
@@ -43,12 +43,12 @@
     "serverCrowded": "There are too many registrations at the moment. Please try again in 15 minutes."
   },
   "join": {
-    "title": "Join",
+    "heading": "Join",
     "key": "Room key:",
     "roomNotFound": "Room not found!"
   },
   "highscore": {
-    "title": "Highscore",
+    "heading": "Highscore",
     "empty": "There are no users in the highscore yet. Become the first!",
     "rank": "Rank",
     "name": "Username",
@@ -74,17 +74,17 @@
     "invalidToken": "Form invalid. Please try again."
   },
   "contact": {
-    "title": "Contact",
-    "HTML": "<p>Please provide contact information according to the legislation of your country.</p>"
+    "heading": "Contact",
+    "content_": "<p>Please provide contact information according to the legislation of your country.</p>"
   },
   "privacy": {
-    "title": "Privacy Policy",
-    "HTML": "<p>Please provide legal information according to the legislation of your country.</p>"
+    "heading": "Privacy Policy",
+    "content_": "<p>Please provide legal information according to the legislation of your country.</p>"
   },
   "success": {
     "title": "Registration successful",
-    "message": "Your registration was successful.",
-    "login": "Login"
+    "content_": "Your registration was successful.",
+    "back": "Login"
   },
   "map": {
     "background": "Background:"

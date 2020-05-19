@@ -8,13 +8,13 @@
     "invalid": "Données d'accès erronées.",
     "name": "Nom:",
     "password": "Mot de passe:",
-    "invite": "Vous êtes nouveau ici? Créez un compte gratuit et commencez: {{-link}}",
+    "invite_": "Vous êtes nouveau ici? Créez un compte gratuit et commencez: {{-link}}",
     "registerLink": "Inscription",
     "joinRoom": "Rejoindre une salle",
     "hackerOfTheMonth": "Top 10 du Mois",
     "showHighscore": "tout afficher",
     "rooms": "Salles",
-    "inviteOrga": "Vous organisez un événement? Ici, vous pouvez {{-link}}.",
+    "inviteOrga_": "Vous organisez un événement? Ici, vous pouvez {{-link}}.",
     "createRoom": "créer votre propre chambre",
     "contactLink": "Contact",
     "privacyLink": "Politique de confidentialité",
@@ -22,8 +22,8 @@
     "version": "version: mai 2020"
   },
   "register": {
-    "title": "Inscription",
-    "joinRoomTitle": "Rejoignez \"{{room}}\"",
+    "normalHeading": "Inscription",
+    "joinRoomHeading": "Rejoignez \"{{room}}\"",
     "username": "Nom",
     "password": "Mot de passe",
     "repeatPassword": "Répéter le mot de passe",
@@ -43,12 +43,12 @@
     "serverCrowded": "Il y a un grand nombre d'inscriptions en ce moment, essayez à nouveau dans 15 minutes."
   },
   "join": {
-    "title": "Rejoignez",
+    "heading": "Rejoignez",
     "key": "Clé de la chambre:",
     "roomNotFound": "Chambre non trouvée!"
   },
   "highscore": {
-    "title": "Highscore",
+    "heading": "Highscore",
     "empty": "Le highscore ne contient encore aucune entrée. Soyez les premiers!",
     "rank": "Position",
     "name": "Nom",
@@ -74,17 +74,17 @@
     "invalidToken": "Les données transmises n'appartiennent pas à cette session. Veuillez réessayer."
   },
   "contact": {
-    "title": "Contact",
-    "HTML": "<p>Veuillez fournir les coordonnées appropriées à la législation de votre pays.</p>"
+    "heading": "Contact",
+    "content_": "<p>Veuillez fournir les coordonnées appropriées à la législation de votre pays.</p>"
   },
   "privacy": {
-    "title": "Politique de confidentialité",
-    "HTML": "<p>Veuillez fournir une politique de confidentialité adaptée à la législation de votre pays.</p>"
+    "heading": "Politique de confidentialité",
+    "content_": "<p>Veuillez fournir une politique de confidentialité adaptée à la législation de votre pays.</p>"
   },
   "success": {
     "title": "Inscription réussie",
-    "message": "Votre inscription a été réussie.",
-    "login": "login"
+    "content_": "Votre inscription a été réussie.",
+    "back": "login"
   },
   "map": {
     "background": "Fond d'écran:"

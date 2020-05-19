@@ -4,10 +4,10 @@ module.exports = function (App) {
 
   App.express.use((req, res, next) => {
     res.renderPage = (opts) => {
+      // REMARK: allow passing in string only
       const page = opts.page || opts
-      const props = opts.props || {}
-      const outsideOfContainer = opts.outsideOfContainer
 
+      // REMARK: automatically prefix page or 'share'
       const t = function (key, opts) {
         const pageKey = page + '.' + key
         if (App.i18n.exists(pageKey)) {
@@ -17,36 +17,65 @@ module.exports = function (App) {
         if (App.i18n.exists(shareKey)) {
           return App.i18n.t(shareKey, opts)
         }
+        // REMARK: allow accessing other page's keys
         if (App.i18n.exists(key)) {
           return App.i18n.t(key, opts)
         }
         return key
       }
 
-      const title = opts.setTitle
-        ? opts.setTitle
-        : App.config.brand +
-          (App.i18n.exists(page + '.title') ? ' - ' + t('title') : '')
-
       const locale = App.config.locale
       const brand = App.config.brand
       const slogan = App.config.slogan
 
       const user = opts.user || req.user
+      const props = opts.props || {}
+
+      // REMARK: take heading option, otherwise translate it
+      const heading = opts.heading
+        ? opts.heading
+        : App.i18n.exists(page + '.heading')
+        ? t('heading')
+        : undefined
+
+      // REMARK prio 1: title, prio 2: title from page, prio 3: heading
+      const title = opts.title
+        ? opts.title
+        : brand +
+          (App.i18n.exists(page + '.title')
+            ? ' - ' + t('title')
+            : heading
+            ? ' - ' + heading
+            : '')
+
+      // REMARK: passing in content or content_ key will avoid using page!
+      const content = opts.content
+        ? opts.content
+        : App.i18n.exists(page + '.content_')
+        ? t('content_')
+        : undefined
+
+      // REMARK: defaults to true
       const backButton = opts.backButton !== false
 
+      // REMARK: prefix default pages with view directory
+      const pagePath = page.includes('/') ? page : './pages/' + page
+
+      const outsideOfContainer = opts.outsideOfContainer
       res.render('main', {
         locale,
         brand,
         slogan,
         title,
-        page,
+        pagePath,
         props,
         user,
         t,
         outsideOfContainer,
         App,
         backButton,
+        heading,
+        content,
       })
     }
     next()

@@ -20,6 +20,9 @@ module.exports = function (App) {
         token,
         room,
       },
+      heading: room
+        ? App.i18n.t('register.joinRoomHeading', { room })
+        : App.i18n.t('register.normalHeading'),
     })
   })
 
@@ -194,7 +197,8 @@ module.exports = function (App) {
   })
 
   App.express.get('/success', (req, res) => {
-    res.renderPage({ page: 'success', backButton: false })
+    // REMARK: pageless render call
+    res.renderPage({ page: 'success' })
   })
 
   App.express.post('/login', async (req, res) => {
