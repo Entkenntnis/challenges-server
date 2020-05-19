@@ -1,9 +1,12 @@
-<h2><%= t('title') %></h2>
+<% if (props.messages.length > 0) { %>
+  <div class="alert alert-danger"><%-props.messages.join('<br>')%></div>
+<% } %>
 
-<p><%- t('confirm') %>
+<p><%- t('confirm_') %>
 </p>
 
 <form method="POST" autocomplete="off">
   <input name="username"><span style="display:inline-block;width:20px"></span>
-  <input type="submit" class="btn btn-danger" value="<%= t('title') %>">
+  <input type="submit" class="btn btn-danger" value="<%= t('heading') %>">
+  <input type="hidden" name="csrf" value="<%=props.token%>"/>
 </form>

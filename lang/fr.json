@@ -29,7 +29,7 @@
     "repeatPassword": "Répéter le mot de passe",
     "usernameNote": "Min. {{minUsername}} lettres",
     "passwordNote": "Min. {{minPassword}} lettres",
-    "noteOn": "Note sur la {{-link}}",
+    "noteOn_": "Note sur la {{-link}}",
     "dataProtection": "protection des données",
     "nameTooShort": "Nom d'utilisateur trop court.",
     "nameTooLong": "Nom d'utilisateur trop long, max. {{max}} lettres.",
@@ -99,7 +99,7 @@
     "logout": "Déconnexion"
   },
   "profile": {
-    "title": "Profil",
+    "heading": "Profil",
     "username": "Nom:",
     "score": "Score:",
     "solved": "Tâches résolues:",
@@ -128,21 +128,30 @@
     "heading": "Highscore: {{room}}"
   },
   "finish": {
-    "title": "Fin de la session",
-    "html": "<p>Bien joué!</p>",
-    "ok": "OK"
+    "heading": "Fin de la session",
+    "content_": "<p>Bien joué!</p>",
+    "back": "OK"
   },
   "delete": {
-    "title": "Supprimer le compte",
-    "confirm": "Vous pouvez ici supprimer <strong>irrévocablement</strong> votre compte et votre progression. Ce processus ne peut être défait. Veuillez le confirmer en entrant votre nom d'utilisateur:",
-    "success": "Compte supprimé avec succès. {{-link}}"
+    "heading": "Supprimer le compte",
+    "confirm_": "Vous pouvez ici supprimer <strong>irrévocablement</strong> votre compte et votre progression. Ce processus ne peut être défait. Veuillez le confirmer en entrant votre nom d'utilisateur:",
+    "wrongUsername": "Nom d'utilisateur erroné"
+  },
+  "deleteSuccess": {
+    "title": "Compte supprimé",
+    "content_": "Compte supprimé avec succès.",
+    "back": "Retour à la page d'accueil"
   },
   "changepw": {
-    "title": "Changer de mot de passe",
+    "heading": "Changer de mot de passe",
     "wrongpw": "Mot de passe erroné",
     "existingPassword": "Mot de passe actuel",
-    "newPassword": "Nouveau mot de passe",
-    "success": "Changement de mot de passe réussi. {{-link}}"
+    "newPassword": "Nouveau mot de passe"
+  },
+  "changepwSuccess": {
+    "title": "Changement de mot de passe",
+    "content_": "Changement de mot de passe réussi.",
+    "back": "OK"
   }
 } 
 

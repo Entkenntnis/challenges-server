@@ -29,7 +29,7 @@
     "repeatPassword": "Repeat password",
     "usernameNote": "Min. {{minUsername}} characters",
     "passwordNote": "Min. {{minPassword}} characters",
-    "noteOn": "Review our {{-link}}",
+    "noteOn_": "Review our {{-link}}",
     "dataProtection": "privacy policy",
     "nameTooShort": "Username too short.",
     "nameTooLong": "Username too long, max. {{max}} characters.",
@@ -99,7 +99,7 @@
     "logout": "Logout"
   },
   "profile": {
-    "title": "Profile",
+    "heading": "Profile",
     "username": "Username:",
     "score": "Score:",
     "solved": "Challenges solved:",
@@ -128,20 +128,29 @@
     "heading": "Highscore for room \"{{room}}\""
   },
   "finish": {
-    "title": "Session finished",
-    "html": "<p>Well done!</p>",
-    "ok": "OK"
+    "heading": "Session finished",
+    "content_": "<p>Well done!</p>",
+    "back": "OK"
   },
   "delete": {
-    "title": "Delete Account",
-    "confirm": "Here you can <strong>permanently</strong> delete your account and your progress. This action can not be undone. Confirm it with your username:",
-    "success": "Account successfully deleted. {{-link}}"
+    "heading": "Delete Account",
+    "confirm_": "Here you can <strong>permanently</strong> delete your account and your progress. This action can not be undone. Confirm it with your username:",
+    "wrongUsername": "Wrong username"
+  },
+  "deleteSuccess": {
+    "title": "Account deleted",
+    "content_": "Account successfully deleted.",
+    "back": "Return to startpage"
   },
   "changepw": {
-    "title": "Change password",
+    "heading": "Change password",
     "wrongpw": "Wrong password",
     "existingPassword": "Current password",
-    "newPassword": "New password",
-    "success": "New password successfully set. {{-link}}"
+    "newPassword": "New password"
+  },
+  "changepwSuccess": {
+    "title": "Password set",
+    "content_": "New password successfully set.",
+    "back": "OK"
   }
 }

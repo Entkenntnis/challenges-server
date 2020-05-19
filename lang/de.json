@@ -29,7 +29,7 @@
     "repeatPassword": "Passwort wiederholen",
     "usernameNote": "Min. {{minUsername}} Zeichen",
     "passwordNote": "Min. {{minPassword}} Zeichen",
-    "noteOn": "Hinweis zum {{-link}}",
+    "noteOn_": "Hinweis zum {{-link}}",
     "dataProtection": "Datenschutz",
     "nameTooShort": "Benutzername zu kurz.",
     "nameTooLong": "Benutzername zu lang, max. {{max}} Zeichen.",
@@ -99,7 +99,7 @@
     "logout": "abmelden"
   },
   "profile": {
-    "title": "Profil",
+    "heading": "Profil",
     "username": "Benutzername:",
     "score": "Punktzahl:",
     "solved": "Gelöste Aufgaben:",
@@ -128,20 +128,29 @@
     "heading": "Highscore für Raum \"{{room}}\""
   },
   "finish": {
-    "title": "Session beendet",
-    "html": "<p>Gut gemacht!</p>",
-    "ok": "OK"
+    "heading": "Session beendet",
+    "content_": "<p>Gut gemacht!</p>",
+    "back": "OK"
   },
   "delete": {
-    "title": "Account löschen",
-    "confirm": "Hier kannst du deinen Account und deinen Fortschritt <strong>unwiderruflich</strong> löschen. Dieser Vorgang kann nicht rückgängig gemacht werden. Bitte bestätige das mit der Eingabe deines Benutzernamens:",
-    "success": "Account erfolgreich gelöscht. {{-link}}"
+    "heading": "Account löschen",
+    "confirm_": "Hier kannst du deinen Account und deinen Fortschritt <strong>unwiderruflich</strong> löschen. Dieser Vorgang kann nicht rückgängig gemacht werden. Bitte bestätige das mit der Eingabe deines Benutzernamens:",
+    "wrongUsername": "Benutzername falsch"
+  },
+  "deleteSuccess": {
+    "title": "Account gelöscht",
+    "content_": "Dein Account wurde vollständig gelöscht.",
+    "back": "Zur Startseite"
   },
   "changepw": {
-    "title": "Passwort ändern",
+    "heading": "Passwort ändern",
     "wrongpw": "Passwort falsch",
     "existingPassword": "Aktuelles Passwort",
-    "newPassword": "Neues Passwort",
-    "success": "Passwort erfolgreich geändert. {{-link}}"
+    "newPassword": "Neues Passwort"
+  },
+  "changepwSuccess": {
+    "title": "Passwort geändert",
+    "content_": "Passwort erfolgreich geändert.",
+    "back": "OK"
   }
 }

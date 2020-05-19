@@ -1,15 +1,11 @@
-const express = require('express')
 const Op = require('sequelize').Op
 const bcrypt = require('bcryptjs')
 
 module.exports = function (App) {
-  // REMARK: the encapsulation with router is not working too great, so may be removed
-  const router = express.Router()
-
   // REMARK: allow hot reloading
   let challenges = require(App.config.challengesDir + '/challenges')
 
-  router.use(async (req, res, next) => {
+  async function checkUser(req, res, next) {
     if (req.session.userId) {
       const user = await App.db.models.User.findOne({
         where: { id: req.session.userId },
@@ -22,17 +18,17 @@ module.exports = function (App) {
     }
     delete req.session.userId
     res.redirect('/')
-  })
+  }
 
-  router.get('/finish', (req, res) => {
+  App.express.get('/finish', checkUser, (req, res) => {
     if (req.user.session_phase === 'OUTRO') {
-      res.renderPage({ page: 'finish', backButton: false })
+      res.renderPage('finish')
     } else {
       res.redirect('/map')
     }
   })
 
-  router.get('/sessiondone', async (req, res) => {
+  App.express.get('/sessiondone', checkUser, async (req, res) => {
     if (req.user.session_phase === 'OUTRO') {
       req.user.session_phase = 'DONE'
       await req.user.save()
@@ -40,7 +36,7 @@ module.exports = function (App) {
     res.redirect('/map')
   })
 
-  router.get('/endsession', async (req, res) => {
+  App.express.get('/endsession', checkUser, async (req, res) => {
     if (req.user.session_phase === 'ACTIVE') {
       req.user.session_score = req.user.score
       req.user.session_phase = 'OUTRO'
@@ -51,7 +47,7 @@ module.exports = function (App) {
     res.redirect('/map')
   })
 
-  router.get('/startsession', async (req, res) => {
+  App.express.get('/startsession', checkUser, async (req, res) => {
     if (req.user.session_phase === 'READY') {
       req.user.session_phase = 'ACTIVE'
       req.user.session_startTime = new Date()
@@ -74,7 +70,7 @@ module.exports = function (App) {
     }
   })
 
-  router.use(async (req, res, next) => {
+  async function checkSession(req, res, next) {
     if (req.user.session_phase === 'ACTIVE') {
       const expired = App.moment(req.user.session_startTime)
         .add(30, 'minutes')
@@ -89,9 +85,9 @@ module.exports = function (App) {
       return
     }
     next()
-  })
+  }
 
-  router.get('/map', async (req, res) => {
+  App.express.get('/map', checkUser, checkSession, async (req, res) => {
     reloadChallenges()
 
     const solvedDb = await App.db.models.Solution.findAll({
@@ -177,7 +173,7 @@ module.exports = function (App) {
   })
 
   // rate limit challenge routes
-  router.use('/challenge/:id', (req, res, next) => {
+  App.express.all('/challenge/:id', checkUser, (req, res, next) => {
     const id = parseInt(req.params.id)
 
     if (
@@ -214,93 +210,101 @@ module.exports = function (App) {
     next()
   })
 
-  router.use('/challenge/:id', async (req, res) => {
-    reloadChallenges()
+  App.express.all(
+    '/challenge/:id',
+    checkUser,
+    checkSession,
+    async (req, res) => {
+      reloadChallenges()
 
-    const id = parseInt(req.params.id)
+      const id = parseInt(req.params.id)
 
-    if (!challenges.some((c) => c.id === id)) {
-      res.redirect('/map')
-      return
-    }
-
-    const challenge = challenges.filter((c) => c.id === id)[0]
-
-    const check =
-      challenge.check ||
-      function (raw) {
-        const answer = raw.toLowerCase()
-        return {
-          answer,
-          correct:
-            challenge.solution && answer === challenge.solution.toLowerCase(),
-        }
+      if (!challenges.some((c) => c.id === id)) {
+        res.redirect('/map')
+        return
       }
 
-    let answer = ''
-    let correct = false
+      const challenge = challenges.filter((c) => c.id === id)[0]
 
-    try {
-      if (req.body.answer) {
-        const result = check(req.body.answer || '', { req, App })
-        if (result.answer) {
-          answer = result.answer
-          correct = result.correct
-        } else {
-          answer = req.body.answer
-          correct = result
-        }
-      }
-    } catch (e) {
-      console.log(e)
-      // something didn't work out, avoid server crashing
-    }
-
-    if (correct && !App.config.editors.includes(req.user.name)) {
-      try {
-        const [, created] = await App.db.models.Solution.findOrCreate({
-          where: { cid: id, UserId: req.user.id },
-        })
-        if (created) {
-          if (req.user.score > 0) {
-            // REMARK: add a small bonus for fast solving
-            const pausetime =
-              (new Date().getTime() - req.user.updatedAt.getTime()) /
-              (60 * 1000)
-            const tinterval = Math.floor(pausetime / 3)
-            req.user.score += Math.pow(0.5, tinterval) * 2
-          } else {
-            req.user.score += 2
-            // REMARK: start session on first solved challenge
-            if (req.user.session_phase === 'READY') {
-              req.user.session_phase = 'ACTIVE'
-              req.user.session_startTime = new Date()
-            }
+      const check =
+        challenge.check ||
+        function (raw) {
+          const answer = raw.toLowerCase()
+          return {
+            answer,
+            correct:
+              challenge.solution && answer === challenge.solution.toLowerCase(),
           }
-          req.user.score += 10
-          await req.user.save()
+        }
+
+      let answer = ''
+      let correct = false
+
+      try {
+        if (req.body.answer) {
+          const result = check(req.body.answer || '', { req, App })
+          if (result.answer) {
+            answer = result.answer
+            correct = result.correct
+          } else {
+            answer = req.body.answer
+            correct = result
+          }
         }
       } catch (e) {
         console.log(e)
+        // something didn't work out, avoid server crashing
       }
+
+      if (correct && !App.config.editors.includes(req.user.name)) {
+        try {
+          const [, created] = await App.db.models.Solution.findOrCreate({
+            where: { cid: id, UserId: req.user.id },
+          })
+          if (created) {
+            if (req.user.score > 0) {
+              // REMARK: add a small bonus for fast solving
+              const pausetime =
+                (new Date().getTime() - req.user.updatedAt.getTime()) /
+                (60 * 1000)
+              const tinterval = Math.floor(pausetime / 3)
+              req.user.score += Math.pow(0.5, tinterval) * 2
+            } else {
+              req.user.score += 2
+              // REMARK: start session on first solved challenge
+              if (req.user.session_phase === 'READY') {
+                req.user.session_phase = 'ACTIVE'
+                req.user.session_startTime = new Date()
+              }
+            }
+            req.user.score += 10
+            await req.user.save()
+          }
+        } catch (e) {
+          console.log(e)
+        }
+      }
+
+      const solvedBy = await App.db.models.Solution.count({
+        where: { cid: id },
+      })
+
+      res.renderPage({
+        page: 'challenge',
+        props: {
+          challenge,
+          correct,
+          answer,
+          solvedBy,
+        },
+        backButton: false,
+        title: challenge.title,
+        heading: challenge.title,
+      })
     }
+  )
 
-    const solvedBy = await App.db.models.Solution.count({ where: { cid: id } })
-
-    res.renderPage({
-      page: 'challenge',
-      props: {
-        challenge,
-        correct,
-        answer,
-        solvedBy,
-      },
-      backButton: false,
-      setTitle: challenge.title,
-    })
-  })
-
-  router.get('/profile', async (req, res) => {
+  App.express.get('/profile', checkUser, checkSession, async (req, res) => {
     let room
     if (req.user.RoomId) {
       const roomRow = await App.db.models.Room.findOne({
@@ -322,7 +326,7 @@ module.exports = function (App) {
     })
   })
 
-  router.get('/roomscore', async (req, res) => {
+  App.express.get('/roomscore', checkUser, checkSession, async (req, res) => {
     const room = await App.db.models.Room.findOne({
       where: { id: req.user.RoomId },
     })
@@ -362,34 +366,42 @@ module.exports = function (App) {
           room: room.name,
           users,
         },
+        heading: App.i18n.t('roomscore.heading', { room }),
       })
       return
     }
     res.redirect('/map')
   })
 
-  router.get('/delete', (req, res) => {
-    res.renderPage('delete')
+  App.express.get('/delete', checkUser, (req, res) => {
+    res.renderPage({
+      page: 'delete',
+      props: {
+        token: App.csrf.create(req),
+        messages: req.flash('delete'),
+      },
+    })
   })
 
-  router.post('/delete', async (req, res) => {
+  App.express.post('/delete', checkUser, async (req, res) => {
     const username = req.body.username || ''
-    if (username === req.user.name) {
-      await App.db.models.User.destroy({ where: { id: req.user.id } })
-      delete req.session.userId
-      res.send(
-        App.i18n.t('delete.success', {
-          link: `<a href="${App.config.urlPrefix}/">${App.i18n.t(
-            'share.back'
-          )}</a>`,
-        })
-      )
+    if (!App.csrf.verify(req, req.body.csrf)) {
+      req.flash('delete', App.i18n.t('register.invalidToken'))
     } else {
-      res.redirect('/delete')
+      if (username === req.user.name) {
+        await App.db.models.User.destroy({ where: { id: req.user.id } })
+        delete req.session.userId
+        delete req.user
+        res.renderPage('deleteSuccess')
+        return
+      } else {
+        req.flash('delete', App.i18n.t('delete.wrongUsername'))
+      }
     }
+    res.redirect('/delete')
   })
 
-  router.get('/changepw', (req, res) => {
+  App.express.get('/changepw', checkUser, (req, res) => {
     res.renderPage({
       page: 'changepw',
       props: {
@@ -399,7 +411,7 @@ module.exports = function (App) {
     })
   })
 
-  router.post('/changepw', async (req, res) => {
+  App.express.post('/changepw', checkUser, async (req, res) => {
     const pw = req.body.pw || ''
     const newpw1 = req.body.newpw1 || ''
     const newpw2 = req.body.newpw2 || ''
@@ -422,21 +434,13 @@ module.exports = function (App) {
           const password = await bcrypt.hash(newpw1, 8)
           req.user.password = password
           await req.user.save()
-          res.send(
-            App.i18n.t('changepw.success', {
-              link: `<a href="${App.config.urlPrefix}/">${App.i18n.t(
-                'share.back'
-              )}</a>`,
-            })
-          )
+          res.renderPage('changepwSuccess')
           return
         }
       }
     }
     res.redirect('/changepw')
   })
-
-  App.express.use(router)
 
   function reloadChallenges() {
     if (App.config.reloadChallenges) {

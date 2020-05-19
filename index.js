@@ -17,10 +17,10 @@ module.exports = function (extend = (config) => config) {
   require('./server/expressSession')(App)
   require('./server/expressViews')(App)
 
-  require('./routes/setConfig')(App)
   require('./routes/staticPages')(App)
   require('./routes/user')(App)
   require('./routes/challenge')(App)
+  require('./routes/setConfig')(App)
 
   App.entry.start().then(() => {
     App.logger.info(App.moment().locale('en').format('LLLL'))
