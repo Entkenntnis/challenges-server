@@ -29,6 +29,7 @@ module.exports = function (App) {
       const slogan = App.config.slogan
 
       const user = opts.user || req.user
+      const backHref = opts.backHref || '/'
       const props = opts.props || {}
 
       // REMARK: take heading option, otherwise translate it
@@ -76,6 +77,7 @@ module.exports = function (App) {
         backButton,
         heading,
         content,
+        backHref,
       })
     }
     next()

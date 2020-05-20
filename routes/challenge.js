@@ -22,7 +22,7 @@ module.exports = function (App) {
 
   App.express.get('/finish', checkUser, (req, res) => {
     if (req.user.session_phase === 'OUTRO') {
-      res.renderPage('finish')
+      res.renderPage({ page: 'finish', backHref: '/endsession' })
     } else {
       res.redirect('/map')
     }
@@ -31,7 +31,7 @@ module.exports = function (App) {
   App.express.get('/sessiondone', checkUser, async (req, res) => {
     if (req.user.session_phase === 'OUTRO') {
       req.user.session_phase = 'DONE'
-      await req.user.save()
+      await req.user.save({ silent: true })
     }
     res.redirect('/map')
   })
@@ -40,7 +40,7 @@ module.exports = function (App) {
     if (req.user.session_phase === 'ACTIVE') {
       req.user.session_score = req.user.score
       req.user.session_phase = 'OUTRO'
-      await req.user.save()
+      await req.user.save({ silent: true })
       res.redirect('/finish')
       return
     }
@@ -51,7 +51,7 @@ module.exports = function (App) {
     if (req.user.session_phase === 'READY') {
       req.user.session_phase = 'ACTIVE'
       req.user.session_startTime = new Date()
-      await req.user.save()
+      await req.user.save({ silent: true })
     }
     res.redirect('/map')
   })
@@ -242,8 +242,8 @@ module.exports = function (App) {
 
       try {
         if (req.body.answer) {
-          const result = check(req.body.answer || '', { req, App })
-          if (result.answer) {
+          const result = await check(req.body.answer || '', { req, App })
+          if (result.answer !== undefined) {
             answer = result.answer
             correct = result.correct
           } else {
@@ -433,7 +433,7 @@ module.exports = function (App) {
           // ready to go
           const password = await bcrypt.hash(newpw1, 8)
           req.user.password = password
-          await req.user.save()
+          await req.user.save({ silent: true })
           res.renderPage('changepwSuccess')
           return
         }
