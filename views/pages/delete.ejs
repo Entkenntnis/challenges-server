@@ -6,7 +6,7 @@
 </p>
 
 <form method="POST" autocomplete="off">
-  <input name="username"><span style="display:inline-block;width:20px"></span>
-  <input type="submit" class="btn btn-danger" value="<%= t('heading') %>">
+  <input name="username" style="height:32px"><span style="display:inline-block;width:10px"></span>
+  <input type="submit" class="btn btn-danger" value="<%= t('heading') %>" style="height:32px;line-height:1;vertical-align:bottom;margin-top:10px;">
   <input type="hidden" name="csrf" value="<%=props.token%>"/>
 </form>
