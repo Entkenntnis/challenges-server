@@ -23,6 +23,7 @@ module.exports = function (App) {
       heading: room
         ? App.i18n.t('register.joinRoomHeading', { room })
         : App.i18n.t('register.normalHeading'),
+      backHref: room ? '/join' : undefined,
     })
   })
 

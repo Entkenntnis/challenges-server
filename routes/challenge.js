@@ -380,6 +380,7 @@ module.exports = function (App) {
         token: App.csrf.create(req),
         messages: req.flash('delete'),
       },
+      backHref: '/profile',
     })
   })
 
@@ -408,6 +409,7 @@ module.exports = function (App) {
         token: App.csrf.create(req),
         messages: req.flash('changepw'),
       },
+      backHref: '/profile',
     })
   })
 
