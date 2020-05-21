@@ -22,7 +22,7 @@ module.exports = function (App) {
 
   App.express.get('/finish', checkUser, (req, res) => {
     if (req.user.session_phase === 'OUTRO') {
-      res.renderPage({ page: 'finish', backHref: '/endsession' })
+      res.renderPage({ page: 'finish', backHref: '/sessiondone' })
     } else {
       res.redirect('/map')
     }
@@ -366,7 +366,7 @@ module.exports = function (App) {
           room: room.name,
           users,
         },
-        heading: App.i18n.t('roomscore.heading', { room }),
+        heading: App.i18n.t('roomscore.heading', { room: room.name }),
       })
       return
     }
