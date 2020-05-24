@@ -226,6 +226,29 @@ module.exports = function (App) {
 
       const challenge = challenges.filter((c) => c.id === id)[0]
 
+      const solvedDb = await App.db.models.Solution.findAll({
+        where: { UserId: req.user.id },
+      })
+
+      let accessible = false
+
+      if (solvedDb.some((s) => s.cid === id)) {
+        accessible = true
+      }
+
+      if (App.config.editors.includes(req.user.name)) {
+        accessible = true
+      }
+
+      if (challenge.deps.some((d) => solvedDb.some((s) => s.cid === d))) {
+        accessible = true
+      }
+
+      if (!accessible) {
+        res.redirect('/map')
+        return
+      }
+
       const check =
         challenge.check ||
         function (raw) {
