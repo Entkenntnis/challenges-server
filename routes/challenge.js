@@ -240,7 +240,10 @@ module.exports = function (App) {
         accessible = true
       }
 
-      if (challenge.deps.some((d) => solvedDb.some((s) => s.cid === d))) {
+      if (
+        challenge.deps.some((d) => solvedDb.some((s) => s.cid === d)) ||
+        challenge.deps.length === 0
+      ) {
         accessible = true
       }
 
