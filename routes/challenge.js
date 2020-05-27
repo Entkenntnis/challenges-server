@@ -66,7 +66,7 @@ module.exports = function (App) {
     for (const user of expiredUsers) {
       user.session_phase = 'OUTRO'
       user.session_score = user.score
-      await user.save()
+      await user.save({ silent: true })
     }
   })
 
