@@ -263,7 +263,7 @@ module.exports = function (App) {
         ['score', 'DESC'],
         ['updatedAt', 'DESC'],
       ],
-      limit: App.config.topHackersLimit,
+      limit: App.config.accounts.topHackersLimit,
     })
     const users = processHighscore(dbUsers)
     res.renderPage({
