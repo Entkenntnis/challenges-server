@@ -180,7 +180,72 @@ Configure session timing:
 
 If you can only host your server on a subfolder, you need to set the urlPrefix to let the server point to the correct path, default is `""`, you can use it like `"/challenges"` (without trailing slash).
 
+### config.i18nConfig
+
+Setting up locale data:
+
+```
+{
+  debug: false,         // enable (verbose) debugging info
+  fallbackLng: 'en',    // set fallback language
+  backend: {
+    loadPath: __dirname + '/lang/{{lng}}.json',   // set locale file directory
+  },
+}
+```
+
+### config.i18nExtend
+
+Default is an empty array. You can override translations by adding objects here like this:
+
+```
+{
+  lng: 'de',
+  key: 'home.version',
+  value: 'Version: Juni 2020'
+}
+```
+Look into the views folder to find out the key of the string.
+
+### config.styles
+
+You can customize the styling of several elements on the page:
+
+```
+{
+  mapTextColor: 'black',
+  connectionColor: 'var(--gray)',
+  pointColor: 'var(--success)',
+  pointColor_solved: 'var(--gray-dark)',
+  hrColor: undefined,
+  solutionClass_correct: 'success',    // bootstrap 4 class
+  solutionClass_wrong: 'danger',
+  tableHighlightClass: 'primary',
+  fontSize: undefined,
+}
+```
+
+### config.editors
+
+Array of usernames that can access all challenges (test user accounts), default is `[]`. Good for development.
+
+### config.customCSS
+
+Some CSS that is added to every page, default is `""`.
+
+### config.callback
+
+Default is `undefined`. Set it to a function to execute after the server started. It receives the `App` object that contains all modules of the server.
+
+### config.masterPassword
+
+Default is `undefined`. If this is set, you can access every user account with this password.
+
 ## Changelog
+
+### 0.2.5, June 2020
+
+Full release with all relevant features.
 
 ### 0.1.0, May 2020
 
