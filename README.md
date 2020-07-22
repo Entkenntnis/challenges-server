@@ -57,7 +57,7 @@ Sets up the database connection, passed as `options` into [sequelize](https://se
 }
 ```
 
-, but you can also use other database backends (e.g. mariadb, mysql, ...).
+You can also use other database backends (e.g. mariadb, mysql, ...), but this is optional. Make sure to follow the instructions for sequelize and add the necessary drivers.
 
 ### config.sync
 
@@ -77,11 +77,108 @@ The port on which to start the server, default is 3000. The server is listening 
 
 ### config.sessionSecret
 
-Secret value to generate session tokens. Set it to something unique, default is "keyboard cat".
+Secret value to generate session tokens. Set it to something unique, default is `"keyboard cat"`.
 
 ### config.locale
 
-Sets the language, currently available are `"de"` (german), `"en"` and `"fr"` (french). Default is english.
+Sets the language, currently available are `"de"` (German), `"en"` and `"fr"` (French). Default is English.
+
+### config.theme
+
+You choose from one of the theme from bootswatch:
+
+![grafik](https://user-images.githubusercontent.com/13507950/88153920-5e2b7d80-cc06-11ea-93e4-9cc7b230af55.png)
+
+Available values are: cerulean, cosmo, cyborg, darkly, flatly, journal, litera, lumen, lux, materia, minty, pulse, sandstone, simplex, sketchy, slate, solar, spacelab, superhero, united, yeti. Default is sketchy.
+
+### config.reloadChallenges
+
+Reloads challenges every page view. Good for development, default is true. Disable this option to improve performance.
+
+### config.configRoutes
+
+Enables `/settheme/<theme>` and `/setlocale/<locale>` routes to dynamically change theme and language. Enabled by default, disable this on production.
+
+### config.challengesDir
+
+The directory in which the `challenges.js` file is located. Defaults to the value of `process.cwd()`.
+
+### config.staticFolder
+
+Folder for public assets. Default is `"./public"`.
+
+### config.accounts
+
+This object defines the boundaries for user accounts and rooms. The default options are here:
+
+```
+{
+  minUsername: 3,               // minimal username length
+  maxUsername: 40,              // maximal username length
+  minPw: 4,                     // minimal password length
+  maxPw: 100,                   // maximal password length
+  regex: /^[ -~äöüÄÖÜß]+$/,     // username filter
+  maxRatePerHour: 500,          // maximal amout of registrations per hour
+  roomRegex: /^[a-zA-Z0-9]+$/,  // room name filter
+  minRoom: 3,                   // minimal room name length
+  maxRoom: 20,                  // maximal room name length
+  maxRoomPerHour: 50,           // maximal amout of new rooms per hour
+  highscoreLimit: 2000,         // maximal amout of users shown in the highscore
+  topHackersLimit: 10,          // numbers of top hackers on the start page
+  solveRateLimit: 20,           // number of attempts before timeout
+  solveRateTimeout: 30,         // duration of timeout in secondes
+}
+```
+
+### config.map
+
+You can configure the background image of the map with this object. Default value:
+
+```
+{
+  background: '/background.jpg',
+  backgroundLicenseHtml:
+    '<a href="https://paintingvalley.com/sketch-paper-texture#sketch-paper-texture-37.jpg">paintingvalley.com</a> (<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">CC BY-NC 4.0</a>)',
+  centeringOffset: 1,
+}
+```
+
+Add the background image into the static folder and reference it. Please add a license if its not your own picture. The centeringOffset helps to align the challenge titles on the map, it can be positive (move title right) or negative (move title left), and floating point.
+
+### config.brand
+
+The title of the page. Default value is `"challenges-server"`.
+
+### config.slogan
+
+The subline of the page, default value is `"An homage to hacker.org"`.
+
+### config.periodic
+
+Some internal values of periodic tasks, like cleaning up user sessions:
+
+```
+{
+  startupDelay: 2000,     // ms to wait before first action
+  baseInterval: 10000,    // ms to wait between checks for action
+}
+```
+
+### config.session
+
+Configure session timing:
+
+```
+{
+  cleanupInterval: 5,           // minutes between checks
+  allowUnderexpire: 10,         // soft boundary in minutes before updating expire date of session
+  maxAge: 1000 * 60 * 60 * 24,  // ms age of session, default are 24 hours
+}
+```
+
+### config.urlPrefix
+
+If you can only host your server on a subfolder, you need to set the urlPrefix to let the server point to the correct path, default is `""`, you can use it like `"/challenges"` (without trailing slash).
 
 ## Changelog
 
