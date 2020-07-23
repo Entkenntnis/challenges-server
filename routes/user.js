@@ -228,7 +228,7 @@ module.exports = function (App) {
         ['score', 'DESC'],
         ['updatedAt', 'DESC'],
       ],
-      limit: App.config.highscoreLimit,
+      limit: App.config.accounts.highscoreLimit,
     })
     let user = undefined
     if (req.session.userId) {
