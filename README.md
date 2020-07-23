@@ -243,6 +243,10 @@ Default is `undefined`. If this is set, you can access every user account with t
 
 ## Changelog
 
+### 0.2.6, Juli 2020
+
+Fix highscoreLimit.
+
 ### 0.2.5, June 2020
 
 Full release with all relevant features.
