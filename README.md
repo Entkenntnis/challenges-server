@@ -243,7 +243,7 @@ Default is `undefined`. If this is set, you can access every user account with t
 
 ## Changelog
 
-### 0.2.7
+### 0.2.8
 
 Expose challenges data on `App`.
 

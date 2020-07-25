@@ -6,7 +6,7 @@ module.exports = function (App) {
       delete require.cache[
         require.resolve(App.config.challengesDir + '/challenges.js')
       ]
-      challenges = require(App.config.challengesDir + '/challenges')
+      App.challenges.data = require(App.config.challengesDir + '/challenges')
     }
   }
 
