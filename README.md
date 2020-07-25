@@ -243,7 +243,11 @@ Default is `undefined`. If this is set, you can access every user account with t
 
 ## Changelog
 
-### 0.2.6, Juli 2020
+### 0.2.7
+
+Expose challenges data on `App`.
+
+### 0.2.6, July 2020
 
 Fix highscoreLimit.
 

@@ -11,6 +11,7 @@ module.exports = function (extend = (config) => config) {
   require('./server/withCsrf')(App)
   require('./server/withMoment')(App)
   require('./server/withPeriodic')(App)
+  require('./server/withChallenges')(App)
 
   require('./server/dbModel')(App)
   require('./server/expressHeaders')(App)

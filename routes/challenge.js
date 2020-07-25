@@ -2,9 +2,6 @@ const Op = require('sequelize').Op
 const bcrypt = require('bcryptjs')
 
 module.exports = function (App) {
-  // REMARK: allow hot reloading
-  let challenges = require(App.config.challengesDir + '/challenges')
-
   async function checkUser(req, res, next) {
     if (req.session.userId) {
       const user = await App.db.models.User.findOne({
@@ -88,7 +85,7 @@ module.exports = function (App) {
   }
 
   App.express.get('/map', checkUser, checkSession, async (req, res) => {
-    reloadChallenges()
+    App.challenges.reload()
 
     const solvedDb = await App.db.models.Solution.findAll({
       where: { UserId: req.user.id },
@@ -97,7 +94,7 @@ module.exports = function (App) {
     const solved = solvedDb.map((s) => s.cid)
 
     if (App.config.editors.includes(req.user.name)) {
-      challenges.map((c) => solved.push(c.id))
+      App.challenges.data.map((c) => solved.push(c.id))
     }
 
     const window = require('svgdom')
@@ -108,7 +105,7 @@ module.exports = function (App) {
 
     const points = []
 
-    challenges.map((challenge) => {
+    App.challenges.data.map((challenge) => {
       const isSolved = solved.includes(challenge.id)
       const point = {
         id: challenge.id,
@@ -123,7 +120,7 @@ module.exports = function (App) {
       if (visible) {
         points.push(point)
         challenge.deps.forEach((dep) => {
-          const previous = challenges.filter((c) => c.id === dep)[0]
+          const previous = App.challenges.data.filter((c) => c.id === dep)[0]
           if (solved.includes(previous.id)) {
             canvas
               .line(
@@ -180,7 +177,7 @@ module.exports = function (App) {
       id &&
       req.user.id &&
       req.body.answer &&
-      challenges.some((c) => c.id === id)
+      App.challenges.data.some((c) => c.id === id)
     ) {
       const key = req.user.id + '-' + id
       req.session.rates = req.session.rates || {}
@@ -215,16 +212,16 @@ module.exports = function (App) {
     checkUser,
     checkSession,
     async (req, res) => {
-      reloadChallenges()
+      App.challenges.reload()
 
       const id = parseInt(req.params.id)
 
-      if (!challenges.some((c) => c.id === id)) {
+      if (!App.challenges.data.some((c) => c.id === id)) {
         res.redirect('/map')
         return
       }
 
-      const challenge = challenges.filter((c) => c.id === id)[0]
+      const challenge = App.challenges.data.filter((c) => c.id === id)[0]
 
       const solvedDb = await App.db.models.Solution.findAll({
         where: { UserId: req.user.id },
@@ -469,13 +466,4 @@ module.exports = function (App) {
     }
     res.redirect('/changepw')
   })
-
-  function reloadChallenges() {
-    if (App.config.reloadChallenges) {
-      delete require.cache[
-        require.resolve(App.config.challengesDir + '/challenges.js')
-      ]
-      challenges = require(App.config.challengesDir + '/challenges')
-    }
-  }
 }
