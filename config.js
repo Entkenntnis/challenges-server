@@ -39,6 +39,8 @@ module.exports = function () {
       backgroundLicenseHtml:
         '<a href="https://paintingvalley.com/sketch-paper-texture#sketch-paper-texture-37.jpg">paintingvalley.com</a> (<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">CC BY-NC 4.0</a>)',
       centeringOffset: 1,
+      width: '1600',
+      height: '1200',
     },
     brand: 'challenges-server',
     slogan: 'An homage to hacker.org',
@@ -68,6 +70,7 @@ module.exports = function () {
     ],
     styles: {
       mapTextColor: 'black',
+      mapTextWeight: 'normal',
       connectionColor: 'var(--gray)',
       pointColor: 'var(--success)',
       pointColor_solved: 'var(--gray-dark)',
@@ -81,6 +84,9 @@ module.exports = function () {
     customCSS: '',
     callback: undefined,
     masterPassword: undefined,
+    githubHref: 'https://github.com/Entkenntnis/challenges-server',
+    fullscreenMap: false,
+    statusBackgroundColor: '',
   }
 
   return config

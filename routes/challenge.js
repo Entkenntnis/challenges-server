@@ -151,8 +151,9 @@ module.exports = function (App) {
       })
       const text = link
         .plain(point.title)
-        .fill(App.config.styles.textColor)
+        .fill(App.config.styles.mapTextColor)
         .font('family', 'inherit')
+        .attr('font-weight', App.config.styles.mapTextWeight)
       text.center(
         point.pos.x + App.config.map.centeringOffset * point.title.length,
         point.pos.y - 23

@@ -140,10 +140,14 @@ You can configure the background image of the map with this object. Default valu
   backgroundLicenseHtml:
     '<a href="https://paintingvalley.com/sketch-paper-texture#sketch-paper-texture-37.jpg">paintingvalley.com</a> (<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">CC BY-NC 4.0</a>)',
   centeringOffset: 1,
+  width: '1600',
+  height: '1200'
 }
 ```
 
 Add the background image into the static folder and reference it. Please add a license if its not your own picture. The centeringOffset helps to align the challenge titles on the map, it can be positive (move title right) or negative (move title left), and floating point.
+
+You can also set the width and the height of the map.
 
 ### config.brand
 
@@ -214,6 +218,7 @@ You can customize the styling of several elements on the page:
 ```
 {
   mapTextColor: 'black',
+  mapTextWeight: 'normal',
   connectionColor: 'var(--gray)',
   pointColor: 'var(--success)',
   pointColor_solved: 'var(--gray-dark)',
@@ -241,7 +246,23 @@ Default is `undefined`. Set it to a function to execute after the server started
 
 Default is `undefined`. If this is set, you can access every user account with this password.
 
+### config.githubHref
+
+URL to GitHub (shown on start page), default is link to this repo.
+
+### config.fullscreenMap
+
+Shows the map fullscreen. Default is `false`
+
+### config.statusBackgroundColor
+
+If map is fullscreen, you can add background color to the status.
+
 ## Changelog
+
+### 0.3.0 August 2020
+
+github link config, Fullscreen Map, status with background color, config for map height and width, map font weight
 
 ### 0.2.8
 

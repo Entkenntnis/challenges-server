@@ -7,8 +7,8 @@
     background-image:url(<%- App.config.map.background %>);
   }
   .drawing {
-    width: 1600px;
-    height: 1200px;
+    width: <%= App.config.map.width %>px;
+    height: <%= App.config.map.height %>px;
     position: relative;
   }
   .license {
@@ -16,6 +16,23 @@
     right: 10px;
     bottom: 10px;
   }
+  <% if (App.config.fullscreenMap) { %>
+    .page-header {
+      display: none
+    }
+    .container hr {
+      display: none
+    }
+    .container .status {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      margin-top: 0;
+      padding-left: 3px;
+      padding-right: 3px;
+      background-color: <%=App.config.statusBackgroundColor%>;
+    }
+  <% } %>
 </style>
 
 <div class="drawing">
