@@ -19,7 +19,7 @@
 <% if (props.correct) { %>
   <p><a href="<%=prefix%>/map"><%= t('continue') %></a></p>
 <% } else { %>
-  <%- props.challenge.html.split('{{PREFIX}}').join(prefix) %>
+  <%- props.html %>
   <% if (!props.challenge.hidesubmit) { %>
     <form autocomplete="off" method="post" id="challenge_form">
       <input id="challenge_answer" type="text" name="answer" style="height:32px">

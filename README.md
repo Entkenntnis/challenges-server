@@ -30,6 +30,42 @@ to start the server.
 
 Look at the [create-challenges-server repo](https://github.com/Entkenntnis/create-challenges-server) for an extended introduction into creating your own set of challenges.
 
+## Challenges Definition
+
+Every challenge is an object with following properties:
+
+### id
+
+The unique (positive-integer) identifier for this challenge.
+
+### pos
+
+An object with x and y property, defines the position of the challenge.
+
+### title
+
+The title of the challenge
+
+### deps
+
+Array of ids of challenge. Is visible only when at least one of the deps is solved. Leave empty to make challenge always visible.
+
+### html
+
+The html content of the challenge
+
+### render
+
+Pass a function that will render the challenge (instead of html). The input is an object with the properties `App` and `req`.
+
+### solution
+
+A string value for the solution of the challenge. (case-insensitive, trimmed).
+
+### check
+
+Function that gets the answer and an object with `App` and `req`. Return an object with answer (the displayed solution value) and correct, a boolean that indicates whether the challenge is solved or not. Alternative: Just return a boolean. Replaces solution.
+
 ## Configuration
 
 The server exposes a lot of config options, which you can all override and customize:
@@ -258,7 +294,15 @@ Shows the map fullscreen. Default is `false`
 
 If map is fullscreen, you can add background color to the status.
 
+### config.prefixPlaceholder
+
+This string is replaced with the current url prefix, default is `{{PREFIX}}`
+
 ## Changelog
+
+### 0.3.1
+
+prefix Placeholder, render for challenges
 
 ### 0.3.0 August 2020
 

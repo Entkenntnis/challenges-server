@@ -87,6 +87,7 @@ module.exports = function () {
     githubHref: 'https://github.com/Entkenntnis/challenges-server',
     fullscreenMap: false,
     statusBackgroundColor: '',
+    prefixPlaceholder: '{{PREFIX}}',
   }
 
   return config

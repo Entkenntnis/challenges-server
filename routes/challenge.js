@@ -253,11 +253,12 @@ module.exports = function (App) {
       const check =
         challenge.check ||
         function (raw) {
-          const answer = raw.toLowerCase()
+          const answer = raw.toLowerCase().trim()
           return {
             answer,
             correct:
-              challenge.solution && answer === challenge.solution.toLowerCase(),
+              challenge.solution &&
+              answer === challenge.solution.toLowerCase().trim(),
           }
         }
 
@@ -313,10 +314,19 @@ module.exports = function (App) {
         where: { cid: id },
       })
 
+      let html = challenge.render
+        ? challenge.render({ App, req })
+        : challenge.html
+
+      if (App.config.prefixPlaceholder) {
+        html = html.split(App.config.prefixPlaceholder).join('')
+      }
+
       res.renderPage({
         page: 'challenge',
         props: {
           challenge,
+          html,
           correct,
           answer,
           solvedBy,
