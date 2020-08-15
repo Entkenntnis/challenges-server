@@ -88,6 +88,7 @@ module.exports = function () {
     fullscreenMap: false,
     statusBackgroundColor: '',
     prefixPlaceholder: '{{PREFIX}}',
+    scoreMode: 'time',
   }
 
   return config

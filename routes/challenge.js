@@ -287,22 +287,31 @@ module.exports = function (App) {
             where: { cid: id, UserId: req.user.id },
           })
           if (created) {
-            if (req.user.score > 0) {
-              // REMARK: add a small bonus for fast solving
-              const pausetime =
-                (new Date().getTime() - req.user.updatedAt.getTime()) /
-                (60 * 1000)
-              const tinterval = Math.floor(pausetime / 3)
-              req.user.score += Math.pow(0.5, tinterval) * 2
-            } else {
-              req.user.score += 2
-              // REMARK: start session on first solved challenge
-              if (req.user.session_phase === 'READY') {
-                req.user.session_phase = 'ACTIVE'
-                req.user.session_startTime = new Date()
-              }
+            // REMARK: start session on first solved challenge
+            if (req.user.score == 0 && req.user.session_phase === 'READY') {
+              req.user.session_phase = 'ACTIVE'
+              req.user.session_startTime = new Date()
             }
-            req.user.score += 10
+
+            // OK, add score
+            if (App.config.scoreMode == 'fixed') {
+              req.user.score += 12
+            } else if (App.config.scoreMode == 'time') {
+              if (req.user.score > 0) {
+                // REMARK: add a small bonus for fast solving
+                const pausetime =
+                  (new Date().getTime() - req.user.updatedAt.getTime()) /
+                  (60 * 1000)
+                const tinterval = Math.floor(pausetime / 3)
+                req.user.score += Math.pow(0.5, tinterval) * 2
+              } else {
+                req.user.score += 2
+              }
+              req.user.score += 10
+            } else if (App.config.scoreMode == 'distance') {
+              req.user.score += 10
+              req.user.score += App.challenges.distance[id]
+            }
             await req.user.save()
           }
         } catch (e) {

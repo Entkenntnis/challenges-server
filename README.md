@@ -298,7 +298,15 @@ If map is fullscreen, you can add background color to the status.
 
 This string is replaced with the current url prefix, default is `{{PREFIX}}`
 
+### config.scoreMode
+
+'fixed' -> 12 points for every challenge, 'time' -> 10 points for every challenge, and up to 2 points time bonus (time bonus halves every 3 minutes), 'distance' -> 10 points for every challenge, 1 additional point for (shortest) distance to start
+
 ## Changelog
+
+### 0.3.2
+
+Different score modes
 
 ### 0.3.1
 
