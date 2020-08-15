@@ -66,6 +66,10 @@ A string value for the solution of the challenge. (case-insensitive, trimmed).
 
 Function that gets the answer and an object with `App` and `req`. Return an object with answer (the displayed solution value) and correct, a boolean that indicates whether the challenge is solved or not. Alternative: Just return a boolean. Replaces solution.
 
+### hidesubmit
+
+Don't show default submit form.
+
 ## Configuration
 
 The server exposes a lot of config options, which you can all override and customize:
@@ -303,6 +307,10 @@ This string is replaced with the current url prefix, default is `{{PREFIX}}`
 'fixed' -> 12 points for every challenge, 'time' -> 10 points for every challenge, and up to 2 points time bonus (time bonus halves every 3 minutes), 'distance' -> 10 points for every challenge, 1 additional point for (shortest) distance to start
 
 ## Changelog
+
+### 0.3.3
+
+Fix bug in distance calculation
 
 ### 0.3.2
 

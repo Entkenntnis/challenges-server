@@ -32,7 +32,7 @@ module.exports = function (App) {
           }
         })
         if (pre.length > 0) {
-          result[chal.id] = Math.max(...pre) + 1
+          result[chal.id] = Math.min(...pre) + 1
           return false
         }
         return true
