@@ -3,6 +3,9 @@ module.exports = function (App) {
     info: (msg) => {
       console.info(App.config.logprefix + msg)
     },
+    warn: (msg) => {
+      console.warn(App.config.logprefix + msg)
+    },
   }
 }
 

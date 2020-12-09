@@ -74,4 +74,14 @@ module.exports = function (App) {
     onDelete: 'cascade',
   })
   Solution.belongsTo(User)
+
+  App.db.define('KVPair', {
+    key: {
+      type: DataTypes.STRING(255),
+      primaryKey: true,
+    },
+    value: {
+      type: DataTypes.TEXT,
+    },
+  })
 }

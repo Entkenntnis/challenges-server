@@ -103,6 +103,7 @@
     "username": "Username:",
     "score": "Score:",
     "solved": "Challenges solved:",
+    "registered": "Joined:",
     "lastActive": "Last active:",
     "room": "Room:",
     "sessionReady": "Session is ready. Solve a challenge to start it.",

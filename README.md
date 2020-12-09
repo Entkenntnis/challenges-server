@@ -308,6 +308,14 @@ This string is replaced with the current url prefix, default is `{{PREFIX}}`
 
 ## Changelog
 
+### 0.4.1
+
+Show registered date in profile.
+
+### 0.4.0
+
+Adds a internal key-value store for challenges. API is similiar to HTML5 localStorage, accessible with `App.storage`.
+
 ### 0.3.3
 
 Fix bug in distance calculation
