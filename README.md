@@ -308,6 +308,10 @@ This string is replaced with the current url prefix, default is `{{PREFIX}}`
 
 ## Changelog
 
+### 0.4.2, December 2020
+
+Make database access more robust (catch errors, use transactions).
+
 ### 0.4.1
 
 Show registered date in profile.
