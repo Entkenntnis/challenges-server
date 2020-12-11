@@ -308,11 +308,15 @@ This string is replaced with the current url prefix, default is `{{PREFIX}}`
 
 ## Changelog
 
-### 0.4.2, December 2020
+### 0.4.3
+
+Fix regression: Show new score on successful answer
+
+### 0.4.2
 
 Make database access more robust (catch errors, use transactions).
 
-### 0.4.1
+### 0.4.1, December 2020
 
 Show registered date in profile.
 
