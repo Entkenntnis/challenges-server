@@ -1,4 +1,4 @@
-const Op = require('sequelize').Op
+const { Op, Transaction } = require('sequelize')
 const bcrypt = require('bcryptjs')
 
 module.exports = function (App) {
@@ -283,39 +283,61 @@ module.exports = function (App) {
 
       if (correct && !App.config.editors.includes(req.user.name)) {
         try {
-          const [, created] = await App.db.models.Solution.findOrCreate({
-            where: { cid: id, UserId: req.user.id },
-          })
-          if (created) {
-            // REMARK: start session on first solved challenge
-            if (req.user.score == 0 && req.user.session_phase === 'READY') {
-              req.user.session_phase = 'ACTIVE'
-              req.user.session_startTime = new Date()
-            }
+          // do updates in a transaction
+          await App.db.transaction(
+            {
+              isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE,
+            },
+            async (t) => {
+              const [, created] = await App.db.models.Solution.findOrCreate({
+                where: { cid: id, UserId: req.user.id },
+                transaction: t,
+              })
 
-            // OK, add score
-            if (App.config.scoreMode == 'fixed') {
-              req.user.score += 12
-            } else if (App.config.scoreMode == 'time') {
-              if (req.user.score > 0) {
-                // REMARK: add a small bonus for fast solving
-                const pausetime =
-                  (new Date().getTime() - req.user.updatedAt.getTime()) /
-                  (60 * 1000)
-                const tinterval = Math.floor(pausetime / 3)
-                req.user.score += Math.pow(0.5, tinterval) * 2
-              } else {
-                req.user.score += 2
+              if (created) {
+                const user = await App.db.models.User.findOne({
+                  where: { id: req.user.id },
+                  transaction: t,
+                })
+
+                // REMARK: start session on first solved challenge
+                if (user.score == 0 && user.session_phase === 'READY') {
+                  user.session_phase = 'ACTIVE'
+                  user.session_startTime = new Date()
+                }
+
+                // OK, add score
+                if (App.config.scoreMode == 'fixed') {
+                  user.score += 12
+                } else if (App.config.scoreMode == 'time') {
+                  if (user.score > 0) {
+                    // REMARK: add a small bonus for fast solving
+                    const pausetime =
+                      (new Date().getTime() - req.user.updatedAt.getTime()) /
+                      (60 * 1000)
+                    const tinterval = Math.floor(pausetime / 3)
+                    user.score += Math.pow(0.5, tinterval) * 2
+                  } else {
+                    user.score += 2
+                  }
+                  user.score += 10
+                } else if (App.config.scoreMode == 'distance') {
+                  user.score += 10
+                  user.score += App.challenges.distance[id]
+                }
+                await user.save({ transaction: t })
+                // Test code
+                // console.log('waiting 20 seconds before commit')
+                // await new Promise((res) => setTimeout(res, 20000))
               }
-              req.user.score += 10
-            } else if (App.config.scoreMode == 'distance') {
-              req.user.score += 10
-              req.user.score += App.challenges.distance[id]
             }
-            await req.user.save()
-          }
+          )
+          //console.log('transaction successful')
         } catch (e) {
+          console.log('adding new solved challenge failed')
           console.log(e)
+          answer = 'Error: ' + e.toString() + ' - Please try again.'
+          correct = 'none'
         }
       }
 

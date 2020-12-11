@@ -9,14 +9,18 @@
 <div style="height:16px"></div>
 
 <% if (props.answer) { %>
-  <p class="text-<%= props.correct ? App.config.styles.solutionClass_correct : App.config.styles.solutionClass_wrong %>">
-    <strong>'<%= props.answer %>' <%= props.correct ? t('correct') : t('wrong') %></strong>
+  <p class="text-<%= props.correct === true ? App.config.styles.solutionClass_correct : App.config.styles.solutionClass_wrong %>">
+    <% if (props.correct === 'none') { %>
+      <strong><%= props.answer %></strong>
+    <% } else { %>
+      <strong>'<%= props.answer %>' <%= props.correct ? t('correct') : t('wrong') %></strong>
+    <% } %>
   </p>
 <% } %>
 
 <div style="height:16px"></div>
 
-<% if (props.correct) { %>
+<% if (props.correct === true) { %>
   <p><a href="<%=prefix%>/map"><%= t('continue') %></a></p>
 <% } else { %>
   <%- props.html %>
