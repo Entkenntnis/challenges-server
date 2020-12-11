@@ -9,59 +9,88 @@ module.exports = function (App) {
 
     get(sid, cb) {
       ;(async () => {
-        const session = await App.db.models.Session.findOne({
-          where: { sid },
-        })
-        return session ? JSON.parse(session.data) : null
-      })().then((session) => cb(null, session))
+        let result = null
+        try {
+          const session = await App.db.models.Session.findOne({
+            where: { sid },
+          })
+          if (session) result = JSON.parse(session.data)
+        } catch (e) {
+          cb(e)
+          return
+        }
+        cb(null, result)
+      })()
     }
 
     set(sid, session, cb) {
       ;(async () => {
-        const data = JSON.stringify(session)
-        const expires = session.cookie.expires
-        // REMARK: findCreateFind is assumed to be a little bit more robust
-        const [sess] = await App.db.models.Session.findCreateFind({
-          where: { sid },
-          defaults: { data, expires },
-        })
-        sess.data = data
-        sess.expires = expires
-        await sess.save()
-      })().then(() => cb(null))
+        try {
+          const data = JSON.stringify(session)
+          const expires = session.cookie.expires
+          // REMARK: findCreateFind is assumed to be a little bit more robust
+          const [sess] = await App.db.models.Session.findCreateFind({
+            where: { sid },
+            defaults: { data, expires },
+          })
+          sess.data = data
+          sess.expires = expires
+          await sess.save()
+        } catch (e) {
+          cb(e)
+          return
+        }
+        cb(null)
+      })()
     }
 
     destroy(sid, cb) {
       ;(async () => {
-        await App.db.models.Session.destroy({
-          where: { sid },
-        })
-      })().then(() => cb(null))
+        try {
+          await App.db.models.Session.destroy({
+            where: { sid },
+          })
+        } catch (e) {
+          cb(e)
+          return
+        }
+        cb(null)
+      })()
     }
 
     touch(sid, session, cb) {
       ;(async () => {
-        const sess = await App.db.models.Session.findOne({
-          where: { sid },
-        })
-        // PERF: only touch session if expires is off by more than 10 minutes
-        if (sess) {
-          const sessionExpire = App.moment(sess.expires)
-          const newExpire = App.moment(session.cookie.expires)
-          const staleMinutes = newExpire.diff(sessionExpire, 'minutes')
-          if (staleMinutes >= App.config.session.allowUnderexpire) {
-            sess.expires = session.cookie.expires
-            await sess.save()
+        try {
+          const sess = await App.db.models.Session.findOne({
+            where: { sid },
+          })
+          // PERF: only touch session if expires is off by more than 10 minutes
+          if (sess) {
+            const sessionExpire = App.moment(sess.expires)
+            const newExpire = App.moment(session.cookie.expires)
+            const staleMinutes = newExpire.diff(sessionExpire, 'minutes')
+            if (staleMinutes >= App.config.session.allowUnderexpire) {
+              sess.expires = session.cookie.expires
+              await sess.save()
+            }
           }
+        } catch (e) {
+          cb(e)
+          return
         }
-      })().then(() => cb(null))
+        cb(null)
+      })()
     }
   }
 
   App.periodic.add(App.config.session.cleanupInterval, async () => {
-    await App.db.models.Session.destroy({
-      where: { expires: { [Op.lt]: new Date() } },
-    })
+    try {
+      await App.db.models.Session.destroy({
+        where: { expires: { [Op.lt]: new Date() } },
+      })
+    } catch (e) {
+      // not dramatic if this throws
+    }
   })
 
   App.express.use(
