@@ -312,7 +312,7 @@ A hook that is called if the user submits any challenge. Arguments are: App, id 
 
 ```js
 config.onSubmit = (App, id, correct) => {
-  console.log('Submit chalenge:', id, correct)
+  console.log('Submit challenge:', id, correct)
 }
 ```
 
