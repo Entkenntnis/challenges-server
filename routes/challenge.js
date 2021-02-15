@@ -277,7 +277,12 @@ module.exports = function (App) {
           }
           // call on submit hook
           if (App.config.onSubmit) {
-            await App.config.onSubmit(App, id, correct)
+            await App.config.onSubmit({
+              App,
+              id,
+              correct,
+              solved: solvedDb.map((s) => s.cid),
+            })
           }
         }
       } catch (e) {

@@ -308,15 +308,19 @@ This string is replaced with the current url prefix, default is `{{PREFIX}}`
 
 ###  config.onSubmit
 
-A hook that is called if the user submits any challenge. Arguments are: App, id and correct. The function can be sync or async. Example:
+A hook that is called if the user submits any challenge. Object argument with properties: App, id, correct and solved (list of ids that the user has solved). The function can be sync or async. Example:
 
 ```js
-config.onSubmit = (App, id, correct) => {
+config.onSubmit = ({App, id, correct, solved }) => {
   console.log('Submit challenge:', id, correct)
 }
 ```
 
 ## Changelog
+
+### 0.5.2
+
+Add solved challenges to onSubmit hook.
 
 ### 0.5.1
 
