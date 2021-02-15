@@ -386,8 +386,9 @@ module.exports = function (App) {
         room = roomRow.name
       }
     }
+    const cids = App.challenges.data.map((c) => c.id)
     const solved = await App.db.models.Solution.count({
-      where: { UserId: req.user.id },
+      where: { UserId: req.user.id, cid: cids },
     })
     res.renderPage({
       page: 'profile',

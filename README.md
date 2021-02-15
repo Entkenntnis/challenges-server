@@ -318,6 +318,10 @@ config.onSubmit = (App, id, correct) => {
 
 ## Changelog
 
+### 0.5.1
+
+Only count solved challenges that exist.
+
 ### 0.5.0, February 2021
 
 Add onSubmit hook.
