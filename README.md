@@ -90,7 +90,7 @@ Here you can find the full list of options.
 
 Sets up the database connection, passed as `options` into [sequelize](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-constructor-constructor). Defaults to sqlite and the value
 
-```
+```js
 {
   dialect: 'sqlite',
   storage: './.data/db.sqlite',
@@ -151,7 +151,7 @@ Folder for public assets. Default is `"./public"`.
 
 This object defines the boundaries for user accounts and rooms. The default options are here:
 
-```
+```js
 {
   minUsername: 3,               // minimal username length
   maxUsername: 40,              // maximal username length
@@ -174,7 +174,7 @@ This object defines the boundaries for user accounts and rooms. The default opti
 
 You can configure the background image of the map with this object. Default value:
 
-```
+```js
 {
   background: '/background.jpg',
   backgroundLicenseHtml:
@@ -201,7 +201,7 @@ The subline of the page, default value is `"An homage to hacker.org"`.
 
 Some internal values of periodic tasks, like cleaning up user sessions:
 
-```
+```js
 {
   startupDelay: 2000,     // ms to wait before first action
   baseInterval: 10000,    // ms to wait between checks for action
@@ -212,7 +212,7 @@ Some internal values of periodic tasks, like cleaning up user sessions:
 
 Configure session timing:
 
-```
+```js
 {
   cleanupInterval: 5,           // minutes between checks
   allowUnderexpire: 10,         // soft boundary in minutes before updating expire date of session
@@ -228,7 +228,7 @@ If you can only host your server on a subfolder, you need to set the urlPrefix t
 
 Setting up locale data:
 
-```
+```js
 {
   debug: false,         // enable (verbose) debugging info
   fallbackLng: 'en',    // set fallback language
@@ -242,7 +242,7 @@ Setting up locale data:
 
 Default is an empty array. You can override translations by adding objects here like this:
 
-```
+```js
 {
   lng: 'de',
   key: 'home.version',
@@ -255,7 +255,7 @@ Look into the views folder to find out the key of the string.
 
 You can customize the styling of several elements on the page:
 
-```
+```js
 {
   mapTextColor: 'black',
   mapTextWeight: 'normal',
@@ -310,7 +310,7 @@ This string is replaced with the current url prefix, default is `{{PREFIX}}`
 
 A hook that is called if the user submits any challenge. Arguments are: App, id and correct. The function can be sync or async. Example:
 
-```
+```js
 config.onSubmit = (App, id, correct) => {
   console.log('Submit chalenge:', id, correct)
 }
