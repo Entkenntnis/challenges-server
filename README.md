@@ -306,7 +306,15 @@ This string is replaced with the current url prefix, default is `{{PREFIX}}`
 
 'fixed' -> 12 points for every challenge, 'time' -> 10 points for every challenge, and up to 2 points time bonus (time bonus halves every 3 minutes), 'distance' -> 10 points for every challenge, 1 additional point for (shortest) distance to start
 
+###  config.onSubmit
+
+A hook that is called if the user submits any challenge. Arguments are: App, id and correct. The function can be sync or async.
+
 ## Changelog
+
+### 0.5.0, February 2021
+
+Add onSubmit hook.
 
 ### 0.4.3
 

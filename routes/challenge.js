@@ -275,6 +275,10 @@ module.exports = function (App) {
             answer = req.body.answer
             correct = result
           }
+          // call on submit hook
+          if (App.config.onSubmit) {
+            await App.config.onSubmit(App, id, correct)
+          }
         }
       } catch (e) {
         console.log(e)
@@ -326,9 +330,9 @@ module.exports = function (App) {
                   user.score += App.challenges.distance[id]
                 }
                 await user.save({ transaction: t })
-                
+
                 req.user.score = user.score
-                
+
                 // Test code
                 // console.log('waiting 20 seconds before commit')
                 // await new Promise((res) => setTimeout(res, 20000))
