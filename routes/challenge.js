@@ -216,6 +216,7 @@ module.exports = function (App) {
       App.challenges.reload()
 
       const id = parseInt(req.params.id)
+      const isEditor = App.config.editors.includes(req.user.name)
 
       if (!App.challenges.data.some((c) => c.id === id)) {
         res.redirect('/map')
@@ -234,7 +235,7 @@ module.exports = function (App) {
         accessible = true
       }
 
-      if (App.config.editors.includes(req.user.name)) {
+      if (isEditor) {
         accessible = true
       }
 
@@ -282,6 +283,7 @@ module.exports = function (App) {
               id,
               correct,
               solved: solvedDb.map((s) => s.cid),
+              isEditor,
             })
           }
         }

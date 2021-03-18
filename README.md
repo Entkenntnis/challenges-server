@@ -311,12 +311,16 @@ This string is replaced with the current url prefix, default is `{{PREFIX}}`
 A hook that is called if the user submits any challenge. Object argument with properties: App, id, correct and solved (list of ids that the user has solved). The function can be sync or async. Example:
 
 ```js
-config.onSubmit = ({App, id, correct, solved }) => {
+config.onSubmit = ({App, id, correct, solved, isEditor }) => {
   console.log('Submit challenge:', id, correct)
 }
 ```
 
 ## Changelog
+
+### 0.5.3,
+
+Add isEditor to onSubmit hook.
 
 ### 0.5.2
 
