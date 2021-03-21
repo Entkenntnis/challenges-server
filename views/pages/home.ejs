@@ -20,8 +20,6 @@
   <%- t('invite_', {link: `<a href="${prefix}/register">${ t('registerLink') }</a>`}) %>
 </p>
 
-<p>[<a href="<%=prefix%>/join"><%= t('joinRoom') %></a>]</p>
-
 <hr class="my-5"/>
 
 <h2><%= t('top10') %></h2>
@@ -35,6 +33,8 @@
 <h2><%= t('rooms') %></h2>
 
 <p><%- t('inviteOrga_', {link: `<a href="${prefix}/create">${t('createRoom')}</a>`}) %></p>
+
+<p>[<a href="<%=prefix%>/join"><%= t('joinRoom') %></a>]</p>
 
 <hr class="my-5"/>
 

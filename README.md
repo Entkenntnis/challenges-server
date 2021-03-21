@@ -316,7 +316,15 @@ config.onSubmit = ({App, id, correct, solved, isEditor }) => {
 }
 ```
 
+### config.hintPage
+
+An object with properties `url` and `label`. Adds an external link to the status bar with the given label.
+
 ## Changelog
+
+### 0.5.4,
+
+Move Join Room to Rooms section, add config.hintPage
 
 ### 0.5.3,
 

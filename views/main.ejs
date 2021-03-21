@@ -51,7 +51,7 @@
     <div class="container">
     
       <% if (user) { %>
-        <%- include('./statusBar', {user, t, prefix: App.config.urlPrefix}) %>
+        <%- include('./statusBar', {user, t, prefix: App.config.urlPrefix, App}) %>
       <% } %>
       
       <div class="page-header">
