@@ -8,7 +8,11 @@ module.exports = function (App) {
   if (App.config.staticFolder)
     App.express.use(gzipStatic(App.config.staticFolder))
 
-  App.express.use(gzipStatic(require('path').join(__dirname, '../public')))
+  App.express.use(
+    gzipStatic(require('path').join(__dirname, '../public'), {
+      serveStatic: { maxAge: '1d' },
+    })
+  )
 
   App.express.use(require('body-parser').urlencoded({ extended: true }))
 

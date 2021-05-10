@@ -12,7 +12,7 @@ A great way to learn and master a skill is to solve challenges. This package aim
 Create a new project (e.g. with `npm init`) and install the package:
 
 ```
-npm install @entkenntnis/challenges-server
+npm install @entkenntnis/challenges-server sqlite3
 ```
 
 Add a main script into your project and write
@@ -321,6 +321,10 @@ config.onSubmit = ({App, id, correct, solved, isEditor }) => {
 An object with properties `url` and `label`. Adds an external link to the status bar with the given label.
 
 ## Changelog
+
+### 0.6.0
+
+Remove sqlite3 as dependency. Add maxAge for static assets.
 
 ### 0.5.4,
 
