@@ -89,6 +89,7 @@ module.exports = function () {
     statusBackgroundColor: '',
     prefixPlaceholder: '{{PREFIX}}',
     scoreMode: 'time',
+    assetsMaxAge: '2d',
   }
 
   return config

@@ -10,7 +10,7 @@ module.exports = function (App) {
 
   App.express.use(
     gzipStatic(require('path').join(__dirname, '../public'), {
-      serveStatic: { maxAge: '1d' },
+      maxAge: App.config.assetsMaxAge,
     })
   )
 

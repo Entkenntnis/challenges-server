@@ -320,11 +320,20 @@ config.onSubmit = ({App, id, correct, solved, isEditor }) => {
 
 An object with properties `url` and `label`. Adds an external link to the status bar with the given label.
 
+### config.assetsMaxAge
+
+Set maxAge for assets of the server (default background image, css). Default value is `2d`.
+
+
 ## Changelog
+
+### 0.6.1
+
+Add maxAge for static assets.
 
 ### 0.6.0
 
-Remove sqlite3 as dependency. Add maxAge for static assets.
+Remove sqlite3 as dependency.
 
 ### 0.5.4,
 
