@@ -1,9 +1,15 @@
 
 <p><%= t('username') %> <%= user.name %></p>
 <p><%= t('score') %> <%= user.score %></p>
+<% if (props.rank) { %>
+  <p>Platz: <%= props.rank %></p>
+<% } %>
 <p><%= t('solved') %> <%= props.solved%></p>
 <p><%= t('registered') %> <%= App.moment(user.createdAt).fromNow() %> (<%= App.moment(user.createdAt).format("LLLL") %>)</p>
 <p><%= t('lastActive') %> <%= App.moment(user.updatedAt).fromNow() %> (<%= App.moment(user.updatedAt).format("LLLL") %>)</p>
+<% if (props.lastChal) { %>
+  <p>Zuletzt gelöst: <%= props.lastChal %></p>
+<% } %>
 
 <% if (props.room) { %>
   <hr />

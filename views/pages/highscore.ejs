@@ -3,4 +3,11 @@
   <p class="my-4">[<a href="<%=prefix%>/roomscore"><%= t('showRoomScore') %></a>]</p>
 <% } %>
 
+<p class="mt-4 mb-5 text-right">Sortieren nach:
+<select onchange="window.location.href = this.value; return false;">
+  <option value="/highscore">Punktzahl</option>
+  <option value="/highscore?sort=month" <%= props.sort == 'month' ? 'selected' : ''%>>Punktzahl (dieser Monat)</option>
+  <option value="/highscore?sort=new" <%= props.sort == 'new' ? 'selected' : ''%>>zuletzt aktiv</option>
+</select></p>
+
 <%- include('../highscoreTable', {users:props.users, t, user}) %>

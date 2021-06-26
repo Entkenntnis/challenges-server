@@ -397,11 +397,36 @@ module.exports = function (App) {
     const solved = await App.db.models.Solution.count({
       where: { UserId: req.user.id, cid: cids },
     })
+    const lastSol = await App.db.models.Solution.findAll({
+      where: { UserId: req.user.id, cid: cids },
+      order: [['updatedAt', 'DESC']],
+      limit: 1,
+    })
+    const lastChal =
+      lastSol &&
+      lastSol[0] &&
+      App.challenges.data.filter((c) => c.id == lastSol[0].cid)[0].title
+    const betterThanMe = await App.db.models.User.count({
+      where: {
+        [Op.or]: [
+          { score: { [Op.gt]: req.user.score } },
+          {
+            [Op.and]: [
+              { score: { [Op.eq]: req.user.score } },
+              { updatedAt: { [Op.gt]: req.user.updatedAt } },
+            ],
+          },
+        ],
+      },
+    })
+    const rank = req.user.score == 0 ? 0 : betterThanMe + 1
     res.renderPage({
       page: 'profile',
       props: {
         room,
         solved,
+        lastChal,
+        rank,
       },
     })
   })

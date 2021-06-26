@@ -221,9 +221,19 @@ module.exports = function (App) {
   })
 
   App.express.get('/highscore', async (req, res) => {
+    const sort = req.query.sort
+
     const dbUsers = await App.db.models.User.findAll({
       attributes: ['name', 'score', 'updatedAt'],
-      where: { score: { [Op.gt]: 0 } },
+      where:
+        sort == 'month'
+          ? {
+              score: { [Op.gt]: 0 },
+              updatedAt: {
+                [Op.gte]: App.moment().subtract(29, 'days').toDate(),
+              },
+            }
+          : { score: { [Op.gt]: 0 } },
       order: [
         ['score', 'DESC'],
         ['updatedAt', 'DESC'],
@@ -236,11 +246,13 @@ module.exports = function (App) {
         where: { id: req.session.userId },
       })
     }
-    const users = processHighscore(dbUsers)
+    const users = processHighscore(dbUsers, sort)
+
     res.renderPage({
       page: 'highscore',
       props: {
         users,
+        sort,
       },
       user, // REMARK provide our own user because it's not provided by middleware
     })
@@ -257,7 +269,7 @@ module.exports = function (App) {
       attributes: ['name', 'score', 'updatedAt'],
       where: {
         score: { [Op.gt]: 0 },
-        updatedAt: { [Op.gte]: App.moment().subtract(1, 'months').toDate() },
+        updatedAt: { [Op.gte]: App.moment().subtract(29, 'days').toDate() },
       },
       order: [
         ['score', 'DESC'],
@@ -281,12 +293,13 @@ module.exports = function (App) {
     res.redirect('/')
   })
 
-  function processHighscore(dbUsers) {
+  function processHighscore(dbUsers, sort) {
     const users = dbUsers.map((user) => {
       return {
         name: user.name,
         score: Math.floor(user.score),
         lastActive: App.moment(user.updatedAt).fromNow(),
+        timestamp: App.moment(user.updatedAt).unix(),
       }
     })
     users.forEach((user, i) => {
@@ -296,6 +309,12 @@ module.exports = function (App) {
         user.rank = i + 1
       }
     })
+
+    if (sort == 'new') {
+      users.sort((a, b) => {
+        return b.timestamp - a.timestamp
+      })
+    }
     return users
   }
 }
