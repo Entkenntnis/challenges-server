@@ -26,12 +26,15 @@ module.exports = function (App) {
       const preTodoLength = todo.length
       todo = todo.filter((chal) => {
         const pre = []
+        let ready = true
         chal.deps.forEach((dep) => {
           if (result[dep] !== undefined) {
             pre.push(result[dep])
+          } else {
+            ready = false
           }
         })
-        if (pre.length > 0) {
+        if (pre.length > 0 && ready) {
           result[chal.id] = Math.min(...pre) + 1
           return false
         }

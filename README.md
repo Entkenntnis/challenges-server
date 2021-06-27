@@ -327,6 +327,10 @@ Set maxAge for assets of the server (default background image, css). Default val
 
 ## Changelog
 
+### 0.7.1
+
+Fix bug in distance calculation
+
 ### 0.7.0, July 2021
 
 Add sort/filter to highscore, add rank to profile, add last solved challenge to profile
