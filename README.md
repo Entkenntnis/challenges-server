@@ -1,6 +1,12 @@
 # challenges-server
 The engine behind https://hack.arrrg.de
 
+## Important!!!
+
+This package is specifically tailored for [Hack The Web](https://hack.arrrg.de) and is currently not maintained for general purpose, e.g. some features are not configurable, some translations are missing, etc....
+
+Use this package at your own risk.
+
 ## Introduction
 
 A great way to learn and master a skill is to solve challenges. This package aims at providing a foundation on which you can create a set of challenges and invite people to solve them.
