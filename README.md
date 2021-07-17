@@ -1,7 +1,7 @@
 # challenges-server
 The engine behind https://hack.arrrg.de
 
-## Important!!!
+## Important
 
 This package is specifically tailored for [Hack The Web](https://hack.arrrg.de) and is currently not maintained for general purpose, e.g. some features are not configurable, some translations are missing, etc....
 
