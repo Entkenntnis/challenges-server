@@ -31,6 +31,7 @@
           required
           maxlength="<%=App.config.accounts.maxRoom%>"
           pattern="<%=App.config.accounts.roomRegex.source%>"
+          autofocus
         >
         <small><%= t('keyNote', {minRoom: App.config.accounts.minRoom, maxRoom: App.config.accounts.maxRoom}) %></small>
       </div>

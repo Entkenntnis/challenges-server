@@ -17,6 +17,7 @@
           required
           maxlength="<%=App.config.accounts.maxUsername%>"
           pattern="<%=App.config.accounts.regex.source%>"
+          autofocus
         >
         <small><%= t('usernameNote', {minUsername: App.config.accounts.minUsername}) %></small>
       </div>
