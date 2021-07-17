@@ -333,6 +333,10 @@ Set maxAge for assets of the server (default background image, css). Default val
 
 ## Changelog
 
+### 0.7.2
+
+Bugfix for highscore recent activity, enable cache header for data directory, better error messaging
+
 ### 0.7.1
 
 Fix bug in distance calculation

@@ -74,8 +74,10 @@ module.exports = function (App) {
         },
       })
 
-      if (creationRate > App.config.accounts.maxRatePerHour)
+      if (creationRate > App.config.accounts.maxRatePerHour) {
+        console.log('register failed because server crowded')
         return App.i18n.t('register.serverCrowded')
+      }
     }
 
     const err = await check()
@@ -173,8 +175,10 @@ module.exports = function (App) {
         },
       })
 
-      if (creationRate > App.config.accounts.maxRoomPerHour)
+      if (creationRate > App.config.accounts.maxRoomPerHour) {
+        console.log('room creation failed because server crowded')
         return App.i18n.t('create.serverCrowded')
+      }
     }
 
     const err = await check()
@@ -234,10 +238,13 @@ module.exports = function (App) {
               },
             }
           : { score: { [Op.gt]: 0 } },
-      order: [
-        ['score', 'DESC'],
-        ['updatedAt', 'DESC'],
-      ],
+      order:
+        sort == 'new'
+          ? [['updatedAt', 'DESC']]
+          : [
+              ['score', 'DESC'],
+              ['updatedAt', 'DESC'],
+            ],
       limit: App.config.accounts.highscoreLimit,
     })
     let user = undefined
@@ -302,17 +309,13 @@ module.exports = function (App) {
         timestamp: App.moment(user.updatedAt).unix(),
       }
     })
-    users.forEach((user, i) => {
-      if (i > 0 && users[i - 1].score == user.score) {
-        user.rank = users[i - 1].rank
-      } else {
-        user.rank = i + 1
-      }
-    })
-
-    if (sort == 'new') {
-      users.sort((a, b) => {
-        return b.timestamp - a.timestamp
+    if (sort != 'new') {
+      users.forEach((user, i) => {
+        if (i > 0 && users[i - 1].score == user.score) {
+          user.rank = users[i - 1].rank
+        } else {
+          user.rank = i + 1
+        }
       })
     }
     return users

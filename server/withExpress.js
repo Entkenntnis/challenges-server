@@ -5,8 +5,11 @@ module.exports = function (App) {
   App.express = express()
 
   // REMARK: allow data directory to override static assets
-  if (App.config.staticFolder)
-    App.express.use(gzipStatic(App.config.staticFolder))
+  if (App.config.staticFolder) {
+    App.express.use(
+      gzipStatic(App.config.staticFolder, { maxAge: App.config.assetsMaxAge })
+    )
+  }
 
   App.express.use(
     gzipStatic(require('path').join(__dirname, '../public'), {

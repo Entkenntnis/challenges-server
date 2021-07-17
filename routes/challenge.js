@@ -350,7 +350,8 @@ module.exports = function (App) {
         } catch (e) {
           console.log('adding new solved challenge failed')
           console.log(e)
-          answer = 'Error: ' + e.toString() + ' - Please try again.'
+          answer =
+            'Your solution is correct, but the server was too busy to update your score - reload page to try again. Sorry for the inconvenience.'
           correct = 'none'
         }
       }
