@@ -1,5 +1,8 @@
 const { Op, Transaction } = require('sequelize')
 const bcrypt = require('bcryptjs')
+const window = require('svgdom')
+const SVG = require('svg.js')(window)
+const document = window.document
 
 module.exports = function (App) {
   async function checkUser(req, res, next) {
@@ -97,9 +100,6 @@ module.exports = function (App) {
       App.challenges.data.map((c) => solved.push(c.id))
     }
 
-    const window = require('svgdom')
-    const SVG = require('svg.js')(window)
-    const document = window.document
     const element = document.createElement('svg')
     const canvas = SVG(element).size('100%', '100%')
 

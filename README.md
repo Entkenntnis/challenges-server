@@ -333,6 +333,10 @@ Set maxAge for assets of the server (default background image, css). Default val
 
 ## Changelog
 
+### 0.7.4
+
+Fix memory leak in map rendering
+
 ### 0.7.3
 
 Autofocus for forms
