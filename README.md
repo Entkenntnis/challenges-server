@@ -314,10 +314,10 @@ This string is replaced with the current url prefix, default is `{{PREFIX}}`
 
 ###  config.onSubmit
 
-A hook that is called if the user submits any challenge. Object argument with properties: App, id, correct and solved (list of ids that the user has solved). The function can be sync or async. Example:
+A hook that is called if the user submits any challenge. Object argument with properties: App, id, correct, solved (list of ids that the user has solved) and the raw answer. The function can be sync or async. Example:
 
 ```js
-config.onSubmit = ({App, id, correct, solved, isEditor }) => {
+config.onSubmit = ({App, id, correct, solved, isEditor, answer }) => {
   console.log('Submit challenge:', id, correct)
 }
 ```
@@ -332,6 +332,10 @@ Set maxAge for assets of the server (default background image, css). Default val
 
 
 ## Changelog
+
+### 0.7.6
+
+Add answer to onSubmit-hook
 
 ### 0.7.5, February 2022
 

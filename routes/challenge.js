@@ -284,6 +284,7 @@ module.exports = function (App) {
               correct,
               solved: solvedDb.map((s) => s.cid),
               isEditor,
+              answer: req.body.answer,
             })
           }
         }
