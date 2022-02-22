@@ -330,8 +330,16 @@ An object with properties `url` and `label`. Adds an external link to the status
 
 Set maxAge for assets of the server (default background image, css). Default value is `2d`.
 
+### config.noSelfAdmin
+
+Array of user names that can't admin themselves (no password change, no delete)
+
 
 ## Changelog
+
+### 0.8.0
+
+Retry transaction on deadlock, add noSelfAdmin feature
 
 ### 0.7.6
 

@@ -294,7 +294,7 @@ module.exports = function (App) {
       }
 
       if (correct && !App.config.editors.includes(req.user.name)) {
-        try {
+        const transact = async function () {
           // do updates in a transaction
           await App.db.transaction(
             {
@@ -347,13 +347,26 @@ module.exports = function (App) {
               }
             }
           )
-          //console.log('transaction successful')
+          // console.log('transaction successful')
+        }
+
+        try {
+          await transact() // first try
         } catch (e) {
-          console.log('adding new solved challenge failed')
-          console.log(e)
-          answer =
-            'Your solution is correct, but the server was too busy to update your score - reload page to try again. Sorry for the inconvenience.'
-          correct = 'none'
+          // console.log('first try failed')
+          try {
+            // random wait for 2 - 5 secs
+            await new Promise((res) =>
+              setTimeout(res, 2000 + Math.random() * 3000)
+            )
+            await transact() // second try
+          } catch (e) {
+            console.log('adding new solved challenge failed')
+            console.log(e)
+            answer =
+              'Your solution is correct, but the server was too busy to update your score - reload page to try again. Sorry for the inconvenience.'
+            correct = 'none'
+          }
         }
       }
 
@@ -481,6 +494,9 @@ module.exports = function (App) {
   })
 
   App.express.get('/delete', checkUser, (req, res) => {
+    if (App.config.noSelfAdmin.includes(req.user.name)) {
+      return res.redirect('/map')
+    }
     res.renderPage({
       page: 'delete',
       props: {
@@ -510,6 +526,9 @@ module.exports = function (App) {
   })
 
   App.express.get('/changepw', checkUser, (req, res) => {
+    if (App.config.noSelfAdmin.includes(req.user.name)) {
+      return res.redirect('/map')
+    }
     res.renderPage({
       page: 'changepw',
       props: {

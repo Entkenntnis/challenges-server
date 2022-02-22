@@ -81,6 +81,7 @@ module.exports = function () {
       fontSize: undefined,
     },
     editors: [],
+    noSelfAdmin: [],
     customCSS: '',
     callback: undefined,
     masterPassword: undefined,

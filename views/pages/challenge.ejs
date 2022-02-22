@@ -1,6 +1,6 @@
 
 <p>
-  <% if (!props.correct) { %>
+  <% if (props.correct !== true) { %>
     <a href="<%=prefix%>/map"><%= t('back') %></a> |
   <% } %>
   <%= t('solvedBy', {count: props.solvedBy}) %> %>
