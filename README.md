@@ -332,7 +332,7 @@ Set maxAge for assets of the server (default background image, css). Default val
 
 ### config.noSelfAdmin
 
-Array of user names that can't admin themselves (no password change, no delete)
+Array of user names that can't admin themselves (no password change, no delete), default is `[]`
 
 
 ## Changelog
