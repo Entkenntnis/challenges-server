@@ -98,7 +98,7 @@ module.exports = function (App) {
       resave: false,
       saveUninitialized: false,
       secret: App.config.sessionSecret,
-      cookie: { maxAge: App.config.session.maxAge },
+      cookie: { maxAge: App.config.session.maxAge, sameSite: 'lax' },
       store: new SessionStore(),
     })
   )

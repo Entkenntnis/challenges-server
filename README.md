@@ -337,6 +337,10 @@ Array of user names that can't admin themselves (no password change, no delete),
 
 ## Changelog
 
+### 0.8.1
+
+Set sameSite attribute of cookies.
+
 ### 0.8.0
 
 Retry transaction on deadlock, add noSelfAdmin feature
