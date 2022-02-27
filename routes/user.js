@@ -2,7 +2,7 @@ const Op = require('sequelize').Op
 const bcrypt = require('bcryptjs')
 
 module.exports = function (App) {
-  App.express.get('/register', (req, res) => {
+  App.express.get('/register', async (req, res) => {
     if (req.session.userId) {
       res.redirect('/map')
       return
@@ -12,6 +12,13 @@ module.exports = function (App) {
     const values = req.session.registerValues || {}
     delete req.session.registerValues
     const token = App.csrf.create(req)
+    // save session to avoid racing of requests
+    await new Promise((res, rej) => {
+      req.session.save((err) => {
+        if (err) rej(err)
+        else res()
+      })
+    })
     res.renderPage({
       page: 'register',
       props: {
@@ -86,7 +93,7 @@ module.exports = function (App) {
     } else {
       // ready to go
       try {
-        const password = await bcrypt.hash(pw1, 8)
+        const password = await bcrypt.hash(pw1, App.config.bcryptRounds)
         await App.db.models.User.create({
           name: username,
           password,

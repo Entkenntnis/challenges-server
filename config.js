@@ -18,6 +18,7 @@ module.exports = function () {
     configRoutes: true,
     challengesDir: process.cwd(),
     staticFolder: './public',
+    bcryptRounds: 10,
     accounts: {
       minUsername: 3,
       maxUsername: 40,

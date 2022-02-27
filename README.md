@@ -334,8 +334,16 @@ Set maxAge for assets of the server (default background image, css). Default val
 
 Array of user names that can't admin themselves (no password change, no delete), default is `[]`
 
+### config.bcryptRounds
+
+Number of bcrypt rounds. current default is `10`.
+
 
 ## Changelog
+
+### 0.8.2
+
+Fix raced requests on register, add config for bcrypt rounds.
 
 ### 0.8.1
 
