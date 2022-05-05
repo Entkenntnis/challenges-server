@@ -3,7 +3,10 @@
   <% if (props.correct !== true) { %>
     <a href="<%=prefix%>/map"><%= t('back') %></a> |
   <% } %>
-  <%= t('solvedBy', {count: props.solvedBy}) %> %>
+  <%= t('solvedBy', {count: props.solvedBy}) %>
+  <% if (props.challenge.date) { %> |
+    <span style="color:gray">erstellt <%= App.moment(props.challenge.date).fromNow()%></span>
+  <% } %>
 </p>
 
 <div style="height:16px"></div>

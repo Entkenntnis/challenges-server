@@ -341,6 +341,10 @@ Number of bcrypt rounds. current default is `10`.
 
 ## Changelog
 
+### 0.9.0, May 2022
+
+Show creation date of challenges, upgrade dependencies, show entries count for highscore mode "month".
+
 ### 0.8.2
 
 Fix raced requests on register, add config for bcrypt rounds.

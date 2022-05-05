@@ -10,4 +10,8 @@
   <option value="/highscore?sort=new" <%= props.sort == 'new' ? 'selected' : ''%>>zuletzt aktiv</option>
 </select></p>
 
+<% if (props.count) { %>
+  <p style="text-align:right;color:gray;margin-top:-2rem;" class="mb-4"><%=props.count%> Einträge</p>
+<% } %>
+
 <%- include('../highscoreTable', {users:props.users, t, user, hideRank:props.sort == 'new'}) %>

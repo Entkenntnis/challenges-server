@@ -261,12 +261,27 @@ module.exports = function (App) {
       })
     }
     const users = processHighscore(dbUsers, sort)
+    let count
+    if (sort == 'month') {
+      count = users.length
+      if (users.length >= App.config.accounts.highscoreLimit) {
+        count = await App.db.models.User.count({
+          where: {
+            score: { [Op.gt]: 0 },
+            updatedAt: {
+              [Op.gte]: App.moment().subtract(29, 'days').toDate(),
+            },
+          },
+        })
+      }
+    }
 
     res.renderPage({
       page: 'highscore',
       props: {
         users,
         sort,
+        count,
       },
       user, // REMARK provide our own user because it's not provided by middleware
     })
