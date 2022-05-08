@@ -296,6 +296,10 @@ Default is `undefined`. If this is set, you can access every user account with t
 
 URL to GitHub (shown on start page), default is link to this repo.
 
+### config.githubTargetBlank
+
+Open URL in new tab, default is `true`.
+
 ### config.fullscreenMap
 
 Shows the map fullscreen. Default is `false`
@@ -340,6 +344,10 @@ Number of bcrypt rounds. current default is `10`.
 
 
 ## Changelog
+
+### 0.9.1
+
+Add githubTargetBlank.
 
 ### 0.9.0, May 2022
 

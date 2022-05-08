@@ -41,6 +41,6 @@
 <p>
   <a href="<%=prefix%>/contact"><%= t('contactLink') %></a> |
   <a href="<%=prefix%>/privacy"><%= t('privacyLink') %></a> | 
-  <a href="<%=App.config.githubHref%>" target="_blank"><%= t('github') %></a> | 
+  <a href="<%=App.config.githubHref%>" <% if (App.config.githubTargetBlank) { %> target="_blank" <% } %>><%= t('github') %></a> | 
   <%- t('version') %>
 </p>

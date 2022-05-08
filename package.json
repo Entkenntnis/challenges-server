@@ -1,6 +1,6 @@
 {
   "name": "@entkenntnis/challenges-server",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "plattform inspired by hacker.org",
   "repository": {
     "type": "git",
