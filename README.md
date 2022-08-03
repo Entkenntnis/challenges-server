@@ -345,6 +345,10 @@ Number of bcrypt rounds. current default is `10`.
 
 ## Changelog
 
+### 0.9.2
+
+Fix error on malformed answer input, add supporter message
+
 ### 0.9.1
 
 Add githubTargetBlank.

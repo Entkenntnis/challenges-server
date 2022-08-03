@@ -1,6 +1,6 @@
 {
   "name": "@entkenntnis/challenges-server",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "plattform inspired by hacker.org",
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "express-session": "^1.17.0",
     "i18next": "^19.4.0",
     "i18next-node-fs-backend": "^2.1.0",
-    "moment": "^2.25.0",
+    "moment": "^2.29.4",
     "sequelize": "^6.0.0",
     "svg.js": "^2.7.0",
     "svgdom": "0.0.21"

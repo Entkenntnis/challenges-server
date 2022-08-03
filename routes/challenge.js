@@ -267,7 +267,7 @@ module.exports = function (App) {
       let correct = false
 
       try {
-        if (req.body.answer) {
+        if (typeof req.body.answer === 'string') {
           const result = await check(req.body.answer || '', { req, App })
           if (result.answer !== undefined) {
             answer = result.answer

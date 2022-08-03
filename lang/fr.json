@@ -19,7 +19,8 @@
     "contactLink": "Contact",
     "privacyLink": "Politique de confidentialité",
     "github": "GitHub",
-    "version": "version: mai 2020"
+    "version": "version: mai 2020",
+    "supporter_": ""
   },
   "register": {
     "normalHeading": "Inscription",
