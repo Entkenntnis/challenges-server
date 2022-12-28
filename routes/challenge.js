@@ -374,18 +374,15 @@ module.exports = function (App) {
         where: { cid: id },
       })
 
-      const lastSolvedFromDB = await App.db.models.Solution.findAll({
-        where: {
-          cid: id,
-        },
-        order: [['createdAt', 'DESC']],
-        limit: 1,
-      })
+      let lastSolved = null
 
-      const lastSolved =
-        lastSolvedFromDB.length > 0 && correct !== true
-          ? lastSolvedFromDB[0].createdAt
-          : null
+      if (correct !== true) {
+        lastSolved = await App.db.models.Solution.max('createdAt', {
+          where: {
+            cid: id,
+          },
+        })
+      }
 
       let html = challenge.render
         ? challenge.render({ App, req })
