@@ -235,7 +235,7 @@ module.exports = function (App) {
     const sort = req.query.sort
 
     const dbUsers = await App.db.models.User.findAll({
-      attributes: ['name', 'score', 'updatedAt'],
+      attributes: ['name', 'score', 'updatedAt', 'createdAt'],
       where:
         sort == 'month'
           ? {
@@ -295,7 +295,7 @@ module.exports = function (App) {
     const invalidLogin = req.session.loginFail
     delete req.session.loginFail
     const dbUsers = await App.db.models.User.findAll({
-      attributes: ['name', 'score', 'updatedAt'],
+      attributes: ['name', 'score', 'updatedAt', 'createdAt'],
       where: {
         score: { [Op.gt]: 0 },
         updatedAt: { [Op.gte]: App.moment().subtract(29, 'days').toDate() },
@@ -329,6 +329,7 @@ module.exports = function (App) {
         score: Math.floor(user.score),
         lastActive: App.moment(user.updatedAt).fromNow(),
         timestamp: App.moment(user.updatedAt).unix(),
+        age: App.moment(user.createdAt).fromNow(),
       }
     })
     if (sort != 'new') {

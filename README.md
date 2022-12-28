@@ -345,6 +345,10 @@ Number of bcrypt rounds. current default is `10`.
 
 ## Changelog
 
+### 0.10.0
+
+Show last solved time of challenge, show created date of user in highscore in tooltip, upgrade dependencies
+
 ### 0.9.2
 
 Fix error on malformed answer input, add supporter message

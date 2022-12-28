@@ -374,6 +374,19 @@ module.exports = function (App) {
         where: { cid: id },
       })
 
+      const lastSolvedFromDB = await App.db.models.Solution.findAll({
+        where: {
+          cid: id,
+        },
+        order: [['createdAt', 'DESC']],
+        limit: 1,
+      })
+
+      const lastSolved =
+        lastSolvedFromDB.length > 0 && correct !== true
+          ? lastSolvedFromDB[0].createdAt
+          : null
+
       let html = challenge.render
         ? challenge.render({ App, req })
         : challenge.html
@@ -390,6 +403,7 @@ module.exports = function (App) {
           correct,
           answer,
           solvedBy,
+          lastSolved,
         },
         backButton: false,
         title: challenge.title,
