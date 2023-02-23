@@ -353,7 +353,7 @@ Show last solved time of challenge as tooltip.
 
 Use better way of finding last user.
 
-### 0.10.0
+### 0.10.0, December 2022
 
 Show last solved time of challenge, show created date of user in highscore in tooltip, upgrade dependencies
 
