@@ -1,5 +1,5 @@
 var i18next = require('i18next')
-var Backend = require('i18next-node-fs-backend')
+var Backend = require('i18next-fs-backend')
 
 module.exports = function (App) {
   App.i18n = i18next.createInstance()

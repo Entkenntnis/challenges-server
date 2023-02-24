@@ -23,7 +23,7 @@
     "express": "^4.17.0",
     "express-session": "^1.17.0",
     "i18next": "^19.4.0",
-    "i18next-node-fs-backend": "^2.1.0",
+    "i18next-fs-backend": "^2.1.1",
     "moment": "^2.29.4",
     "sequelize": "^6.0.0",
     "svg.js": "^2.7.0",
