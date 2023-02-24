@@ -8,7 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "prettify": "prettier --write index.js config.js ./{server,routes}/**/*.js",
+    "prettify": "prettier --write --end-of-line=auto index.js config.js ./{server,routes}/**/*.js",
     "lint": "eslint index.js config.js ./{server,routes}/**/*.js"
   },
   "author": "Entkenntnis <hack@arrrg.de>",

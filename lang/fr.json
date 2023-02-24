@@ -50,8 +50,6 @@
   },
   "highscore": {
     "heading": "Highscore",
-    "empty": "Le highscore ne contient encore aucune entrée. Soyez les premiers!",
-    "rank": "Position",
     "name": "Nom",
     "score": "Score",
     "sessionScore": "Session Score",
@@ -62,7 +60,9 @@
     "points": "Points",
     "pointsMonth": "Points (ce mois-ci)",
     "entries": "{{count}} entrée",
-    "entries_plural": "{{count}} entrées"
+    "entries_plural": "{{count}} entrées",
+    "rank": "Position",
+    "lastSolved": "Résolu pour la dernière fois"
   },
   "create": {
     "title": "Créer une chambre",

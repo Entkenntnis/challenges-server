@@ -119,7 +119,9 @@
     "sessionDone": "Session done.",
     "sessionScore": "Session score:",
     "delete": "Delete Account ...",
-    "changepw": "Change password ..."
+    "changepw": "Change password ...",
+    "rank": "Rank",
+    "lastSolved": "Last solved"
   },
   "challenge": {
     "back": "back",

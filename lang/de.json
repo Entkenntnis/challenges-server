@@ -51,7 +51,6 @@
   "highscore": {
     "heading": "Highscore",
     "empty": "Die Highscore enthält noch keine Einträge. Werde der Erste!",
-    "rank": "Platz",
     "name": "Benutzername",
     "score": "Punktzahl",
     "sessionScore": "Session-Punktzahl",
@@ -62,7 +61,9 @@
     "points": "Punktzahl",
     "pointsMonth": "Punktzahl (dieser Monat)",
     "entries": "{{count}} Eintrag",
-    "entries_plural": "{{count}} Einträge"
+    "entries_plural": "{{count}} Einträge",
+    "rank": "Platz",
+    "lastSolved": "Zuletzt gelöst"
   },
   "create": {
     "title": "Raum erstellen",
