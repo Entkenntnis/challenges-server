@@ -1,12 +1,6 @@
 # challenges-server
 The engine behind https://hack.arrrg.de
 
-## Important
-
-This package is specifically tailored for [Hack The Web](https://hack.arrrg.de) and is currently not maintained for general purpose, e.g. some features are not configurable, some translations are missing, etc....
-
-Use this package at your own risk.
-
 ## Introduction
 
 A great way to learn and master a skill is to solve challenges. This package aims at providing a foundation on which you can create a set of challenges and invite people to solve them.
@@ -70,7 +64,21 @@ A string value for the solution of the challenge. (case-insensitive, trimmed).
 
 ### check
 
-Function that gets the answer and an object with `App` and `req`. Return an object with answer (the displayed solution value) and correct, a boolean that indicates whether the challenge is solved or not. Alternative: Just return a boolean. Replaces solution.
+Function that gets the answer and an object with `App` and `req`. Return an object with answer (the displayed solution value) and correct, a boolean that indicates whether the challenge is solved or not. Alternative: Just return a boolean, replaces solution.
+
+This is the default check function:
+
+```js
+function (raw, {App, req}) {
+  const answer = raw.toLowerCase().trim()
+  return {
+    answer,
+    correct:
+      challenge.solution &&
+      answer === challenge.solution.toLowerCase().trim(),
+  }
+}
+```
 
 ### hidesubmit
 
@@ -131,7 +139,7 @@ Sets the language, currently available are `"de"` (German), `"en"` and `"fr"` (F
 
 ### config.theme
 
-You choose from one of the theme from bootswatch:
+You choose from one of the theme from [bootswatch](https://bootswatch.com/4/):
 
 ![grafik](https://user-images.githubusercontent.com/13507950/88153920-5e2b7d80-cc06-11ea-93e4-9cc7b230af55.png)
 
@@ -228,7 +236,7 @@ Configure session timing:
 
 ### config.urlPrefix
 
-If you can only host your server on a subfolder, you need to set the urlPrefix to let the server point to the correct path, default is `""`, you can use it like `"/challenges"` (without trailing slash).
+If you can only host your server on a subfolder, you need to set the urlPrefix to let the server point to the correct path, default is `""`, you can use it like `"/challenges"` (without trailing slash). Warning: this option is not very well tested, use at own risk.
 
 ### config.i18nConfig
 
@@ -249,11 +257,11 @@ Setting up locale data:
 Default is an empty array. You can override translations by adding objects here like this:
 
 ```js
-{
+config.i18nExtend.push({
   lng: 'de',
   key: 'home.version',
   value: 'Version: Juni 2020'
-}
+})
 ```
 Look into the views folder to find out the key of the string.
 
