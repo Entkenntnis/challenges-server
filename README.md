@@ -353,6 +353,10 @@ Number of bcrypt rounds. current default is `10`.
 
 ## Changelog
 
+### 1.0.0, February 2023
+
+Moving out of beta, fix missing translations
+
 ### 0.10.2
 
 Show last solved time of challenge as tooltip.
