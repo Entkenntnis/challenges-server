@@ -11,7 +11,7 @@
 </select></p>
 
 <% if (props.count) { %>
-  <p style="text-align:right;color:gray;margin-top:-2rem;" class="mb-4"><%= t('showRoomScore', {count:props.count}) %></p>
+  <p style="text-align:right;color:gray;margin-top:-2rem;" class="mb-4"><%= t('entries', {count:props.count}) %></p>
 <% } %>
 
 <%- include('../highscoreTable', {users:props.users, t, user, hideRank:props.sort == 'new'}) %>
