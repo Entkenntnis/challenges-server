@@ -57,7 +57,12 @@
     "sessionScore": "Session Score",
     "lastActive": "dernier actif",
     "showRoomScore": "seulement la chambre",
-    "showGlobalScore": "tout afficher"
+    "showGlobalScore": "tout afficher",
+    "orderby": "ordonner par",
+    "points": "Points",
+    "pointsMonth": "Points (ce mois-ci)",
+    "entries": "{{count}} entrée",
+    "entries_plural": "{{count}} entrées"
   },
   "create": {
     "title": "Créer une chambre",
@@ -155,6 +160,4 @@
     "content_": "Changement de mot de passe réussi.",
     "back": "OK"
   }
-} 
-
-
+}

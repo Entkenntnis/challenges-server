@@ -57,7 +57,12 @@
     "sessionScore": "Session-Punktzahl",
     "lastActive": "zuletzt aktiv",
     "showRoomScore": "nur Raum",
-    "showGlobalScore": "alle anzeigen"
+    "showGlobalScore": "alle anzeigen",
+    "orderby": "Sortieren nach",
+    "points": "Punktzahl",
+    "pointsMonth": "Punktzahl (dieser Monat)",
+    "entries": "{{count}} Eintrag",
+    "entries_plural": "{{count}} Einträge"
   },
   "create": {
     "title": "Raum erstellen",

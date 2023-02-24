@@ -3,15 +3,15 @@
   <p class="my-4">[<a href="<%=prefix%>/roomscore"><%= t('showRoomScore') %></a>]</p>
 <% } %>
 
-<p class="mt-4 mb-5 text-right">Sortieren nach:
+<p class="mt-4 mb-5 text-right"><%= t('orderby') %>:
 <select onchange="window.location.href = this.value; return false;">
-  <option value="/highscore">Punktzahl</option>
-  <option value="/highscore?sort=month" <%= props.sort == 'month' ? 'selected' : ''%>>Punktzahl (dieser Monat)</option>
-  <option value="/highscore?sort=new" <%= props.sort == 'new' ? 'selected' : ''%>>zuletzt aktiv</option>
+  <option value="/highscore"><%= t('points') %></option>
+  <option value="/highscore?sort=month" <%= props.sort == 'month' ? 'selected' : ''%>><%= t('pointsMonth') %></option>
+  <option value="/highscore?sort=new" <%= props.sort == 'new' ? 'selected' : ''%>><%= t('lastActive') %></option>
 </select></p>
 
 <% if (props.count) { %>
-  <p style="text-align:right;color:gray;margin-top:-2rem;" class="mb-4"><%=props.count%> Einträge</p>
+  <p style="text-align:right;color:gray;margin-top:-2rem;" class="mb-4"><%= t('showRoomScore', {count:props.count}) %></p>
 <% } %>
 
 <%- include('../highscoreTable', {users:props.users, t, user, hideRank:props.sort == 'new'}) %>
