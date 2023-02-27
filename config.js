@@ -93,6 +93,7 @@ module.exports = function () {
     prefixPlaceholder: '{{PREFIX}}',
     scoreMode: 'time',
     assetsMaxAge: '2d',
+    historyBack: false,
   }
 
   return config

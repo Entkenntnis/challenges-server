@@ -350,8 +350,16 @@ Array of user names that can't admin themselves (no password change, no delete),
 
 Number of bcrypt rounds. current default is `10`.
 
+### config.historyBack
+
+Use `window.history.back()` for back navigation from challenge (restores scroll position)
+
 
 ## Changelog
+
+### 1.0.1
+
+Add historyBack
 
 ### 1.0.0, February 2023
 
