@@ -357,6 +357,10 @@ Use `window.history.back()` for back navigation from challenge (restores scroll 
 
 ## Changelog
 
+### 1.0.2
+
+Fix translation for profile
+
 ### 1.0.1
 
 Add historyBack

@@ -50,6 +50,8 @@
   },
   "highscore": {
     "heading": "Highscore",
+    "empty": "Le highscore ne contient encore aucune entrée. Soyez les premiers!",
+    "rank": "Position",
     "name": "Nom",
     "score": "Score",
     "sessionScore": "Session Score",
@@ -119,7 +121,9 @@
     "sessionDone": "La session est terminée.",
     "sessionScore": "Session score:",
     "delete": "Supprimer le compte ...",
-    "changepw": "Changer de mot de passe ..."
+    "changepw": "Changer de mot de passe ...",
+    "rank": "Position",
+    "lastSolved": "Résolu pour la dernière fois"
   },
   "challenge": {
     "back": "retour",
