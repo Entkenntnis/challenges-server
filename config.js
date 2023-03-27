@@ -42,6 +42,7 @@ module.exports = function () {
       centeringOffset: 1,
       width: '1600',
       height: '1200',
+      customMapHtml: '',
     },
     brand: 'challenges-server',
     slogan: 'An homage to hacker.org',

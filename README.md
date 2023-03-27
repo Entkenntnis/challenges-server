@@ -195,13 +195,14 @@ You can configure the background image of the map with this object. Default valu
     '<a href="https://paintingvalley.com/sketch-paper-texture#sketch-paper-texture-37.jpg">paintingvalley.com</a> (<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.en">CC BY-NC 4.0</a>)',
   centeringOffset: 1,
   width: '1600',
-  height: '1200'
+  height: '1200',
+  customMapHtml: ''
 }
 ```
 
 Add the background image into the static folder and reference it. Please add a license if its not your own picture. The centeringOffset helps to align the challenge titles on the map, it can be positive (move title right) or negative (move title left), and floating point.
 
-You can also set the width and the height of the map.
+You can also set the width and the height of the map. You can add custom html to the map.
 
 ### config.brand
 
@@ -356,6 +357,10 @@ Use `window.history.back()` for back navigation from challenge (restores scroll 
 
 
 ## Changelog
+
+### 1.0.3
+
+CustomMapHtml, add username to last solved tooltip.
 
 ### 1.0.2
 

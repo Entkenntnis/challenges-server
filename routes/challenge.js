@@ -375,6 +375,7 @@ module.exports = function (App) {
       })
 
       let lastSolved = null
+      let lastSolvedUserName = null
 
       if (correct !== true) {
         lastSolved = await App.db.models.Solution.max('createdAt', {
@@ -382,6 +383,17 @@ module.exports = function (App) {
             cid: id,
           },
         })
+        const lastSolvedSolution = await App.db.models.Solution.findOne({
+          where: { createdAt: lastSolved },
+        })
+        if (lastSolvedSolution) {
+          const lastSolvedUser = await App.db.models.User.findOne({
+            where: { id: lastSolvedSolution.UserId },
+          })
+          if (lastSolvedUser) {
+            lastSolvedUserName = lastSolvedUser.name
+          }
+        }
       }
 
       let html = challenge.render
@@ -401,6 +413,7 @@ module.exports = function (App) {
           answer,
           solvedBy,
           lastSolved,
+          lastSolvedUserName,
         },
         backButton: false,
         title: challenge.title,

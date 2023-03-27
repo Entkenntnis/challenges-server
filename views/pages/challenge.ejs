@@ -3,7 +3,7 @@
   <% if (props.correct !== true) { %>
     <a href="<%=prefix%>/map" <%- App.config.historyBack ? 'onclick="window.history.back()"' : ''%>><%= t('back') %></a> |
   <% } %>
-  <span title="<% if (props.lastSolved !== null) { %>zuletzt <%= App.moment(props.lastSolved).fromNow()%><% } %>">
+  <span title="<% if (props.lastSolved !== null) { %>zuletzt <%= App.moment(props.lastSolved).fromNow()%> von <%= props.lastSolvedUserName %><% } %>">
     <%= t('solvedBy', {count: props.solvedBy}) %>
   </span>
   <% if (props.challenge.date) { %> |
