@@ -355,8 +355,16 @@ Number of bcrypt rounds. current default is `10`.
 
 Use `window.history.back()` for back navigation from challenge (restores scroll position)
 
+### config.slowRequestWarning
+
+Logs a warning if a request took longer than 10 seconds.
+
 
 ## Changelog
+
+### 1.0.4
+
+Added `slowRequestWarning`
 
 ### 1.0.3
 

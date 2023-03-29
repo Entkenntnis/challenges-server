@@ -15,6 +15,10 @@ module.exports = function (App) {
             where: { sid },
           })
           if (session) result = JSON.parse(session.data)
+
+          if (App.config.slowRequestWarning) {
+            result.__start_ts = Date.now()
+          }
         } catch (e) {
           cb(e)
           return
@@ -26,6 +30,14 @@ module.exports = function (App) {
     set(sid, session, cb) {
       ;(async () => {
         try {
+          if (App.config.slowRequestWarning && session.__start_ts) {
+            const time = Date.now() - session.__start_ts
+            if (time > 10000) {
+              console.log(`Slow request took ${time}ms.`)
+            }
+            delete session['__start_ts']
+          }
+
           const data = JSON.stringify(session)
           const expires = session.cookie.expires
           // REMARK: findCreateFind is assumed to be a little bit more robust

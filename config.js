@@ -95,6 +95,7 @@ module.exports = function () {
     scoreMode: 'time',
     assetsMaxAge: '2d',
     historyBack: false,
+    slowRequestWarning: false,
   }
 
   return config
