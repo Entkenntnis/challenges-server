@@ -96,6 +96,7 @@ module.exports = function () {
     assetsMaxAge: '2d',
     historyBack: false,
     slowRequestWarning: false,
+    slowRequestThreshold: 10000,
   }
 
   return config

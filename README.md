@@ -357,10 +357,18 @@ Use `window.history.back()` for back navigation from challenge (restores scroll 
 
 ### config.slowRequestWarning
 
-Logs a warning if a request took longer than 10 seconds.
+Logs a warning if a request took longer than threshold. (default false)
+
+### config.slowRequestThreshold
+
+Amount of ms for request to become slow (default 10000)
 
 
 ## Changelog
+
+### 1.0.5
+
+Improve slow request warning implementation, add `slowRequestThreshold`
 
 ### 1.0.4
 

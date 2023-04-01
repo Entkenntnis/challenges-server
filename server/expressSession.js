@@ -14,10 +14,11 @@ module.exports = function (App) {
           const session = await App.db.models.Session.findOne({
             where: { sid },
           })
-          if (session) result = JSON.parse(session.data)
-
-          if (App.config.slowRequestWarning) {
-            result.__start_ts = Date.now()
+          if (session) {
+            result = JSON.parse(session.data)
+            if (App.config.slowRequestWarning && result) {
+              result.__start_ts = Date.now()
+            }
           }
         } catch (e) {
           cb(e)
@@ -32,7 +33,7 @@ module.exports = function (App) {
         try {
           if (App.config.slowRequestWarning && session.__start_ts) {
             const time = Date.now() - session.__start_ts
-            if (time > 10000) {
+            if (time > App.config.slowRequestThreshold) {
               console.log(`Slow request took ${time}ms.`)
             }
             delete session['__start_ts']

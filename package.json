@@ -1,6 +1,6 @@
 {
   "name": "@entkenntnis/challenges-server",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "plattform inspired by hacker.org",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "prettify": "prettier --write --end-of-line=auto index.js config.js ./{server,routes}/**/*.js",
+    "format": "prettier --write --end-of-line=auto index.js config.js ./{server,routes}/**/*.js",
     "lint": "eslint index.js config.js ./{server,routes}/**/*.js"
   },
   "author": "Entkenntnis <hack@arrrg.de>",
