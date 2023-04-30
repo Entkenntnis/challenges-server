@@ -1,4 +1,3 @@
-
 <% if (props.messages.length > 0) { %>
   <div class="alert alert-danger"><%-props.messages.join('<br>')%></div>
 <% } %>
@@ -18,8 +17,10 @@
           maxlength="<%=App.config.accounts.maxUsername%>"
           pattern="<%=App.config.accounts.regex.source%>"
           autofocus
+          oninput="checkUsername()"
         >
-        <small><%= t('usernameNote', {minUsername: App.config.accounts.minUsername}) %></small>
+        <small><%= t('usernameNote', {minUsername: App.config.accounts.minUsername}) %>
+        <span id="msg-span" style="margin-left:12px;font-size:13px;vertical-align:-1px;"></span></small>
       </div>
     </div>
     <div class="form-group row">
@@ -63,3 +64,60 @@
     <input type="hidden" name="room" value="<%=props.room%>" />
   </fieldset>
 </form>
+
+<script>
+  var state = {
+    msg: '',
+    class: 'text-danger'
+  }
+  
+  const msgSpan = document.getElementById('msg-span')
+  const nameInput = document.getElementById('inputName')
+  
+  function render() {
+    msgSpan.innerHTML = state.msg
+    msgSpan.className = state.class
+  }
+  
+  function checkUsername() {
+    const name = nameInput.value.trim()
+    if (name.length == 0) {
+      state.msg = ''
+      state.class = 'text-danger'
+    } else if (name.length < <%= App.config.accounts.minUsername %>) {
+      state.msg = 'Benutzername zu kurz'
+      state.class = 'text-danger'
+    } else if (!/<%=App.config.accounts.regex.source%>/.test(name)) {
+      state.msg = 'Benutzername enthält ungültige Zeichen'
+      state.class = 'text-danger'
+    } else {
+      state.msg = 'wird geprüft ...'
+      state.class = 'text-secondary'
+      
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', '/check/' + name);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          if (xhr.responseText === nameInput.value.trim()) {
+            state.msg = '✓ verfügbar'
+            state.class = 'text-info'
+            render()
+          } else if (xhr.responseText === '²bad²') {
+            state.msg = 'Benutzername bereits vergeben'
+            state.class = 'text-danger'
+            render()
+          } else {
+            console.log('Something went wrong!');
+          }
+        } else {
+          console.log('Request failed. Returned status of ' + xhr.status);
+        }
+      };
+      xhr.send();
+    }
+    render()
+  }
+  
+  render()
+
+</script>

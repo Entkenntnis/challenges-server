@@ -117,6 +117,20 @@ module.exports = function (App) {
     res.redirect('/register')
   })
 
+  App.express.get('/check/:name', async (req, res) => {
+    const name = req.params.name
+    if (typeof name == 'string' && name.length > 0) {
+      const user = await App.db.models.User.findOne({
+        where: { name },
+      })
+      if (!user) {
+        res.send(name)
+        return
+      }
+    }
+    res.send('²bad²')
+  })
+
   App.express.get('/join', (req, res) => {
     if (req.session.userId) {
       res.redirect('/map')

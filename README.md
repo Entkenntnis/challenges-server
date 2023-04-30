@@ -366,6 +366,10 @@ Amount of ms for request to become slow (default 10000)
 
 ## Changelog
 
+### 1.1.0, May 2023
+
+Add username check
+
 ### 1.0.5
 
 Improve slow request warning implementation, add `slowRequestThreshold`
