@@ -32,7 +32,27 @@
 <% if (!App.config.noSelfAdmin.includes(user.name)) { %>
 
   <p style="text-align:right"><a href="<%=prefix%>/changepw"><%= t('changepw') %></a></p>
+  
+  <p class="d-none" id="remove-user" style="text-align:right;"><a href="#" onclick="removeMe()">Account von lokal entfernen</a></p>
 
   <p style="text-align:right"><a href="<%=prefix%>/delete"><%= t('delete') %></a></p>
 
+<% } %>
+
+<% if (App.config.autoPassword) { %>
+  <script>
+    const username = '<%-user.name.replace(/\\/g, '\\\\').replace(/'/g, '\\\'')%>'
+    let user = JSON.parse(localStorage.getItem('htw_local_users') || '[]').filter(function(entry){ return entry.name == username })
+    if (user.length == 1) {
+      document.getElementById('remove-user').className = ''
+    }
+    
+    function removeMe() {
+      let data = JSON.parse(localStorage.getItem('htw_local_users') || '[]')
+      data = data.filter(entry => entry.name != username)
+      localStorage.setItem('htw_local_users', JSON.stringify(data))
+      alert('Account von lokal entfernt')
+      window.location.reload()
+    }
+  </script>
 <% } %>

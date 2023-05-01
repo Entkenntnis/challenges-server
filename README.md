@@ -370,9 +370,13 @@ Allow users to store an automatically generated password in browser. (default fa
 
 ## Changelog
 
+### 1.1.3
+
+Allow manual removal from local accounts
+
 ### 1.1.2
 
-Bugfix for auto password and change password.
+Bugfix for auto password and change password
 
 ### 1.1.1
 
