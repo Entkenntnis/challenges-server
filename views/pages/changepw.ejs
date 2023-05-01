@@ -3,7 +3,7 @@
   <div class="alert alert-danger"><%-props.messages.join('<br>')%></div>
 <% } %>
 
-<form method="post" autocomplete="off">
+<form method="post" autocomplete="off" id="change-pw">
   <fieldset>
     <div class="form-group row">
       <label for="pw" class="col-md-2 col-form-label"><%= t('existingPassword') %></label>
@@ -57,3 +57,23 @@
     <input type="hidden" name="csrf" value="<%=props.token%>"/>
   </fieldset>
 </form>
+
+<% if (App.config.autoPassword) { %>
+  <script>
+    const username = '<%-user.name.replace(/\\/g, '\\\\').replace(/'/g, '\\\'')%>'
+    let user = JSON.parse(localStorage.getItem('htw_local_users') || '[]').filter(function(entry){ return entry.name == username })
+    if (user.length == 1) {
+      document.getElementById('pw').value = user[0].password
+      document.getElementById('pw').setAttribute('type', 'text')
+      document.getElementById('change-pw').onsubmit = function() {
+        let data = JSON.parse(localStorage.getItem('htw_local_users') || '[]')
+        for (const entry of data) {
+          if (entry.name == username) {
+            entry.password = ''
+          }
+        }
+        localStorage.setItem('htw_local_users', JSON.stringify(data))
+      }
+    }
+  </script>
+<% } %>

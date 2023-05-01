@@ -41,7 +41,8 @@
     "invalidToken": "Les données transmises n'appartiennent pas à cette session. Veuillez réessayer.",
     "failure": "L'enregistrement a échoué. Veuillez réessayer.",
     "nameExists": "Le nom d'utilisateur existe déjà.",
-    "serverCrowded": "Il y a un grand nombre d'inscriptions en ce moment, essayez à nouveau dans 15 minutes."
+    "serverCrowded": "Il y a un grand nombre d'inscriptions en ce moment, essayez à nouveau dans 15 minutes.",
+    "submit": "Submit"
   },
   "join": {
     "heading": "Rejoignez",
@@ -91,7 +92,7 @@
   },
   "success": {
     "title": "Inscription réussie",
-    "content_": "Votre inscription a été réussie.",
+    "message": "Votre inscription a été réussie.",
     "back": "login"
   },
   "map": {

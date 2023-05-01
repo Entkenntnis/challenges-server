@@ -41,7 +41,8 @@
     "invalidToken": "Übermittelte Daten gehört nicht zu dieser Sitzung. Bitte erneut versuchen.",
     "failure": "Registrierung fehlgeschlagen. Bitte erneut versuchen.",
     "nameExists": "Benutzername existiert bereits.",
-    "serverCrowded": "Es gibt im Moment ein hohes Aufkommen an Registrierungen, versuche es in 15 Minuten erneut."
+    "serverCrowded": "Es gibt im Moment ein hohes Aufkommen an Registrierungen, versuche es in 15 Minuten erneut.",
+    "submit": "Jetzt loslegen"
   },
   "join": {
     "heading": "Beitreten",
@@ -89,7 +90,7 @@
   },
   "success": {
     "title": "Registrierung erfolgreich",
-    "content_": "Deine Registrierung war erfolgreich.",
+    "message": "Deine Registrierung war erfolgreich.",
     "back": "Zum Login"
   },
   "map": {

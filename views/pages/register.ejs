@@ -23,7 +23,16 @@
         <span id="msg-span" style="margin-left:12px;font-size:13px;vertical-align:-1px;"></span></small>
       </div>
     </div>
-    <div class="form-group row">
+    <% if (App.config.autoPassword) { %>
+      <div class="form-group row" style="margin-top:32px;">
+        <label class="col-md-2 col-form-label"></label>
+        <div class="col-md-5">
+          <p>Dein Passwort wird automatisch erzeugt und in diesem Browser gespeichert - die Anmeldung erfolgt automatisch. Du kannst im Profil unter "Passwort ändern" dein Passwort einsehen und ändern, um dich auf anderen Geräten anzumelden.
+          </p>
+        </div>
+      </div>
+    <% } %>
+    <div class="form-group row <%= App.config.autoPassword ? 'd-none' : '' %>">
       <label for="inputPw1" class="col-md-2 col-form-label"><%= t('password') %></label>
       <div class="col-md-5">
         <input
@@ -37,7 +46,7 @@
         >
       </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row <%= App.config.autoPassword ? 'd-none' : '' %>">
       <label for="inputPw2" class="col-md-2 col-form-label"><%= t('repeatPassword') %></label>
       <div class="col-md-5">
         <input
@@ -54,16 +63,17 @@
     </div>
     <div class="form-group row">
       <div class="col-md-5 offset-md-2">
-        <p style="margin-top:8px;margin-bottom:16px;">
-          <%- t('noteOn_', {link: `<a href="${prefix}/privacy">${ t('dataProtection') }</a>`}) %>
+        <p style="margin-top:8px;margin-bottom:32px;">
+          <%- t('noteOn_', {link: `<a href="${prefix}/privacy">${ t('dataProtection') }</a>`}) %>.
         </p>
-        <button type="submit" class="btn btn-success"><%= t('go') %></button>
+        <button type="submit" class="btn btn-success" id="submit-button"><%= t('submit') %></button>
       </div>
     </div>
     <input type="hidden" name="csrf" value="<%=props.token%>"/>
     <input type="hidden" name="room" value="<%=props.room%>" />
   </fieldset>
 </form>
+
 
 <script>
   var state = {
@@ -73,10 +83,16 @@
   
   const msgSpan = document.getElementById('msg-span')
   const nameInput = document.getElementById('inputName')
+  const submitButton = document.getElementById('submit-button')
   
   function render() {
     msgSpan.innerHTML = state.msg
     msgSpan.className = state.class
+    if (state.class == 'text-info') {
+      submitButton.disabled = false
+    } else {
+      submitButton.disabled = true
+    }
   }
   
   function checkUsername() {
@@ -95,13 +111,22 @@
       state.class = 'text-secondary'
       
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', '/check/' + name);
+      xhr.open('GET', '/check/' + encodeURIComponent(name));
       xhr.onload = function() {
         if (xhr.status === 200) {
           if (xhr.responseText === nameInput.value.trim()) {
             state.msg = '✓ verfügbar'
             state.class = 'text-info'
             render()
+            <% if (App.config.autoPassword) { %>
+              let pw = ''
+              for (let i = 0; i < 32; i++) {
+                pw += Math.floor(10*Math.random()).toString()
+              }
+              document.getElementById('inputPw1').value = pw
+              document.getElementById('inputPw2').value = pw
+              sessionStorage.setItem('htw_temp_local_user', JSON.stringify({name:name, password: pw}))
+            <% } %>
           } else if (xhr.responseText === '²bad²') {
             state.msg = 'Benutzername bereits vergeben'
             state.class = 'text-danger'

@@ -97,6 +97,7 @@ module.exports = function () {
     historyBack: false,
     slowRequestWarning: false,
     slowRequestThreshold: 10000,
+    autoPassword: false,
   }
 
   return config

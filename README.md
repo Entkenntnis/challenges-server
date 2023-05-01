@@ -363,8 +363,16 @@ Logs a warning if a request took longer than threshold. (default false)
 
 Amount of ms for request to become slow (default 10000)
 
+### config.autoPassword
+
+Allow users to store an automatically generated password in browser. (default false)
+
 
 ## Changelog
+
+### 1.1.1
+
+Add `autoPassword` feature
 
 ### 1.1.0, May 2023
 

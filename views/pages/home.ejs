@@ -5,16 +5,53 @@
   <div class="alert alert-danger"><%= t('invalid') %></div>
 <% } %>
 
-<form action="<%=prefix%>/login" method="post" autocomplete="off">
+<form action="<%=prefix%>/login" method="post" autocomplete="off" id="login-form">
 
   <div class="form-group">
-    <label><%= t('name') %> <input class="form-control" type="text" name="username" value="" autofocus/></label>
+    <label><%= t('name') %> <input class="form-control" type="text" name="username" value="" autofocus id="inputName"/></label>
     <span style="display:inline-block;width:10px;"></span>
-    <label><%= t('password') %> <input class="form-control" type="password" name="password" value=""/></label>
+    <label><%= t('password') %> <input class="form-control" type="password" name="password" value="" id="inputPw"/></label>
     <span style="display:inline-block;width:5px;"></span>
     <button type="submit" class="btn btn-success" style="margin-top:-4px"><%= t('go') %></button>
   </div>
 </form>
+
+<% if (App.config.autoPassword) { %>
+  <div id="locals-list" class="d-none">
+    Weiterspielen: <span id="locals"></span>
+  </div>
+
+  <script>
+    window.onload = function() {
+      try {
+        const localUsers = JSON.parse(localStorage.getItem('htw_local_users') || '[]')
+        if (localUsers.length > 0) {
+          let html = ''
+          for (let i = 0; i < localUsers.length; i++) {
+            html += '<button class="btn btn-warning mx-2 btn-sm" onclick="applyUser(' + i + ')"><strong>' + localUsers[i].name + '</strong></button>'
+          }
+          document.getElementById('locals').innerHTML = html
+          document.getElementById('locals-list').className = ''
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    
+    function applyUser(index) {
+      const user = JSON.parse(localStorage.getItem('htw_local_users') || '[]')[index]
+      document.getElementById('inputName').value = user.name
+      document.getElementById('inputPw').value = user.password
+      if (user.password) {
+        setTimeout(function() {
+          document.getElementById('login-form').submit()
+        }, 100)
+      } else {
+        document.getElementById('inputPw').focus()
+      }
+    }
+  </script>
+<% } %>
 
 <p class="my-4">
   <%- t('invite_', {link: `<a href="${prefix}/register">${ t('registerLink') }</a>`}) %>

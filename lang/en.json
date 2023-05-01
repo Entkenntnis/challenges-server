@@ -41,7 +41,8 @@
     "invalidToken": "Form invalid. Please try again.",
     "failure": "Creating user failed. Please try again.",
     "nameExists": "Username already exists.",
-    "serverCrowded": "There are too many registrations at the moment. Please try again in 15 minutes."
+    "serverCrowded": "There are too many registrations at the moment. Please try again in 15 minutes.",
+    "submit": "Submit"
   },
   "join": {
     "heading": "Join",
@@ -89,7 +90,7 @@
   },
   "success": {
     "title": "Registration successful",
-    "content_": "Your registration was successful.",
+    "message": "Your registration was successful.",
     "back": "Login"
   },
   "map": {
