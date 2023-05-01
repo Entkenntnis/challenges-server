@@ -370,6 +370,10 @@ Allow users to store an automatically generated password in browser. (default fa
 
 ## Changelog
 
+### 1.1.5
+
+Hints are not opening in new tab
+
 ### 1.1.4
 
 Only show after password changed
