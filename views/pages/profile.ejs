@@ -43,7 +43,7 @@
   <script>
     const username = '<%-user.name.replace(/\\/g, '\\\\').replace(/'/g, '\\\'')%>'
     let user = JSON.parse(localStorage.getItem('htw_local_users') || '[]').filter(function(entry){ return entry.name == username })
-    if (user.length == 1) {
+    if (user.length == 1 && !user[0].password) {
       document.getElementById('remove-user').className = ''
     }
     

@@ -370,6 +370,10 @@ Allow users to store an automatically generated password in browser. (default fa
 
 ## Changelog
 
+### 1.1.4
+
+Only show after password changed
+
 ### 1.1.3
 
 Allow manual removal from local accounts
