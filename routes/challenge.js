@@ -470,6 +470,45 @@ module.exports = function (App) {
     })
   })
 
+  App.express.get('/token', checkUser, async (req, res) => {
+    if (req.user.score == 0) {
+      res.send(
+        'Du musst mindestens eine Aufgabe lösen, um diese Funktion zu nutzen.'
+      )
+      return
+    }
+    const ts = Date.now()
+    const clearToken = `${ts}²${req.user.name}²${App.config.tokenSecret}`
+    const hashToken = `${ts}|${await bcrypt.hash(clearToken, 10)}`
+    res.send(
+      `Mit diesen Token kannst du dich auf Discord authentifizieren:<br><br><code style="font-size:16px;border: solid gray 2px; padding: 8px;">${encodeURIComponent(
+        hashToken
+      )}</code><br><br>Der Token ist 15 Minuten gültig bis ${new Date(
+        ts + 1000 * 60 * 15
+      ).toLocaleString()}.`
+    )
+  })
+
+  App.express.get('/verify/:name/:token', async (req, res) => {
+    try {
+      const username = req.params.name
+      const token = decodeURIComponent(req.params.token)
+      const parts = token.split('|')
+      const ts = parseInt(parts[0])
+      const hash = parts[1]
+      const clearToken = `${ts}²${username}²${App.config.tokenSecret}`
+      if (ts + 1000 * 60 * 15 > Date.now()) {
+        if (await bcrypt.compare(clearToken, hash)) {
+          res.send('valid')
+          return
+        }
+      }
+    } catch (e) {
+      console.log(e)
+    }
+    res.send('not valid')
+  })
+
   App.express.get('/roomscore', checkUser, checkSession, async (req, res) => {
     const room = await App.db.models.Room.findOne({
       where: { id: req.user.RoomId },

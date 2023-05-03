@@ -98,6 +98,7 @@ module.exports = function () {
     slowRequestWarning: false,
     slowRequestThreshold: 10000,
     autoPassword: false,
+    tokenSecret: 'mouse dog',
   }
 
   return config

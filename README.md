@@ -367,8 +367,16 @@ Amount of ms for request to become slow (default 10000)
 
 Allow users to store an automatically generated password in browser. (default false)
 
+### config.tokenSecret
+
+Secret server value for auth tokens. (default "mouse dog")
+
 
 ## Changelog
+
+### 1.2.0
+
+Add `/token` and `/verify` for third-party auth.
 
 ### 1.1.5
 
