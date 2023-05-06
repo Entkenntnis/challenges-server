@@ -374,9 +374,13 @@ Secret server value for auth tokens. (default "mouse dog")
 
 ## Changelog
 
+### 1.2.1
+
+Disable monthly count
+
 ### 1.2.0
 
-Add `/token` and `/verify` for third-party auth.
+Add `/token` and `/verify` for third-party auth
 
 ### 1.1.5
 
