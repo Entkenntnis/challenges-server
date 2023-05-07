@@ -459,6 +459,9 @@ module.exports = function (App) {
       },
     })
     const rank = req.user.score == 0 ? 0 : betterThanMe + 1
+    const sum = await App.db.models.User.count({
+      where: { score: { [Op.gt]: 0 } },
+    })
     res.renderPage({
       page: 'profile',
       props: {
@@ -466,6 +469,7 @@ module.exports = function (App) {
         solved,
         lastChal,
         rank,
+        sum,
       },
     })
   })

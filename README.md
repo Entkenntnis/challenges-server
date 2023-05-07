@@ -374,6 +374,10 @@ Secret server value for auth tokens. (default "mouse dog")
 
 ## Changelog
 
+### 1.2.2
+
+Show number of all users in profile rank
+
 ### 1.2.1
 
 Disable monthly count

@@ -2,7 +2,7 @@
 <p><%= t('username') %> <%= user.name %></p>
 <p><%= t('score') %> <%= user.score %></p>
 <% if (props.rank) { %>
-  <p><%= t('rank') %>: <%= props.rank %></p>
+  <p><%= t('rank') %>: <%= props.rank %> (von <%= props.sum %>)</p>
 <% } %>
 <p><%= t('solved') %> <%= props.solved%></p>
 <p><%= t('registered') %> <%= App.moment(user.createdAt).fromNow() %> (<%= App.moment(user.createdAt).format("LLLL") %>)</p>
