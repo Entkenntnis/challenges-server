@@ -17,6 +17,7 @@ module.exports = function (extend = (config) => config) {
   require('./server/dbModel')(App)
   require('./server/expressHeaders')(App)
   require('./server/expressSession')(App)
+  require('./server/expressPerfMonitor')(App)
   require('./server/expressViews')(App)
 
   require('./routes/staticPages')(App)

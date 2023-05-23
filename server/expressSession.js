@@ -33,10 +33,12 @@ module.exports = function (App) {
         try {
           if (App.config.slowRequestWarning && session.__start_ts) {
             const time = Date.now() - session.__start_ts
+            const path = session.__path || ''
             if (time > App.config.slowRequestThreshold) {
-              console.log(`Slow request took ${time}ms.`)
+              console.log(`Slow request took ${time}ms for ${path}`)
             }
             delete session['__start_ts']
+            delete session['__path']
           }
 
           const data = JSON.stringify(session)

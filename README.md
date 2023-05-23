@@ -374,6 +374,14 @@ Secret server value for auth tokens. (default "mouse dog")
 
 ## Changelog
 
+### 1.2.4
+
+Add path to slow request warning
+
+### 1.2.3
+
+Link to last activities on landing page
+
 ### 1.2.2
 
 Show number of all users in profile rank
