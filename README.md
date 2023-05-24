@@ -374,6 +374,10 @@ Secret server value for auth tokens. (default "mouse dog")
 
 ## Changelog
 
+### 1.2.5
+
+Show top percentage
+
 ### 1.2.4
 
 Add path to slow request warning
