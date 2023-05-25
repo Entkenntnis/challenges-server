@@ -342,7 +342,6 @@ module.exports = function (App) {
         name: user.name,
         score: Math.floor(user.score),
         lastActive: App.moment(user.updatedAt).fromNow(),
-        timestamp: App.moment(user.updatedAt).unix(),
         age: App.moment(user.createdAt).fromNow(),
       }
     })
