@@ -31,7 +31,11 @@
 
 <% if (!App.config.noSelfAdmin.includes(user.name)) { %>
 
-  <p style="text-align:right"><a href="<%=prefix%>/changepw"><%= t('changepw') %></a></p>
+  <div class="alert alert-warning d-none my-4" role="alert" id="password-hint">
+    Empfohlen: Setze ein Passwort, um dich auf weiteren Geräten anzumelden: <a href="<%=prefix%>/changepw" class="alert-link">Passwort festlegen</a>
+  </div>
+
+  <p style="text-align:right" id="change-pw"><a href="<%=prefix%>/changepw"><%= t('changepw') %></a></p>
   
   <p class="d-none" id="remove-user" style="text-align:right;"><a href="#" onclick="removeMe()">Account von lokal entfernen</a></p>
 
@@ -45,6 +49,10 @@
     let user = JSON.parse(localStorage.getItem('htw_local_users') || '[]').filter(function(entry){ return entry.name == username })
     if (user.length == 1 && !user[0].password) {
       document.getElementById('remove-user').className = ''
+    }
+    if (user.length == 1 && user[0].password) {
+      document.getElementById('password-hint').classList.remove('d-none')
+      document.getElementById('change-pw').classList.add('d-none')
     }
     
     function removeMe() {

@@ -374,6 +374,10 @@ Secret server value for auth tokens. (default "mouse dog")
 
 ## Changelog
 
+### 1.2.7
+
+Auto password improvements
+
 ### 1.2.6
 
 Small performance improvement for highscore
