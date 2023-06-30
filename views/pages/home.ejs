@@ -28,7 +28,7 @@
         if (localUsers.length > 0) {
           let html = ''
           for (let i = 0; i < localUsers.length; i++) {
-            html += '<button class="btn btn-warning mx-2 btn-sm" onclick="applyUser(' + i + ')"><strong>' + localUsers[i].name + '</strong></button>'
+            html += '<button class="btn btn-warning mx-2 btn-sm" style="vertical-align:baseline" onclick="applyUser(' + i + ')"><strong>' + localUsers[i].name + '</strong></button>'
           }
           document.getElementById('locals').innerHTML = html
           document.getElementById('locals-list').className = ''
