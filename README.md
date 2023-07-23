@@ -374,6 +374,10 @@ Secret server value for auth tokens. (default "mouse dog")
 
 ## Changelog
 
+### 1.3.0
+
+Improve javascript back
+
 ### 1.2.8
 
 Fix vertical align for local accounts

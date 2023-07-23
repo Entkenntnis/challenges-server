@@ -1,7 +1,18 @@
+<script>
+function goBack() {
+  window.history.back()
+  sessionStorage.setItem('should_be_map', '1')
+}
+
+if (sessionStorage.getItem('should_be_map') == '1') {
+  window.location.href = '/map'
+  sessionStorage.removeItem('should_be_map')
+}
+</script>
 
 <p>
   <% if (props.correct !== true) { %>
-    <a href="<%=prefix%>/map" <%- App.config.historyBack ? 'onclick="window.history.back()"' : ''%>><%= t('back') %></a> |
+    <a href="<%=prefix%>/map" <%- App.config.historyBack ? 'onclick="goBack()"' : ''%>><%= t('back') %></a> |
   <% } %>
   <span title="<% if (props.lastSolved !== null) { %>zuletzt <%= App.moment(props.lastSolved).fromNow()%> von <%= props.lastSolvedUserName %><% } %>">
     <%= t('solvedBy', {count: props.solvedBy}) %>
