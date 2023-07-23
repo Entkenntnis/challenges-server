@@ -1,12 +1,10 @@
 <script>
 function goBack() {
-  window.history.back()
-  sessionStorage.setItem('should_be_map', '1')
-}
-
-if (sessionStorage.getItem('should_be_map') == '1') {
-  window.location.href = '/map'
-  sessionStorage.removeItem('should_be_map')
+  if (document.referrer && document.referrer.includes('/map')) {
+    window.history.back()
+  } else {
+    window.location.href = '/map'
+  }
 }
 </script>
 

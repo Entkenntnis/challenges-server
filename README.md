@@ -374,6 +374,10 @@ Secret server value for auth tokens. (default "mouse dog")
 
 ## Changelog
 
+### 1.3.1
+
+Found a better improvement
+
 ### 1.3.0
 
 Improve javascript back
