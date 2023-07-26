@@ -23,7 +23,7 @@
         <span id="msg-span" style="margin-left:12px;font-size:13px;vertical-align:-1px;"></span></small>
       </div>
     </div>
-    <% if (App.config.autoPassword) { %>
+    <% if (App.config.autoPassword && App.config.allowNewAutoPassword) { %>
       <div class="form-group row" style="margin-top:32px;">
         <label class="col-md-2 col-form-label"></label>
         <div class="col-md-5">
@@ -32,7 +32,7 @@
         </div>
       </div>
     <% } %>
-    <div class="form-group row <%= App.config.autoPassword ? 'd-none' : '' %>">
+    <div class="form-group row <%= App.config.autoPassword && App.config.allowNewAutoPassword ? 'd-none' : '' %>">
       <label for="inputPw1" class="col-md-2 col-form-label"><%= t('password') %></label>
       <div class="col-md-5">
         <input
@@ -46,7 +46,7 @@
         >
       </div>
     </div>
-    <div class="form-group row <%= App.config.autoPassword ? 'd-none' : '' %>">
+    <div class="form-group row <%= App.config.autoPassword && App.config.allowNewAutoPassword ? 'd-none' : '' %>">
       <label for="inputPw2" class="col-md-2 col-form-label"><%= t('repeatPassword') %></label>
       <div class="col-md-5">
         <input
@@ -88,11 +88,6 @@
   function render() {
     msgSpan.innerHTML = state.msg
     msgSpan.className = state.class
-    if (state.class == 'text-info') {
-      submitButton.disabled = false
-    } else {
-      submitButton.disabled = true
-    }
   }
   
   function checkUsername() {
@@ -118,7 +113,7 @@
             state.msg = '✓ verfügbar'
             state.class = 'text-info'
             render()
-            <% if (App.config.autoPassword) { %>
+            <% if (App.config.autoPassword && App.config.allowNewAutoPassword) { %>
               let pw = ''
               for (let i = 0; i < 32; i++) {
                 pw += Math.floor(10*Math.random()).toString()

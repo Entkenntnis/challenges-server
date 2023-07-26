@@ -371,8 +371,16 @@ Allow users to store an automatically generated password in browser. (default fa
 
 Secret server value for auth tokens. (default "mouse dog")
 
+### config.allowNewAutoPassword
+
+Allow or disallow new registrations with auto-password (default false)
+
 
 ## Changelog
+
+### 1.3.2
+
+Add migration strategy to exit auto password
 
 ### 1.3.1
 
