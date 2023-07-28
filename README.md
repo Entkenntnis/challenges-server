@@ -86,7 +86,7 @@ Don't show default submit form.
 
 ### noScore
 
-This challenges scores no points and doesn't update last active. Still counts towards solved challenges and shows as last solved challenge in profile.
+This challenges scores no points and doesn't update last active in highscore. Still counts towards solved challenges and shows as last solved challenge in profile.
 
 ## Configuration
 
@@ -381,6 +381,10 @@ Allow or disallow new registrations with auto-password (default false)
 
 
 ## Changelog
+
+### 1.4.1
+
+Last active in profile includes noScore challenges
 
 ### 1.4.0
 

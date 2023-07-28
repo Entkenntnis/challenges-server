@@ -445,6 +445,8 @@ module.exports = function (App) {
       lastSol &&
       lastSol[0] &&
       App.challenges.data.filter((c) => c.id == lastSol[0].cid)[0].title
+    const lastActive =
+      (lastSol && lastSol[0] && lastSol[0].createdAt) || req.user.updatedAt
     const betterThanMe = await App.db.models.User.count({
       where: {
         [Op.or]: [
@@ -468,6 +470,7 @@ module.exports = function (App) {
         room,
         solved,
         lastChal,
+        lastActive,
         rank,
         sum,
       },

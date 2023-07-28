@@ -6,7 +6,7 @@
 <% } %>
 <p><%= t('solved') %> <%= props.solved%></p>
 <p><%= t('registered') %> <%= App.moment(user.createdAt).fromNow() %> (<%= App.moment(user.createdAt).format("LLLL") %>)</p>
-<p><%= t('lastActive') %> <%= App.moment(user.updatedAt).fromNow() %> (<%= App.moment(user.updatedAt).format("LLLL") %>)</p>
+<p><%= t('lastActive') %> <%= App.moment(props.lastActive).fromNow() %> (<%= App.moment(props.lastActive).format("LLLL") %>)</p>
 <% if (props.lastChal) { %>
   <p><%= t('lastSolved') %>: <%= props.lastChal %></p>
 <% } %>
