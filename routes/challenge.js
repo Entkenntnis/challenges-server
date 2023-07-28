@@ -397,7 +397,7 @@ module.exports = function (App) {
       }
 
       let html = challenge.render
-        ? challenge.render({ App, req })
+        ? await challenge.render({ App, req })
         : challenge.html
 
       if (App.config.prefixPlaceholder) {

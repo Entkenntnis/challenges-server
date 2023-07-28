@@ -382,6 +382,10 @@ Allow or disallow new registrations with auto-password (default false)
 
 ## Changelog
 
+### 1.4.2
+
+Allow render to be async
+
 ### 1.4.1
 
 Last active in profile includes noScore challenges
