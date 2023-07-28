@@ -16,7 +16,7 @@ module.exports = function (App) {
   function calculateDistance() {
     const result = {}
     let todo = App.challenges.data.filter((chal) => {
-      if (chal.deps.length == 0) {
+      if (chal.deps.length == 0 || chal.noScore) {
         result[chal.id] = 0
         return false
       }

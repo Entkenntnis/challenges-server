@@ -84,6 +84,10 @@ function (raw, {App, req}) {
 
 Don't show default submit form.
 
+### noScore
+
+This challenges scores no points and doesn't update last active. Still counts towards solved challenges and shows as last solved challenge in profile.
+
 ## Configuration
 
 The server exposes a lot of config options, which you can all override and customize:
@@ -377,6 +381,10 @@ Allow or disallow new registrations with auto-password (default false)
 
 
 ## Changelog
+
+### 1.4.0
+
+Add noScore config for challenge
 
 ### 1.3.2
 

@@ -306,7 +306,7 @@ module.exports = function (App) {
                 transaction: t,
               })
 
-              if (created) {
+              if (created && !challenge.noScore) {
                 const user = await App.db.models.User.findOne({
                   where: { id: req.user.id },
                   transaction: t,
