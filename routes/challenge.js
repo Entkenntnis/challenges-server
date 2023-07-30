@@ -404,6 +404,8 @@ module.exports = function (App) {
         html = html.split(App.config.prefixPlaceholder).join('')
       }
 
+      const author = challenge.author
+
       res.renderPage({
         page: 'challenge',
         props: {
@@ -414,6 +416,7 @@ module.exports = function (App) {
           solvedBy,
           lastSolved,
           lastSolvedUserName,
+          author,
         },
         backButton: false,
         title: challenge.title,

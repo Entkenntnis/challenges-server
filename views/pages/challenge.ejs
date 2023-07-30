@@ -16,7 +16,11 @@ function goBack() {
     <%= t('solvedBy', {count: props.solvedBy}) %>
   </span>
   <% if (props.challenge.date) { %> |
-    <span style="color:gray">erstellt <%= App.moment(props.challenge.date).fromNow()%></span>
+    <span style="color:gray">erstellt <%= App.moment(props.challenge.date).fromNow()%>
+      <% if (props.challenge.author) { %>
+        von <%= props.challenge.author %>
+      <% } %>
+    </span>
   <% } %>
 </p>
 

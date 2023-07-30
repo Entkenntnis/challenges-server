@@ -56,7 +56,7 @@ The html content of the challenge
 
 ### render
 
-Pass a function that will render the challenge (instead of html). The input is an object with the properties `App` and `req`.
+Optional instead of html: Pass a function that will render the challenge (instead of html). The input is an object with the properties `App` and `req`.
 
 ### solution
 
@@ -64,7 +64,7 @@ A string value for the solution of the challenge. (case-insensitive, trimmed).
 
 ### check
 
-Function that gets the answer and an object with `App` and `req`. Return an object with answer (the displayed solution value) and correct, a boolean that indicates whether the challenge is solved or not. Alternative: Just return a boolean, replaces solution.
+Optional instead of solution: Function that gets the answer and an object with `App` and `req`. Return an object with answer (the displayed solution value) and correct, a boolean that indicates whether the challenge is solved or not. Alternative: Just return a boolean, replaces solution.
 
 This is the default check function:
 
@@ -82,11 +82,15 @@ function (raw, {App, req}) {
 
 ### hidesubmit
 
-Don't show default submit form.
+Optional, don't show default submit form. 
 
 ### noScore
 
-This challenges scores no points and doesn't update last active in highscore. Still counts towards solved challenges and shows as last solved challenge in profile.
+Optional, This challenges scores no points and doesn't update last active in highscore. Still counts towards solved challenges and shows as last solved challenge in profile.
+
+### author
+
+Optional, shows the name of an author
 
 ## Configuration
 
@@ -381,6 +385,10 @@ Allow or disallow new registrations with auto-password (default false)
 
 
 ## Changelog
+
+### 1.4.3
+
+Add author to challenge definition, fix for noScore in distance calculation
 
 ### 1.4.2
 
