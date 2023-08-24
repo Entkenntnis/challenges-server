@@ -247,7 +247,13 @@ module.exports = function (App) {
       }
 
       if (!accessible) {
-        res.redirect('/map')
+        res.renderPage({
+          page: 'challenge',
+          props: {},
+          backButton: true,
+          title: challenge.title,
+          heading: challenge.title,
+        })
         return
       }
 
@@ -409,6 +415,7 @@ module.exports = function (App) {
       res.renderPage({
         page: 'challenge',
         props: {
+          accessible: true,
           challenge,
           html,
           correct,

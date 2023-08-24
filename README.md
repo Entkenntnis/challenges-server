@@ -386,6 +386,10 @@ Allow or disallow new registrations with auto-password (default false)
 
 ## Changelog
 
+### 1.4.4
+
+Show placeholder for inaccessible challenges
+
 ### 1.4.3
 
 Add author to challenge definition, fix for noScore in distance calculation
