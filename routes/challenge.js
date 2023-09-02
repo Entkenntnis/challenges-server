@@ -115,7 +115,8 @@ module.exports = function (App) {
       }
       const visible =
         isSolved ||
-        challenge.deps.some((c) => solved.includes(c)) ||
+        (challenge.deps.some((c) => solved.includes(c)) &&
+          !challenge.showAfterSolve) ||
         challenge.deps.length === 0
       if (visible) {
         points.push(point)

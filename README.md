@@ -92,6 +92,10 @@ Optional, This challenges scores no points and doesn't update last active in hig
 
 Optional, shows the name of an author
 
+### showAfterSolve
+
+Only visible after challenge is solved
+
 ## Configuration
 
 The server exposes a lot of config options, which you can all override and customize:
@@ -385,6 +389,10 @@ Allow or disallow new registrations with auto-password (default false)
 
 
 ## Changelog
+
+### 1.4.5
+
+Add showAfterSolve
 
 ### 1.4.4
 
