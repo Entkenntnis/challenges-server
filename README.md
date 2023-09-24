@@ -385,7 +385,7 @@ Allow or disallow new registrations with auto-password (default false)
 
 ## Changelog
 
-### 2.0.1
+### 2.0.1, 2.0.2
 
 Fix: Add sameSite attribute
 

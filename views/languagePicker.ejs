@@ -19,7 +19,7 @@
     function changeLng(e) {
       const previousLng = Cookies.get(key)
       if (e.target.value !== previousLng) {
-        Cookies.set(key, e.target.value)
+        Cookies.set(key, e.target.value, {sameSite: 'lax'})
         window.location.reload()
       }
     }
