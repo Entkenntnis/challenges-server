@@ -8,7 +8,10 @@ module.exports = function (App) {
       req.lng = lng
     } else {
       req.lng = detectLanguage(req.headers['accept-language'])
-      res.cookie(cookieKey, req.lng, { maxAge: 7 * 24 * 60 * 60 * 1000 })
+      res.cookie(cookieKey, req.lng, {
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        sameSite: 'lax',
+      })
     }
 
     next()
