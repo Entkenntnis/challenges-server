@@ -1,4 +1,6 @@
 
+<%- include('../languagePicker', {t, App, locale}) %>
+
 <h2><%= t('loginHeading') %></h2>
 
 <% if (props.invalidLogin) { %>
@@ -63,7 +65,7 @@
 
 <%- include('../highscoreTable', {users:props.users, t, user, hideRank: false}) %>
 
-<p>[<a href="<%=prefix%>/highscore">Highscore</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<a href="<%=prefix%>/highscore?sort=new">neuste Aktivität</a>]</p>
+<p>[<a href="<%=prefix%>/highscore">Highscore</a>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<a href="<%=prefix%>/highscore?sort=new"><%=t('showRecent')%></a>]</p>
 
 <hr class="my-5"/>
 

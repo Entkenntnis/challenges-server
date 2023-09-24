@@ -7,26 +7,27 @@ module.exports = function (App) {
       // REMARK: allow passing in string only
       const page = opts.page || opts
 
+      const i18n = App.i18n.get(req.lng)
+
       // REMARK: automatically prefix page or 'share'
       const t = function (key, opts) {
         const pageKey = page + '.' + key
-        if (App.i18n.exists(pageKey)) {
-          return App.i18n.t(pageKey, opts)
+        if (i18n.exists(pageKey)) {
+          return i18n.t(pageKey, opts)
         }
         const shareKey = 'share.' + key
-        if (App.i18n.exists(shareKey)) {
-          return App.i18n.t(shareKey, opts)
+        if (i18n.exists(shareKey)) {
+          return i18n.t(shareKey, opts)
         }
         // REMARK: allow accessing other page's keys
-        if (App.i18n.exists(key)) {
-          return App.i18n.t(key, opts)
+        if (i18n.exists(key)) {
+          return i18n.t(key, opts)
         }
         return key
       }
 
-      const locale = App.config.locale
+      const locale = req.lng
       const brand = App.config.brand
-      const slogan = App.config.slogan
 
       const user = opts.user || req.user
       const backHref = opts.backHref || '/'
@@ -35,7 +36,7 @@ module.exports = function (App) {
       // REMARK: take heading option, otherwise translate it
       const heading = opts.heading
         ? opts.heading
-        : App.i18n.exists(page + '.heading')
+        : i18n.exists(page + '.heading')
         ? t('heading')
         : undefined
 
@@ -43,7 +44,7 @@ module.exports = function (App) {
       const title = opts.title
         ? opts.title
         : brand +
-          (App.i18n.exists(page + '.title')
+          (i18n.exists(page + '.title')
             ? ' - ' + t('title')
             : heading
             ? ' - ' + heading
@@ -52,7 +53,7 @@ module.exports = function (App) {
       // REMARK: passing in content or content_ key will avoid using page!
       const content = opts.content
         ? opts.content
-        : App.i18n.exists(page + '.content_')
+        : i18n.exists(page + '.content_')
         ? t('content_')
         : undefined
 
@@ -66,7 +67,6 @@ module.exports = function (App) {
       res.render('main', {
         locale,
         brand,
-        slogan,
         title,
         pagePath,
         props,

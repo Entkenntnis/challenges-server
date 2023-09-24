@@ -96,13 +96,13 @@
       state.msg = ''
       state.class = 'text-danger'
     } else if (name.length < <%= App.config.accounts.minUsername %>) {
-      state.msg = 'Benutzername zu kurz'
+      state.msg = '<%= t('nameTooShort')%>'
       state.class = 'text-danger'
     } else if (!/<%=App.config.accounts.regex.source%>/.test(name)) {
-      state.msg = 'Benutzername enthält ungültige Zeichen'
+      state.msg = '<%= t('nameInvalidChars')%>'
       state.class = 'text-danger'
     } else {
-      state.msg = 'wird geprüft ...'
+      state.msg = '<%= t('checking')%> ...'
       state.class = 'text-secondary'
       
       const xhr = new XMLHttpRequest();
@@ -110,7 +110,7 @@
       xhr.onload = function() {
         if (xhr.status === 200) {
           if (xhr.responseText === nameInput.value.trim()) {
-            state.msg = '✓ verfügbar'
+            state.msg = '✓ <%= t('available')%>'
             state.class = 'text-info'
             render()
             <% if (App.config.autoPassword && App.config.allowNewAutoPassword) { %>
@@ -123,7 +123,7 @@
               sessionStorage.setItem('htw_temp_local_user', JSON.stringify({name:name, password: pw}))
             <% } %>
           } else if (xhr.responseText === '²bad²') {
-            state.msg = 'Benutzername bereits vergeben'
+            state.msg = '<%= t('nameExists')%>'
             state.class = 'text-danger'
             render()
           } else {

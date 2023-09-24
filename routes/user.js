@@ -19,6 +19,7 @@ module.exports = function (App) {
         else res()
       })
     })
+    const i18n = App.i18n.get(req.lng)
     res.renderPage({
       page: 'register',
       props: {
@@ -28,8 +29,8 @@ module.exports = function (App) {
         room,
       },
       heading: room
-        ? App.i18n.t('register.joinRoomHeading', { room })
-        : App.i18n.t('register.normalHeading'),
+        ? i18n.t('register.joinRoomHeading', { room })
+        : i18n.t('register.normalHeading'),
       backHref: room ? '/join' : undefined,
     })
   })
@@ -41,11 +42,13 @@ module.exports = function (App) {
     const room = req.body.room
     let roomId
 
+    const i18n = App.i18n.get(req.lng)
+
     if (room) {
       const dbRoom = await App.db.models.Room.findOne({ where: { name: room } })
       if (!dbRoom) {
         // REMARK: this is not expected to happen
-        req.flash('join', App.i18n.t('join.roomNotFound'))
+        req.flash('join', i18n.t('join.roomNotFound'))
         res.redirect('/join')
         return
       }
@@ -54,26 +57,26 @@ module.exports = function (App) {
 
     async function check() {
       if (!App.csrf.verify(req, req.body.csrf))
-        return App.i18n.t('register.invalidToken')
+        return i18n.t('register.invalidToken')
       if (username.length < App.config.accounts.minUsername)
-        return App.i18n.t('register.nameTooShort')
+        return i18n.t('register.nameTooShort')
       if (username.length > App.config.accounts.maxUsername)
-        return App.i18n.t('register.nameTooLong', {
+        return i18n.t('register.nameTooLong', {
           max: App.config.accounts.maxUsername,
         })
       if (!App.config.accounts.regex.test(username))
-        return App.i18n.t('register.nameInvalidChars')
+        return i18n.t('register.nameInvalidChars')
 
       const user = await App.db.models.User.findOne({
         where: { name: username },
       })
-      if (user) return App.i18n.t('register.nameExists')
+      if (user) return i18n.t('register.nameExists')
 
-      if (pw1 != pw2) return App.i18n.t('register.pwMismatch')
+      if (pw1 != pw2) return i18n.t('register.pwMismatch')
       if (pw1.length < App.config.accounts.minPw)
-        return App.i18n.t('register.pwTooShort')
+        return i18n.t('register.pwTooShort')
       if (pw1.length > App.config.accounts.maxPw)
-        return App.i18n.t('register.pwTooLong')
+        return i18n.t('register.pwTooLong')
 
       const creationRate = await App.db.models.User.count({
         where: {
@@ -83,7 +86,7 @@ module.exports = function (App) {
 
       if (creationRate > App.config.accounts.maxRatePerHour) {
         console.log('register failed because server crowded')
-        return App.i18n.t('register.serverCrowded')
+        return i18n.t('register.serverCrowded')
       }
     }
 
@@ -104,7 +107,7 @@ module.exports = function (App) {
         return
       } catch (e) {
         console.warn(e)
-        req.flash('register', App.i18n.t('register.failure'))
+        req.flash('register', i18n.t('register.failure'))
       }
     }
     req.session.registerValues = {
@@ -149,9 +152,10 @@ module.exports = function (App) {
 
   App.express.post('/join', async (req, res) => {
     const room = req.body.room
+    const i18n = App.i18n.get(req.lng)
     const roomId = await App.db.models.Room.findOne({ where: { name: room } })
     if (!roomId) {
-      req.flash('join', App.i18n.t('join.roomNotFound'))
+      req.flash('join', i18n.t('join.roomNotFound'))
       req.session.joinValues = { room }
       res.redirect('/join')
       return
@@ -179,16 +183,18 @@ module.exports = function (App) {
     const room = req.body.room
     const roomId = await App.db.models.Room.findOne({ where: { name: room } })
 
+    const i18n = App.i18n.get(req.lng)
+
     async function check() {
       if (!App.csrf.verify(req, req.body.csrf))
-        return App.i18n.t('create.invalidToken')
+        return i18n.t('create.invalidToken')
       if (room.length < App.config.accounts.minRoom)
-        return App.i18n.t('create.keyTooShort')
+        return i18n.t('create.keyTooShort')
       if (room.length > App.config.accounts.maxRoom)
-        return App.i18n.t('create.keyTooLong')
+        return i18n.t('create.keyTooLong')
       if (!App.config.accounts.roomRegex.test(room))
-        return App.i18n.t('create.keyInvalid')
-      if (roomId) return App.i18n.t('create.keyExists')
+        return i18n.t('create.keyInvalid')
+      if (roomId) return i18n.t('create.keyExists')
 
       const creationRate = await App.db.models.Room.count({
         where: {
@@ -198,7 +204,7 @@ module.exports = function (App) {
 
       if (creationRate > App.config.accounts.maxRoomPerHour) {
         console.log('room creation failed because server crowded')
-        return App.i18n.t('create.serverCrowded')
+        return i18n.t('create.serverCrowded')
       }
     }
 
@@ -214,7 +220,7 @@ module.exports = function (App) {
         return
       } catch (e) {
         console.warn(e)
-        req.flash('create', App.i18n.t('create.failure'))
+        req.flash('create', i18n.t('create.failure'))
       }
     }
 
@@ -274,7 +280,7 @@ module.exports = function (App) {
         where: { id: req.session.userId },
       })
     }
-    const users = processHighscore(dbUsers, sort)
+    const users = processHighscore(dbUsers, sort, req.lng)
     let count
     if (sort == 'month') {
       count = users.length
@@ -320,7 +326,7 @@ module.exports = function (App) {
       ],
       limit: App.config.accounts.topHackersLimit,
     })
-    const users = processHighscore(dbUsers)
+    const users = processHighscore(dbUsers, undefined, req.lng)
     res.renderPage({
       page: 'home',
       props: {
@@ -336,13 +342,13 @@ module.exports = function (App) {
     res.redirect('/')
   })
 
-  function processHighscore(dbUsers, sort) {
+  function processHighscore(dbUsers, sort, lng) {
     const users = dbUsers.map((user) => {
       return {
         name: user.name,
         score: Math.floor(user.score),
-        lastActive: App.moment(user.updatedAt).fromNow(),
-        age: App.moment(user.createdAt).fromNow(),
+        lastActive: App.moment(user.updatedAt).locale(lng).fromNow(),
+        age: App.moment(user.createdAt).locale(lng).fromNow(),
       }
     })
     if (sort != 'new') {

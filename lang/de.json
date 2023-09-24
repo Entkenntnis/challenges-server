@@ -4,6 +4,8 @@
     "back": "Zurück"
   },
   "home": {
+    "slogan": "Dein Slogan",
+    "language": "Sprache",
     "loginHeading": "Login",
     "invalid": "Falsche Zugangsdaten",
     "name": "Name:",
@@ -12,7 +14,7 @@
     "registerLink": "Registrierung",
     "joinRoom": "Raum beitreten",
     "top10": "Top 10 des Monats",
-    "showHighscore": "alle anzeigen",
+    "showRecent": "neuste Aktivität",
     "rooms": "Räume",
     "inviteOrga_": "Leitest du eine Veranstaltung? Hier kannst du {{-link}}.",
     "createRoom": "einen eigenen Raum anlegen",
@@ -42,7 +44,9 @@
     "failure": "Registrierung fehlgeschlagen. Bitte erneut versuchen.",
     "nameExists": "Benutzername existiert bereits.",
     "serverCrowded": "Es gibt im Moment ein hohes Aufkommen an Registrierungen, versuche es in 15 Minuten erneut.",
-    "submit": "Los"
+    "submit": "Los",
+    "available": "verfügbar",
+    "checking": "wird überprüft"
   },
   "join": {
     "heading": "Beitreten",
@@ -57,6 +61,7 @@
     "score": "Punktzahl",
     "sessionScore": "Session-Punktzahl",
     "lastActive": "zuletzt aktiv",
+    "joined": "beigetreten",
     "showRoomScore": "nur Raum",
     "showGlobalScore": "alle anzeigen",
     "orderby": "Sortieren nach",
@@ -102,6 +107,7 @@
     "sessionReady": "Session: bereit",
     "session": "Session:",
     "highscore": "Highscore",
+    "hint": "Hinweise",
     "profile": "Profil",
     "logout": "abmelden"
   },
@@ -131,7 +137,10 @@
     "continue": "weiter",
     "correct": "ist richtig",
     "wrong": "ist falsch",
-    "locked": "Du musst nach 20 Versuchen jeweils eine Pause von 30 Sekunden einlegen. Bitte warte noch {{sec}}s."
+    "locked": "Du musst nach 20 Versuchen jeweils eine Pause von 30 Sekunden einlegen. Bitte warte noch {{sec}}s.",
+    "lastSolved": "zuletzt {{ago}} von {{name}}",
+    "created":  "erstellt",
+    "locked": "Du hast diese Aufgabe noch nicht freigeschaltet."
   },
   "roomscore": {
     "title": "Highscore",

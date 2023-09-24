@@ -21,6 +21,8 @@ module.exports = function (App) {
 
   App.express.use(require('connect-flash')())
 
+  App.express.use(require('cookie-parser')())
+
   // COMPAT: allow prefixing redirects
   App.express.use((req, res, next) => {
     const redirect = res.redirect.bind(res)

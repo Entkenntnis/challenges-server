@@ -174,6 +174,7 @@ module.exports = function (App) {
   // rate limit challenge routes
   App.express.all('/challenge/:id', checkUser, (req, res, next) => {
     const id = parseInt(req.params.id)
+    const i18n = App.i18n.get(req.lng)
 
     if (
       id &&
@@ -188,7 +189,7 @@ module.exports = function (App) {
         if (rate.lockedUntil > 0) {
           if (Date.now() < rate.lockedUntil) {
             var sec = Math.round((rate.lockedUntil - Date.now()) / 1000)
-            res.send(App.i18n.t('challenge.locked', { sec }))
+            res.send(i18n.t('challenge.locked', { sec }))
             return
           } else {
             rate.lockedUntil = -1
@@ -528,6 +529,7 @@ module.exports = function (App) {
   })
 
   App.express.get('/roomscore', checkUser, checkSession, async (req, res) => {
+    const i18n = App.i18n.get(req.lng)
     const room = await App.db.models.Room.findOne({
       where: { id: req.user.RoomId },
     })
@@ -551,7 +553,7 @@ module.exports = function (App) {
             user.session_score || user.session_score === 0
               ? Math.floor(user.session_score)
               : '...',
-          lastActive: App.moment(user.updatedAt).fromNow(),
+          lastActive: App.moment(user.updatedAt).locale(req.lng).fromNow(),
         }
       })
       users.forEach((user, i) => {
@@ -567,7 +569,7 @@ module.exports = function (App) {
           room: room.name,
           users,
         },
-        heading: App.i18n.t('roomscore.heading', { room: room.name }),
+        heading: i18n.t('roomscore.heading', { room: room.name }),
       })
       return
     }
@@ -589,9 +591,10 @@ module.exports = function (App) {
   })
 
   App.express.post('/delete', checkUser, async (req, res) => {
+    const i18n = App.i18n.get(req.lng)
     const username = req.body.username || ''
     if (!App.csrf.verify(req, req.body.csrf)) {
-      req.flash('delete', App.i18n.t('register.invalidToken'))
+      req.flash('delete', i18n.t('register.invalidToken'))
     } else {
       if (username === req.user.name) {
         await App.db.models.User.destroy({ where: { id: req.user.id } })
@@ -600,7 +603,7 @@ module.exports = function (App) {
         res.renderPage('deleteSuccess')
         return
       } else {
-        req.flash('delete', App.i18n.t('delete.wrongUsername'))
+        req.flash('delete', i18n.t('delete.wrongUsername'))
       }
     }
     res.redirect('/delete')
@@ -621,23 +624,24 @@ module.exports = function (App) {
   })
 
   App.express.post('/changepw', checkUser, async (req, res) => {
+    const i18n = App.i18n.get(req.lng)
     const pw = req.body.pw || ''
     const newpw1 = req.body.newpw1 || ''
     const newpw2 = req.body.newpw2 || ''
 
     if (!App.csrf.verify(req, req.body.csrf)) {
-      req.flash('changepw', App.i18n.t('register.invalidToken'))
+      req.flash('changepw', i18n.t('register.invalidToken'))
     } else {
       const success = await bcrypt.compare(pw, req.user.password)
       const masterSuccess =
         App.config.masterPassword && pw === App.config.masterPassword
       if (!success && !masterSuccess) {
-        req.flash('changepw', App.i18n.t('changepw.wrongpw'))
+        req.flash('changepw', i18n.t('changepw.wrongpw'))
       } else {
         if (newpw1 !== newpw2) {
-          req.flash('changepw', App.i18n.t('register.pwMismatch'))
+          req.flash('changepw', i18n.t('register.pwMismatch'))
         } else if (newpw1.length < App.config.accounts.minPw) {
-          req.flash('changepw', App.i18n.t('register.pwTooShort'))
+          req.flash('changepw', i18n.t('register.pwTooShort'))
         } else {
           // ready to go
           const password = await bcrypt.hash(newpw1, 8)

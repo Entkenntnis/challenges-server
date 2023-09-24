@@ -12,7 +12,7 @@ module.exports = function () {
     logprefix: '[challenges-server] ',
     port: 3000,
     sessionSecret: 'keyboard cat',
-    locale: 'en',
+    languages: ['en'],
     theme: 'sketchy',
     reloadChallenges: true,
     configRoutes: true,
@@ -45,7 +45,6 @@ module.exports = function () {
       customMapHtml: '',
     },
     brand: 'challenges-server',
-    slogan: 'An homage to hacker.org',
     periodic: {
       startupDelay: 2000,
       baseInterval: 10000,

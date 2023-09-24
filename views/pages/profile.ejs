@@ -1,4 +1,7 @@
 
+<%- include('../languagePicker', {t, App, locale}) %>
+
+
 <p><%= t('username') %> <%= user.name %></p>
 <p><%= t('score') %> <%= user.score %></p>
 <% if (props.rank) { %>

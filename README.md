@@ -104,7 +104,6 @@ The server exposes a lot of config options, which you can all override and custo
 require('@entkenntnis/challenges-server')(config => {
   // configure server
   config.port = 8080
-  config.locale = 'de'
   config.theme = 'yeti'
   return config
 })
@@ -145,9 +144,9 @@ The port on which to start the server, default is 3000. The server is listening 
 
 Secret value to generate session tokens. Set it to something unique, default is `"keyboard cat"`.
 
-### config.locale
+### config.languages
 
-Sets the language, currently available are `"de"` (German), `"en"` and `"fr"` (French). Default is English.
+Set selectable languages, currently available are `"de"` (German), `"en"` and `"fr"` (French). Default is `['en']`.
 
 ### config.theme
 
@@ -163,7 +162,7 @@ Reloads challenges every page view. Good for development, default is true. Disab
 
 ### config.configRoutes
 
-Enables `/settheme/<theme>` and `/setlocale/<locale>` routes to dynamically change theme and language. Enabled by default, disable this on production.
+Enables `/settheme/<theme>` route to dynamically change theme. Enabled by default, disable this on production.
 
 ### config.challengesDir
 
@@ -219,10 +218,6 @@ You can also set the width and the height of the map. You can add custom html to
 ### config.brand
 
 The title of the page. Default value is `"challenges-server"`.
-
-### config.slogan
-
-The subline of the page, default value is `"An homage to hacker.org"`.
 
 ### config.periodic
 
@@ -349,7 +344,7 @@ config.onSubmit = ({App, id, correct, solved, isEditor, answer }) => {
 
 ### config.hintPage
 
-An object with properties `url` and `label`. Adds an external link to the status bar with the given label.
+An object with properties `url`. Adds an external link to the status bar with the given translation string `statusBar.hint`.
 
 ### config.assetsMaxAge
 
@@ -389,6 +384,15 @@ Allow or disallow new registrations with auto-password (default false)
 
 
 ## Changelog
+
+### 2.0.0
+
+Breaking I18n rework:
+
+- `locale` is replaced by `languages`
+- `slogan` replaced by i18n string `home.slogan`
+- `hintPage.label` replaced by i18n string `statusBar.hint`
+
 
 ### 1.4.5
 

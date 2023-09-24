@@ -4,6 +4,8 @@
     "go": "Go"
   },
   "home": {
+    "slogan": "Your slogan",
+    "language": "Language",
     "loginHeading": "Login",
     "invalid": "Login failed!",
     "name": "Name:",
@@ -12,7 +14,7 @@
     "registerLink": "Register",
     "joinRoom": "Join room",
     "top10": "Top 10 of the Month",
-    "showHighscore": "Show all",
+    "showRecent": "Latest Activity",
     "rooms": "Rooms",
     "inviteOrga_": "Are you hosting an event? Here you can {{-link}}.",
     "createRoom": "create a custom room",
@@ -42,7 +44,9 @@
     "failure": "Creating user failed. Please try again.",
     "nameExists": "Username already exists.",
     "serverCrowded": "There are too many registrations at the moment. Please try again in 15 minutes.",
-    "submit": "Submit"
+    "submit": "Submit",
+    "available": "available",
+    "checking": "checking"
   },
   "join": {
     "heading": "Join",
@@ -57,11 +61,12 @@
     "score": "Score",
     "sessionScore": "Session Score",
     "lastActive": "Last Active",
+    "joined": "joined",
     "showRoomScore": "room only",
     "showGlobalScore": "show all",
     "orderby": "Order by",
-    "points": "Points",
-    "pointsMonth": "Points (this month)",
+    "points": "Score",
+    "pointsMonth": "Score (this month)",
     "entries": "{{count}} entry",
     "entries_plural": "{{count}} entries"
   },
@@ -102,6 +107,7 @@
     "sessionReady": "Session: ready",
     "session": "Session:",
     "highscore": "Highscore",
+    "hint": "Hints",
     "profile": "Profile",
     "logout": "Logout"
   },
@@ -131,7 +137,10 @@
     "continue": "continue",
     "correct": "is correct",
     "wrong": "is wrong",
-    "locked": "After 20 tries, you must pause for 30 seconds. Please wait {{sec}}s."
+    "locked": "After 20 tries, you must pause for 30 seconds. Please wait {{sec}}s.",
+    "lastSolved": "last {{ago}} by {{name}}",
+    "created":  "created",
+    "locked": "You have not unlocked this challenge yet."
   },
   "roomscore": {
     "title": "Highscore",
