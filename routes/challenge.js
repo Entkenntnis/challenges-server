@@ -110,7 +110,7 @@ module.exports = function (App) {
       const point = {
         id: challenge.id,
         pos: challenge.pos,
-        title: challenge.title,
+        title: challenge.title[req.lng] || challenge.title,
         isSolved,
       }
       const visible =
@@ -248,13 +248,15 @@ module.exports = function (App) {
         accessible = true
       }
 
+      const challengeTitle = challenge.title[req.lng] || challenge.title
+
       if (!accessible) {
         res.renderPage({
           page: 'challenge',
           props: {},
           backButton: true,
-          title: challenge.title,
-          heading: challenge.title,
+          title: challengeTitle,
+          heading: challengeTitle,
         })
         return
       }
@@ -408,6 +410,8 @@ module.exports = function (App) {
         ? await challenge.render({ App, req })
         : challenge.html
 
+      html = html[req.lng] || html
+
       if (App.config.prefixPlaceholder) {
         html = html.split(App.config.prefixPlaceholder).join('')
       }
@@ -428,8 +432,8 @@ module.exports = function (App) {
           author,
         },
         backButton: false,
-        title: challenge.title,
-        heading: challenge.title,
+        title: challengeTitle,
+        heading: challengeTitle,
       })
     }
   )
@@ -476,12 +480,13 @@ module.exports = function (App) {
     const sum = await App.db.models.User.count({
       where: { score: { [Op.gt]: 0 } },
     })
+
     res.renderPage({
       page: 'profile',
       props: {
         room,
         solved,
-        lastChal,
+        lastChal: (lastChal && lastChal[req.lng]) || lastChal,
         lastActive,
         rank,
         sum,

@@ -8,8 +8,8 @@
   <p><%= t('rank') %>: <%= props.rank %> <span style="color:#dddddd;margin-left:12px;">(von <%= props.sum %>, Top <%= Math.ceil(props.rank * 100 / props.sum) %>%)</span></p>
 <% } %>
 <p><%= t('solved') %> <%= props.solved%></p>
-<p><%= t('registered') %> <%= App.moment(user.createdAt).fromNow() %> (<%= App.moment(user.createdAt).format("LLLL") %>)</p>
-<p><%= t('lastActive') %> <%= App.moment(props.lastActive).fromNow() %> (<%= App.moment(props.lastActive).format("LLLL") %>)</p>
+<p><%= t('registered') %> <%= App.moment(user.createdAt).locale(locale).fromNow() %> (<%= App.moment(user.createdAt).locale(locale).format("LLLL") %>)</p>
+<p><%= t('lastActive') %> <%= App.moment(props.lastActive).locale(locale).fromNow() %> (<%= App.moment(props.lastActive).locale(locale).format("LLLL") %>)</p>
 <% if (props.lastChal) { %>
   <p><%= t('lastSolved') %>: <%= props.lastChal %></p>
 <% } %>
