@@ -385,6 +385,10 @@ Allow or disallow new registrations with auto-password (default false)
 
 ## Changelog
 
+### 2.0.4
+
+Fix: missing translation in challenge, rank in profile matches rank in highscore
+
 ### 2.0.3
 
 Fix: profile date translation, challenges can return translated content

@@ -140,7 +140,8 @@
     "locked": "After 20 tries, you must pause for 30 seconds. Please wait {{sec}}s.",
     "lastSolved": "last {{ago}} by {{name}}",
     "created":  "created",
-    "locked": "You have not unlocked this challenge yet."
+    "locked": "You have not unlocked this challenge yet.",
+    "by": "by"
   },
   "roomscore": {
     "title": "Highscore",

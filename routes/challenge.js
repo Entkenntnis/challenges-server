@@ -467,12 +467,12 @@ module.exports = function (App) {
       where: {
         [Op.or]: [
           { score: { [Op.gt]: req.user.score } },
-          {
+          /*{
             [Op.and]: [
               { score: { [Op.eq]: req.user.score } },
               { updatedAt: { [Op.gt]: req.user.updatedAt } },
             ],
-          },
+          },*/
         ],
       },
     })

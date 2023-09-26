@@ -24,7 +24,7 @@ function goBack() {
     <% if (props.challenge.date) { %> |
       <span style="color:gray"><%= t('created')%> <%= App.moment(props.challenge.date).locale(locale).fromNow()%>
         <% if (props.challenge.author) { %>
-          von <%= props.challenge.author %>
+          <%= t('by') %> <%= props.challenge.author %>
         <% } %>
       </span>
     <% } %>
