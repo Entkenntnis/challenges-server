@@ -385,6 +385,11 @@ Allow or disallow new registrations with auto-password (default false)
 
 ## Changelog
 
+### 2.0.5
+
+Fix: User is loaded for all routes
+Fix: potential server crash
+
 ### 2.0.4
 
 Fix: missing translation in challenge, rank in profile matches rank in highscore

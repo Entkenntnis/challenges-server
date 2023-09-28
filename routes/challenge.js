@@ -6,15 +6,9 @@ const document = window.document
 
 module.exports = function (App) {
   async function checkUser(req, res, next) {
-    if (req.session.userId) {
-      const user = await App.db.models.User.findOne({
-        where: { id: req.session.userId },
-      })
-      if (user) {
-        req.user = user
-        next()
-        return
-      }
+    if (req.session.userId && req.user) {
+      next()
+      return
     }
     delete req.session.userId
     res.redirect('/')
@@ -536,7 +530,7 @@ module.exports = function (App) {
   App.express.get('/roomscore', checkUser, checkSession, async (req, res) => {
     const i18n = App.i18n.get(req.lng)
     const room = await App.db.models.Room.findOne({
-      where: { id: req.user.RoomId },
+      where: { id: req.user.RoomId || -1 },
     })
     if (req.user.RoomId && room) {
       const dbUsers = await App.db.models.User.findAll({
