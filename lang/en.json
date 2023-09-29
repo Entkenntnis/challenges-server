@@ -137,7 +137,7 @@
     "continue": "continue",
     "correct": "is correct",
     "wrong": "is wrong",
-    "locked": "After 20 tries, you must pause for 30 seconds. Please wait {{sec}}s.",
+    "timeout": "After 20 tries, you must pause for 30 seconds. Please wait {{sec}}s.",
     "lastSolved": "last {{ago}} by {{name}}",
     "created":  "created",
     "locked": "You have not unlocked this challenge yet.",

@@ -385,6 +385,10 @@ Allow or disallow new registrations with auto-password (default false)
 
 ## Changelog
 
+### 2.0.6
+
+Fix: Duplicated translation key
+
 ### 2.0.5
 
 Fix: User is loaded for all routes

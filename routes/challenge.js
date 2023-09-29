@@ -183,7 +183,7 @@ module.exports = function (App) {
         if (rate.lockedUntil > 0) {
           if (Date.now() < rate.lockedUntil) {
             var sec = Math.round((rate.lockedUntil - Date.now()) / 1000)
-            res.send(i18n.t('challenge.locked', { sec }))
+            res.send(i18n.t('challenge.timeout', { sec }))
             return
           } else {
             rate.lockedUntil = -1

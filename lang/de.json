@@ -137,7 +137,7 @@
     "continue": "weiter",
     "correct": "ist richtig",
     "wrong": "ist falsch",
-    "locked": "Du musst nach 20 Versuchen jeweils eine Pause von 30 Sekunden einlegen. Bitte warte noch {{sec}}s.",
+    "timeout": "Du musst nach 20 Versuchen jeweils eine Pause von 30 Sekunden einlegen. Bitte warte noch {{sec}}s.",
     "lastSolved": "zuletzt {{ago}} von {{name}}",
     "created":  "erstellt",
     "locked": "Du hast diese Aufgabe noch nicht freigeschaltet.",
