@@ -385,6 +385,10 @@ Allow or disallow new registrations with auto-password (default false)
 
 ## Changelog
 
+### 2.0.7
+
+Fix: Hidden challenges not visible for demo accounts
+
 ### 2.0.6
 
 Fix: Duplicated translation key

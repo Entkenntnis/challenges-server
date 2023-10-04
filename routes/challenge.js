@@ -91,7 +91,17 @@ module.exports = function (App) {
     const solved = solvedDb.map((s) => s.cid)
 
     if (App.config.editors.includes(req.user.name)) {
-      App.challenges.data.map((c) => solved.push(c.id))
+      App.challenges.data.map((c) => {
+        if (
+          c.showAfterSolve &&
+          App.config.noSelfAdmin.includes(req.user.name)
+        ) {
+          // hidden challenges not visible for demo accounts
+          return
+        }
+
+        solved.push(c.id)
+      })
     }
 
     const element = document.createElement('svg')
