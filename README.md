@@ -382,8 +382,26 @@ Secret server value for auth tokens. (default "mouse dog")
 
 Allow or disallow new registrations with auto-password (default false)
 
+### config.rateLimit
+
+This is the default value:
+
+```
+{
+  enabled: false,
+  timespan: 5, // time frame in minutes
+  requests: 400, // number of requests that are allowed in this time frame
+}
+```
+
+Will show a message if the number of requests exceeds the limit within the time frame.
+
 
 ## Changelog
+
+### 2.1.0
+
+Feat: Add rate limiter
 
 ### 2.0.7
 

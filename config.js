@@ -99,6 +99,11 @@ module.exports = function () {
     autoPassword: false,
     allowNewAutoPassword: false,
     tokenSecret: 'mouse dog',
+    rateLimit: {
+      enabled: false,
+      timespan: 5, // min
+      requests: 400,
+    },
   }
 
   return config

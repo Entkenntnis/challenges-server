@@ -20,6 +20,7 @@ module.exports = function (extend = (config) => config) {
   require('./server/expressPerfMonitor')(App)
   require('./server/expressLanguage')(App)
   require('./server/expressLoadUser')(App)
+  require('./server/expressRateLimit')(App)
   require('./server/expressViews')(App)
 
   require('./routes/staticPages')(App)
