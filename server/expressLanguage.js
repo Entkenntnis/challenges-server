@@ -36,7 +36,7 @@ module.exports = function (App) {
   }
 
   function setCookie(res, lng) {
-    res.cookie(cookieKey, req.lng, {
+    res.cookie(cookieKey, lng, {
       maxAge: 7 * 24 * 60 * 60 * 1000,
       sameSite: 'lax',
     })
