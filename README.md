@@ -399,6 +399,11 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 ## Changelog
 
+### 2.1.1
+
+Fix: Translation string
+Feat: Dedicated page for english home on `/en`
+
 ### 2.1.0
 
 Feat: Add rate limiter

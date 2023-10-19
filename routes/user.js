@@ -307,35 +307,44 @@ module.exports = function (App) {
     })
   })
 
-  App.express.get('/', async (req, res) => {
-    if (req.session.userId) {
-      res.redirect('/map')
-      return
+  function createLandingHandler(lng) {
+    return async (req, res) => {
+      if (req.session.userId) {
+        res.redirect('/map')
+        return
+      }
+      if (req.lng !== lng) {
+        res.redirect(req.lng == 'de' ? '/' : '/en')
+        return
+      }
+      const invalidLogin = req.session.loginFail
+      delete req.session.loginFail
+      const dbUsers = await App.db.models.User.findAll({
+        attributes: ['name', 'score', 'updatedAt', 'createdAt'],
+        where: {
+          score: { [Op.gt]: 0 },
+          updatedAt: { [Op.gte]: App.moment().subtract(29, 'days').toDate() },
+        },
+        order: [
+          ['score', 'DESC'],
+          ['updatedAt', 'DESC'],
+        ],
+        limit: App.config.accounts.topHackersLimit,
+      })
+      const users = processHighscore(dbUsers, undefined, req.lng)
+      res.renderPage({
+        page: 'home',
+        props: {
+          invalidLogin,
+          users,
+        },
+        backButton: false,
+      })
     }
-    const invalidLogin = req.session.loginFail
-    delete req.session.loginFail
-    const dbUsers = await App.db.models.User.findAll({
-      attributes: ['name', 'score', 'updatedAt', 'createdAt'],
-      where: {
-        score: { [Op.gt]: 0 },
-        updatedAt: { [Op.gte]: App.moment().subtract(29, 'days').toDate() },
-      },
-      order: [
-        ['score', 'DESC'],
-        ['updatedAt', 'DESC'],
-      ],
-      limit: App.config.accounts.topHackersLimit,
-    })
-    const users = processHighscore(dbUsers, undefined, req.lng)
-    res.renderPage({
-      page: 'home',
-      props: {
-        invalidLogin,
-        users,
-      },
-      backButton: false,
-    })
-  })
+  }
+
+  App.express.get('/', createLandingHandler('de'))
+  App.express.get('/en', createLandingHandler('en'))
 
   App.express.get('/logout', (req, res) => {
     delete req.session.userId
