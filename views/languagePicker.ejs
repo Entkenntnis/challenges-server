@@ -20,7 +20,7 @@
       const previousLng = Cookies.get(key)
       if (e.target.value !== previousLng) {
         Cookies.set(key, e.target.value, {sameSite: 'lax'})
-        window.location.reload()
+        window.location.href = e.target.value == 'de' ? '/de' : '/en'
       }
     }
   </script>

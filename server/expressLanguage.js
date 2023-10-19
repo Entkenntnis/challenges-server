@@ -2,18 +2,24 @@ const cookieKey = 'htw_language_preference'
 
 module.exports = function (App) {
   App.express.use((req, res, next) => {
-    const lng = req.cookies[cookieKey]
+    let lng = req.cookies[cookieKey]
+
+    if (req.path == '/de') {
+      lng = 'de'
+      setCookie(res, lng)
+    }
+
+    if (req.path == '/en') {
+      lng = 'en'
+      setCookie(res, lng)
+    }
 
     if (App.config.languages.includes(lng)) {
       req.lng = lng
     } else {
       req.lng = detectLanguage(req.headers['accept-language'])
-      res.cookie(cookieKey, req.lng, {
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        sameSite: 'lax',
-      })
+      setCookie(res, req.lng)
     }
-
     next()
   })
 
@@ -27,5 +33,12 @@ module.exports = function (App) {
     }
     // use first language as fallback
     return App.config.languages[0]
+  }
+
+  function setCookie(res, lng) {
+    res.cookie(cookieKey, req.lng, {
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: 'lax',
+    })
   }
 }

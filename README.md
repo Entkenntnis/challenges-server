@@ -399,6 +399,10 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 ## Changelog
 
+### 2.1.2
+
+Fix: incorrect redirect logic for language subpaths
+
 ### 2.1.1
 
 Fix: Translation string

@@ -307,7 +307,7 @@ module.exports = function (App) {
     })
   })
 
-  App.express.get('/', async (req, res) => {
+  const landingHandler = async (req, res) => {
     if (req.session.userId) {
       res.redirect('/map')
       return
@@ -335,7 +335,11 @@ module.exports = function (App) {
       },
       backButton: false,
     })
-  })
+  }
+
+  App.express.get('/', landingHandler)
+  App.express.get('/de', landingHandler)
+  App.express.get('/en', landingHandler)
 
   App.express.get('/logout', (req, res) => {
     delete req.session.userId
