@@ -399,6 +399,10 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 ## Changelog
 
+### 2.1.3
+
+Feat: Registration as ceremony
+
 ### 2.1.2
 
 Fix: incorrect redirect logic for language subpaths
