@@ -399,6 +399,10 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 ## Changelog
 
+### 2.1.4
+
+Feat: Auto-login after registration
+
 ### 2.1.3
 
 Feat: Registration as ceremony

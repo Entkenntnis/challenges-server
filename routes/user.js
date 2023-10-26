@@ -97,13 +97,14 @@ module.exports = function (App) {
       // ready to go
       try {
         const password = await bcrypt.hash(pw1, App.config.bcryptRounds)
-        await App.db.models.User.create({
+        const result = await App.db.models.User.create({
           name: username,
           password,
           RoomId: roomId,
           session_phase: roomId && 'READY',
         })
-        res.redirect('/success')
+        req.session.userId = result.id
+        res.redirect('/')
         return
       } catch (e) {
         console.warn(e)
