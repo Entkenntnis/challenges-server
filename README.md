@@ -399,6 +399,10 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 ## Changelog
 
+### 2.1.5
+
+Fix: Scrollbars and css for `/register`
+
 ### 2.1.4
 
 Feat: Auto-login after registration
