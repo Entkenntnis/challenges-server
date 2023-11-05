@@ -1,8 +1,5 @@
 const { Op, Transaction } = require('sequelize')
 const bcrypt = require('bcryptjs')
-const window = require('svgdom')
-const SVG = require('svg.js')(window)
-const document = window.document
 
 module.exports = function (App) {
   async function checkUser(req, res, next) {
@@ -104,8 +101,11 @@ module.exports = function (App) {
       })
     }
 
-    const element = document.createElement('svg')
-    const canvas = SVG(element).size('100%', '100%')
+    const svgStart =
+      '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="100%" height="100%">'
+    const svgEnd = '</svg>'
+    const svgLines = []
+    const svgCircles = []
 
     const points = []
 
@@ -127,16 +127,9 @@ module.exports = function (App) {
         challenge.deps.forEach((dep) => {
           const previous = App.challenges.data.filter((c) => c.id === dep)[0]
           if (solved.includes(previous.id)) {
-            canvas
-              .line(
-                previous.pos.x,
-                previous.pos.y,
-                challenge.pos.x,
-                challenge.pos.y
-              )
-              .stroke({ width: 10 })
-              .stroke(App.config.styles.connectionColor)
-              .attr('stroke-linecap', 'round')
+            svgLines.push(
+              `<line x1="${previous.pos.x}" y1="${previous.pos.y}" x2="${challenge.pos.x}" y2="${challenge.pos.y}" stroke="${App.config.styles.connectionColor}" stroke-width="10" stroke-linecap="round"></line>`
+            )
           }
         })
       }
@@ -144,31 +137,32 @@ module.exports = function (App) {
 
     // COMPAT: draw points after connections to show the above
     for (const point of points) {
-      const link = canvas
-        .link(App.config.urlPrefix + '/challenge/' + point.id)
-        .addClass('no-underline')
-      link.circle(18).attr({
-        fill: point.isSolved
-          ? App.config.styles.pointColor_solved
-          : App.config.styles.pointColor,
-        cx: point.pos.x,
-        cy: point.pos.y,
-      })
-      const text = link
-        .plain(point.title)
-        .fill(App.config.styles.mapTextColor)
-        .font('family', 'inherit')
-        .attr('font-weight', App.config.styles.mapTextWeight)
-      text.center(
-        point.pos.x + App.config.map.centeringOffset * point.title.length,
-        point.pos.y - 23
+      svgCircles.push(
+        `<a href="${
+          App.config.urlPrefix + '/challenge/' + point.id
+        }" class="no-underline"><g><circle r="9" cx="${point.pos.x}" cy="${
+          point.pos.y
+        }" fill="${
+          point.isSolved
+            ? App.config.styles.pointColor_solved
+            : App.config.styles.pointColor
+        }"></circle><text font-family="inherit" fill="${
+          App.config.styles.mapTextColor
+        }" font-weight="${App.config.styles.mapTextWeight}" x="${
+          point.pos.x
+        }" y="${point.pos.y - 17}" text-anchor="middle">${
+          point.title
+        }</text></g></a>`
       )
     }
+
+    // const map = canvas.svg()
+    const map = svgStart + svgLines.join('') + svgCircles.join('') + svgEnd
 
     res.renderPage({
       page: 'map',
       props: {
-        map: canvas.svg(),
+        map,
       },
       outsideOfContainer: true,
       backButton: false,
