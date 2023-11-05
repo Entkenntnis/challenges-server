@@ -253,9 +253,13 @@ module.exports = function (App) {
   })
 
   App.express.get('/highscore', async (req, res) => {
-    const sort = req.query.sort
+    const pageSize = App.config.accounts.highscoreLimit
 
-    const dbUsers = await App.db.models.User.findAll({
+    const sort = req.query.sort
+    const page = req.query.page && !sort ? parseInt(req.query.page) : 1
+    const offset = (page - 1) * pageSize
+
+    const { count, rows: dbUsers } = await App.db.models.User.findAndCountAll({
       attributes: ['name', 'score', 'updatedAt', 'createdAt'],
       where:
         sort == 'month'
@@ -273,27 +277,28 @@ module.exports = function (App) {
               ['score', 'DESC'],
               ['updatedAt', 'DESC'],
             ],
-      limit: App.config.accounts.highscoreLimit,
+      limit: pageSize,
+      offset,
     })
-    let user = undefined
-    if (req.session.userId) {
-      user = await App.db.models.User.findOne({
-        where: { id: req.session.userId },
+    let rank = undefined
+    if (dbUsers.length > 0 && page > 1) {
+      const betterThanMe = await App.db.models.User.count({
+        where: {
+          [Op.or]: [{ score: { [Op.gt]: dbUsers[0].score } }],
+        },
       })
+      rank = betterThanMe + 1
     }
-    const users = processHighscore(dbUsers, sort, req.lng)
-    let count
-    if (sort == 'month') {
-      count = users.length
-      if (users.length >= App.config.accounts.highscoreLimit) {
-        count = await App.db.models.User.count({
-          where: {
-            score: { [Op.gt]: 0 },
-            updatedAt: {
-              [Op.gte]: App.moment().subtract(29, 'days').toDate(),
-            },
-          },
-        })
+    const users = processHighscore(dbUsers, sort, req.lng, offset, rank)
+
+    let pagination = undefined
+    if (!sort) {
+      pagination = {
+        prevLink: page == 1 ? undefined : `/highscore?page=${page - 1}`,
+        nextLink:
+          count <= page * pageSize ? undefined : `/highscore?page=${page + 1}`,
+        pages: Math.ceil(count / pageSize),
+        page,
       }
     }
 
@@ -302,9 +307,8 @@ module.exports = function (App) {
       props: {
         users,
         sort,
-        count,
+        pagination,
       },
-      user, // REMARK provide our own user because it's not provided by middleware
     })
   })
 
@@ -347,7 +351,7 @@ module.exports = function (App) {
     res.redirect('/')
   })
 
-  function processHighscore(dbUsers, sort, lng) {
+  function processHighscore(dbUsers, sort, lng, offset = 0, rank = undefined) {
     const users = dbUsers.map((user) => {
       return {
         name: user.name,
@@ -358,10 +362,12 @@ module.exports = function (App) {
     })
     if (sort != 'new') {
       users.forEach((user, i) => {
-        if (i > 0 && users[i - 1].score == user.score) {
+        if (i == 0 && offset > 0 && rank) {
+          user.rank = rank
+        } else if (i > 0 && users[i - 1].score == user.score) {
           user.rank = users[i - 1].rank
         } else {
-          user.rank = i + 1
+          user.rank = i + 1 + offset
         }
       })
     }

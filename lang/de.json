@@ -68,7 +68,8 @@
     "points": "Punktzahl",
     "pointsMonth": "Punktzahl (dieser Monat)",
     "entries": "{{count}} Eintrag",
-    "entries_plural": "{{count}} Einträge"
+    "entries_plural": "{{count}} Einträge",
+    "of": "von"
   },
   "create": {
     "title": "Raum erstellen",

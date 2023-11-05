@@ -463,15 +463,7 @@ module.exports = function (App) {
       (lastSol && lastSol[0] && lastSol[0].createdAt) || req.user.updatedAt
     const betterThanMe = await App.db.models.User.count({
       where: {
-        [Op.or]: [
-          { score: { [Op.gt]: req.user.score } },
-          /*{
-            [Op.and]: [
-              { score: { [Op.eq]: req.user.score } },
-              { updatedAt: { [Op.gt]: req.user.updatedAt } },
-            ],
-          },*/
-        ],
+        [Op.or]: [{ score: { [Op.gt]: req.user.score } }],
       },
     })
     const rank = req.user.score == 0 ? 0 : betterThanMe + 1

@@ -68,7 +68,8 @@
     "points": "Score",
     "pointsMonth": "Score (this month)",
     "entries": "{{count}} entry",
-    "entries_plural": "{{count}} entries"
+    "entries_plural": "{{count}} entries",
+    "of": "of"
   },
   "create": {
     "title": "Create Room",
