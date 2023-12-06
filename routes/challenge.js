@@ -263,11 +263,15 @@ module.exports = function (App) {
         challenge.check ||
         function (raw) {
           const answer = raw.toLowerCase().trim()
+          const solutions = Array.isArray(challenge.solution)
+            ? challenge.solution
+            : [challenge.solution]
+          const correct = solutions.some(
+            (solution) => solution && answer === solution.toLowerCase().trim()
+          )
           return {
             answer,
-            correct:
-              challenge.solution &&
-              answer === challenge.solution.toLowerCase().trim(),
+            correct,
           }
         }
 

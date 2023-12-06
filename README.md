@@ -60,7 +60,7 @@ Optional instead of html: Pass a function that will render the challenge (instea
 
 ### solution
 
-A string value for the solution of the challenge. (case-insensitive, trimmed).
+A string value for the solution of the challenge. (case-insensitive, trimmed) - can also be an array of strings for multiple correct solutions.
 
 ### check
 
@@ -69,13 +69,17 @@ Optional instead of solution: Function that gets the answer and an object with `
 This is the default check function:
 
 ```js
-function (raw, {App, req}) {
+function (raw) {
   const answer = raw.toLowerCase().trim()
+  const solutions = Array.isArray(challenge.solution)
+    ? challenge.solution
+    : [challenge.solution]
+  const correct = solutions.some(
+    (solution) => solution && answer === solution.toLowerCase().trim()
+  )
   return {
     answer,
-    correct:
-      challenge.solution &&
-      answer === challenge.solution.toLowerCase().trim(),
+    correct,
   }
 }
 ```
@@ -398,6 +402,10 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 
 ## Changelog
+
+### 2.3.0
+
+Feat: Allow arrays for `solution`
 
 ### 2.2.1
 
