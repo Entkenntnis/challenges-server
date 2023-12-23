@@ -256,7 +256,10 @@ module.exports = function (App) {
     const pageSize = App.config.accounts.highscoreLimit
 
     const sort = req.query.sort
-    const page = req.query.page && !sort ? parseInt(req.query.page) : 1
+    const parsedQueryPage =
+      req.query.page && !sort ? parseInt(req.query.page) : 1
+    const page =
+      isNaN(parsedQueryPage) || parsedQueryPage < 1 ? 1 : parsedQueryPage
     const offset = (page - 1) * pageSize
 
     const { count, rows: dbUsers } = await App.db.models.User.findAndCountAll({

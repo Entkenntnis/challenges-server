@@ -46,7 +46,8 @@
     "serverCrowded": "There are too many registrations at the moment. Please try again in 15 minutes.",
     "submit": "Submit",
     "available": "available",
-    "checking": "checking"
+    "checking": "checking",
+    "warnEmail": "Your username is publicly visible. Therefore, it is strongly discouraged to use an email address as your username."
   },
   "join": {
     "heading": "Join",

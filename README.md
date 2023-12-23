@@ -403,6 +403,12 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 ## Changelog
 
+### 2.3.1
+
+Fix: Sanitize query for highscore
+
+Feat: Warn if attempt to use email as username
+
 ### 2.3.0
 
 Feat: Allow arrays for `solution`

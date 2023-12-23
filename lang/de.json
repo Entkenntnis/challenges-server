@@ -46,7 +46,8 @@
     "serverCrowded": "Es gibt im Moment ein hohes Aufkommen an Registrierungen, versuche es in 15 Minuten erneut.",
     "submit": "Los",
     "available": "verfügbar",
-    "checking": "wird überprüft"
+    "checking": "wird überprüft",
+    "warnEmail": "Dein Benutzername ist öffentlich sichtbar. Deshalb wird stark davon abgeraten, als Benutzername eine E-Mail-Adresse zu verwenden."
   },
   "join": {
     "heading": "Beitreten",
@@ -55,7 +56,7 @@
   },
   "highscore": {
     "heading": "Highscore",
-    "empty": "Die Highscore enthält noch keine Einträge. Werde der Erste!",
+    "empty": "Die Highscore enthält noch keine Einträge. Werde die Erste!",
     "rank": "Platz",
     "name": "Benutzername",
     "score": "Punktzahl",

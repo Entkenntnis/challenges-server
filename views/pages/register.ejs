@@ -111,6 +111,11 @@
   
   function checkUsername() {
     const name = nameInput.value.trim()
+    if (/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(name)) {
+      setTimeout(() => {
+        alert('<%= t('warnEmail') %>')
+      }, 100)
+    }
     if (name.length == 0) {
       state.msg = ''
       state.class = 'text-danger'
