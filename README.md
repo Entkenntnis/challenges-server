@@ -100,6 +100,10 @@ Optional, shows the name of an author
 
 Only visible after challenge is solved
 
+### showAboveScore
+
+When score is higher than value, challenge becomes visible, even if not reached yet 
+
 ## Configuration
 
 The server exposes a lot of config options, which you can all override and customize:
@@ -402,6 +406,10 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 
 ## Changelog
+
+### 2.4.1
+
+Feat: showAboveScore
 
 ### 2.4.0, January 2024
 

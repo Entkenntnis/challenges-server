@@ -121,7 +121,8 @@ module.exports = function (App) {
         isSolved ||
         (challenge.deps.some((c) => solved.includes(c)) &&
           !challenge.showAfterSolve) ||
-        challenge.deps.length === 0
+        challenge.deps.length === 0 ||
+        (challenge.showAboveScore && req.user.score > challenge.showAboveScore)
       if (visible) {
         points.push(point)
         challenge.deps.forEach((dep) => {
@@ -247,7 +248,8 @@ module.exports = function (App) {
 
       if (
         challenge.deps.some((d) => solvedDb.some((s) => s.cid === d)) ||
-        challenge.deps.length === 0
+        challenge.deps.length === 0 ||
+        (challenge.showAboveScore && req.user.score > challenge.showAboveScore)
       ) {
         accessible = true
       }
