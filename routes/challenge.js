@@ -159,10 +159,16 @@ module.exports = function (App) {
     // const map = canvas.svg()
     const map = svgStart + svgLines.join('') + svgCircles.join('') + svgEnd
 
+    const custom = App.config.map.customMapHtml
+
+    const customMapHtml =
+      typeof custom === 'function' ? custom({ App, req }) : custom
+
     res.renderPage({
       page: 'map',
       props: {
         map,
+        customMapHtml,
       },
       outsideOfContainer: true,
       backButton: false,

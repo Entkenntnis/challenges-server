@@ -211,7 +211,7 @@ You can configure the background image of the map with this object. Default valu
   centeringOffset: 1,
   width: '1600',
   height: '1200',
-  customMapHtml: ''
+  customMapHtml: '' // can also be a function with argument {App, req}
 }
 ```
 
@@ -402,6 +402,10 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 
 ## Changelog
+
+### 2.4.0, January 2024
+
+Feat: Allow function for customMapHtml
 
 ### 2.3.1
 
