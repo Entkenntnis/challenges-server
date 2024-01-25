@@ -314,6 +314,7 @@ module.exports = function (App) {
       }
 
       if (correct && !App.config.editors.includes(req.user.name)) {
+        const needRefresh = { current: false }
         const transact = async function () {
           // do updates in a transaction
           await App.db.transaction(
@@ -325,6 +326,10 @@ module.exports = function (App) {
                 where: { cid: id, UserId: req.user.id },
                 transaction: t,
               })
+
+              if (created) {
+                needRefresh.current = true
+              }
 
               if (created && !challenge.noScore) {
                 const user = await App.db.models.User.findOne({
@@ -388,33 +393,14 @@ module.exports = function (App) {
             correct = 'none'
           }
         }
-      }
 
-      const solvedBy = await App.db.models.Solution.count({
-        where: { cid: id },
-      })
-
-      let lastSolved = null
-      let lastSolvedUserName = null
-
-      if (correct !== true) {
-        lastSolved = await App.db.models.Solution.max('createdAt', {
-          where: {
-            cid: id,
-          },
-        })
-        const lastSolvedSolution = await App.db.models.Solution.findOne({
-          where: { createdAt: lastSolved },
-        })
-        if (lastSolvedSolution) {
-          const lastSolvedUser = await App.db.models.User.findOne({
-            where: { id: lastSolvedSolution.UserId },
-          })
-          if (lastSolvedUser) {
-            lastSolvedUserName = lastSolvedUser.name
-          }
+        if (needRefresh.current) {
+          await App.challengeStats.refreshData(id)
         }
       }
+
+      const { solvedBy, lastSolved, lastSolvedUserName } =
+        await App.challengeStats.getData(id)
 
       let html = challenge.render
         ? await challenge.render({ App, req })
@@ -605,6 +591,7 @@ module.exports = function (App) {
     } else {
       if (username === req.user.name) {
         await App.db.models.User.destroy({ where: { id: req.user.id } })
+        App.challengeStats.nuke()
         delete req.session.userId
         delete req.user
         res.renderPage('deleteSuccess')

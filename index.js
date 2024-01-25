@@ -13,6 +13,7 @@ module.exports = function (extend = (config) => config) {
   require('./server/withPeriodic')(App)
   require('./server/withChallenges')(App)
   require('./server/withStorage')(App)
+  require('./server/withChallengeStats')(App)
 
   require('./server/dbModel')(App)
   require('./server/expressHeaders')(App)

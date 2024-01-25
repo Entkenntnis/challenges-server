@@ -407,6 +407,10 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 ## Changelog
 
+### 2.4.2
+
+Feat: Improve performance by caching challenge stats
+
 ### 2.4.1
 
 Feat: showAboveScore
