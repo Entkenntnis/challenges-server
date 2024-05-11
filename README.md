@@ -407,6 +407,10 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 ## Changelog
 
+### 2.4.3
+
+Refactor: avoid using google fonts for lato
+
 ### 2.4.2
 
 Feat: Improve performance by caching challenge stats
