@@ -285,6 +285,7 @@ module.exports = function (App) {
 
       let answer = ''
       let correct = false
+      let rawAnswer = false
 
       try {
         if (typeof req.body.answer === 'string') {
@@ -292,9 +293,12 @@ module.exports = function (App) {
           if (result.answer !== undefined) {
             answer = result.answer
             correct = result.correct
+            if (result.rawAnswer === true) {
+              rawAnswer = true
+            }
           } else {
             answer = req.body.answer
-            correct = result
+            correct = !!result
           }
           // call on submit hook
           if (App.config.onSubmit) {
@@ -421,6 +425,7 @@ module.exports = function (App) {
           challenge,
           html,
           correct,
+          rawAnswer,
           answer,
           solvedBy,
           lastSolved,

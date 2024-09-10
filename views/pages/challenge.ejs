@@ -37,7 +37,7 @@ function goBack() {
       <% if (props.correct === 'none') { %>
         <strong><%= props.answer %></strong>
       <% } else { %>
-        <strong>'<%= props.answer %>' <%= props.correct ? t('correct') : t('wrong') %></strong>
+        <strong><%= props.rawAnswer ? props.answer : `'${props.answer}'` %> <%= props.rawAnswer ? '' : props.correct ? t('correct') : t('wrong') %></strong>
       <% } %>
     </p>
   <% } %>

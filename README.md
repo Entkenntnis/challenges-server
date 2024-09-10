@@ -1,4 +1,5 @@
 # challenges-server
+
 The engine behind https://hack.arrrg.de
 
 ## Introduction
@@ -18,7 +19,7 @@ npm install @entkenntnis/challenges-server sqlite3
 Add a main script into your project and write
 
 ```js
-require('@entkenntnis/challenges-server')(config => {
+require('@entkenntnis/challenges-server')((config) => {
   // configure server
   return config
 })
@@ -64,7 +65,7 @@ A string value for the solution of the challenge. (case-insensitive, trimmed) - 
 
 ### check
 
-Optional instead of solution: Function that gets the answer and an object with `App` and `req`. Return an object with answer (the displayed solution value) and correct, a boolean that indicates whether the challenge is solved or not. Alternative: Just return a boolean, replaces solution.
+Optional instead of solution: Function that gets the answer and an object with `App` and `req`. Return an object with answer (the displayed solution value) and correct, a boolean that indicates whether the challenge is solved or not. Alternative: Just return a boolean. Replaces solution attribute. Set `rawAnswer` to true to only show answer without right/wrong.
 
 This is the default check function:
 
@@ -86,7 +87,7 @@ function (raw) {
 
 ### hidesubmit
 
-Optional, don't show default submit form. 
+Optional, don't show default submit form.
 
 ### noScore
 
@@ -102,14 +103,14 @@ Only visible after challenge is solved
 
 ### showAboveScore
 
-When score is higher than value, challenge becomes visible, even if not reached yet 
+When score is higher than value, challenge becomes visible, even if not reached yet
 
 ## Configuration
 
 The server exposes a lot of config options, which you can all override and customize:
 
 ```js
-require('@entkenntnis/challenges-server')(config => {
+require('@entkenntnis/challenges-server')((config) => {
   // configure server
   config.port = 8080
   config.theme = 'yeti'
@@ -276,9 +277,10 @@ Default is an empty array. You can override translations by adding objects here 
 config.i18nExtend.push({
   lng: 'de',
   key: 'home.version',
-  value: 'Version: Juni 2020'
+  value: 'Version: Juni 2020',
 })
 ```
+
 Look into the views folder to find out the key of the string.
 
 ### config.styles
@@ -340,12 +342,12 @@ This string is replaced with the current url prefix, default is `{{PREFIX}}`
 
 'fixed' -> 12 points for every challenge, 'time' -> 10 points for every challenge, and up to 2 points time bonus (time bonus halves every 3 minutes), 'distance' -> 10 points for every challenge, 1 additional point for (shortest) distance to start
 
-###  config.onSubmit
+### config.onSubmit
 
 A hook that is called if the user submits any challenge. Object argument with properties: App, id, correct, solved (list of ids that the user has solved) and the raw answer. The function can be sync or async. Example:
 
 ```js
-config.onSubmit = ({App, id, correct, solved, isEditor, answer }) => {
+config.onSubmit = ({ App, id, correct, solved, isEditor, answer }) => {
   console.log('Submit challenge:', id, correct)
 }
 ```
@@ -404,8 +406,11 @@ This is the default value:
 
 Will show a message if the number of requests exceeds the limit within the time frame.
 
-
 ## Changelog
+
+### 2.5.0
+
+Feature: Add `rawAnswer` attribute
 
 ### 2.4.3
 
@@ -498,7 +503,6 @@ Breaking I18n rework:
 - `locale` is replaced by `languages`
 - `slogan` replaced by i18n string `home.slogan`
 - `hintPage.label` replaced by i18n string `statusBar.hint`
-
 
 ### 1.4.5
 
