@@ -4,14 +4,11 @@ module.exports = function (App) {
   App.express.use((req, res, next) => {
     let lng = req.cookies[cookieKey]
 
-    if (req.path == '/de') {
-      lng = 'de'
-      setCookie(res, lng)
-    }
-
-    if (req.path == '/en') {
-      lng = 'en'
-      setCookie(res, lng)
+    for (const configLng of App.config.languages) {
+      if (req.path == '/' + configLng) {
+        lng = configLng
+        setCookie(res, configLng)
+      }
     }
 
     if (App.config.languages.includes(lng)) {
@@ -24,7 +21,7 @@ module.exports = function (App) {
   })
 
   function detectLanguage(header) {
-    if (header) {
+    if (header && App.config.detectLanguage) {
       // return language as soon as it is detected
       for (let i = 0; i < App.config.languages.length; i++) {
         const lng = App.config.languages[i]

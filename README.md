@@ -408,6 +408,10 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 ## Changelog
 
+### 2.5.1
+
+Feature: Add `detectLanguage` and make it optional
+
 ### 2.5.0
 
 Feature: Add `rawAnswer` attribute

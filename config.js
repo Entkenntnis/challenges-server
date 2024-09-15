@@ -13,6 +13,7 @@ module.exports = function () {
     port: 3000,
     sessionSecret: 'keyboard cat',
     languages: ['en'],
+    detectLanguage: false,
     theme: 'sketchy',
     reloadChallenges: true,
     configRoutes: true,
