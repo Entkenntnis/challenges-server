@@ -147,7 +147,9 @@ module.exports = function (App) {
           point.isSolved
             ? App.config.styles.pointColor_solved
             : App.config.styles.pointColor
-        }"></circle><text font-family="inherit" fill="${
+        }"></circle><circle r="16" cx="${point.pos.x}" cy="${
+          point.pos.y
+        }" fill="transparent"></circle><text font-family="inherit" fill="${
           App.config.styles.mapTextColor
         }" font-weight="${App.config.styles.mapTextWeight}" x="${
           point.pos.x
