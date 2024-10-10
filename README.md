@@ -408,6 +408,10 @@ Will show a message if the number of requests exceeds the limit within the time 
 
 ## Changelog
 
+### 2.5.3
+
+Chore: Update dependencies
+
 ### 2.5.2
 
 Fix: Make click-area bigger
